@@ -106,8 +106,6 @@ function addProductListCode()
     $url = 'products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $limit . '&category_id=' . $category_id . '&zone_id=' . $destination_id . '&lang=' . pll_current_language();
     $data = apiGetRequest($url);
 
-    echo $url;
-
     echo '<div  class="ppb_tour_classic one nopadding " style="margin-bottom:50px;" >';
     echo '<div class="page_content_wrapper page_main_content sidebar_content full_width fixed_column">';
     echo '<div class="standard_wrapper">';
