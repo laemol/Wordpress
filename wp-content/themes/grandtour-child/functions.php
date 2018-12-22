@@ -98,15 +98,16 @@ function addProductListCode()
 
     if ($_POST['offset'] || $_POST['category'] || $_POST['destination']) {
         $offset = $_POST['offset'];
-        $category_id = $_POST['category'];
+        $category_id = $_POST['category'] ? implode(',', $_POST['category']) : null;
         $destination_id = $_POST['destination'];
+        $recommended = '';
     }
 
-    $data = apiGetRequest('products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $limit . '&category_id=' . $category_id . '&zone_id=' . $destination_id . '&lang=' . pll_current_language());
+    $url = 'products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $limit . '&category_id=' . $category_id . '&zone_id=' . $destination_id . '&lang=' . pll_current_language();
+    $data = apiGetRequest($url);
 
-    if (!$data) {
-        echo '[no data found]';
-    }
+    echo $url;
+
     echo '<div  class="ppb_tour_classic one nopadding " style="margin-bottom:50px;" >';
     echo '<div class="page_content_wrapper page_main_content sidebar_content full_width fixed_column">';
     echo '<div class="standard_wrapper">';
@@ -148,12 +149,14 @@ function addProductListCode()
             ?>
 
         <div class="btn_wrapper">
-        <a href="#/" class="button show_more" data-offset="<?php echo $offset ?> data-category="<?php echo $_GET['category_id'] ?> data-zone="<?php echo $_GET['destination_id'] ?>">Show More</a>
+        <a href="#/" class="button show_more" data-offset="<?php echo $offset ?>" data-category="[<?php echo $category_id ?>]" data-zone="<?php echo $destination_id ?>">Show More</a>
         </div>
         <div class="products<?php echo $offset ?>"></div>
        
     <?php
         }
+    } else {
+        echo 'Sorry, nothing found';
     }
 
     /* AJAX check  */
@@ -166,7 +169,7 @@ function addProductListCode()
     jQuery(document).on('click','.show_more',function(){	
         var offset = jQuery(this).data('offset');
         var category = jQuery(this).data('category');
-        var destination = jQuery(this).data('destination');
+        var destination = jQuery(this).data('zone');
         var loder = '<div class="loder"></div>'	
         jQuery('.show_more').html(loder);	
         jQuery('.loding').show();
