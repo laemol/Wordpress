@@ -307,6 +307,11 @@ select {
     color: #fff;
 }
 
+.radio-toolbar input[type="radio"]:hover ~ * { 
+    background:#dce0e0 !important;
+    border-radius: 4px;
+}
+
 /* Calendar style */
 
 .calendar-wrapper {
