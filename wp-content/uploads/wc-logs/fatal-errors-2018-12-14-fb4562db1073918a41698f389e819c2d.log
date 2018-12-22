@@ -1,0 +1,48 @@
+2018-12-14T14:09:02+00:00 CRITICAL Uncaught Error: Call to undefined function apiRequest() in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/template-return.php:173
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template-loader.php(74): include()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-blog-header.php(19): require_once('/home/deb108402...')
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/index.php(17): require('/home/deb108402...')
+#3 {main}
+  thrown
+
+2018-12-14T14:09:39+00:00 CRITICAL Uncaught Error: Call to undefined function apiRequest() in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/template-return.php:173
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template-loader.php(74): include()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-blog-header.php(19): require_once('/home/deb108402...')
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/index.php(17): require('/home/deb108402...')
+#3 {main}
+  thrown
+
+2018-12-14T14:09:59+00:00 CRITICAL Uncaught Error: Call to undefined function apiRequest() in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/template-return.php:174
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template-loader.php(74): include()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-blog-header.php(19): require_once('/home/deb108402...')
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/index.php(17): require('/home/deb108402...')
+#3 {main}
+  thrown
+
+2018-12-14T14:10:47+00:00 CRITICAL Uncaught Error: Call to undefined function apiRequest() in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/template-return.php:175
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template-loader.php(74): include()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-blog-header.php(19): require_once('/home/deb108402...')
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/index.php(17): require('/home/deb108402...')
+#3 {main}
+  thrown
+
+2018-12-14T14:11:31+00:00 CRITICAL Uncaught Error: Call to undefined function apiRequest() in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/template-return.php:175
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template-loader.php(74): include()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-blog-header.php(19): require_once('/home/deb108402...')
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/index.php(17): require('/home/deb108402...')
+#3 {main}
+  thrown
+
+2018-12-14T18:38:31+00:00 CRITICAL Uncaught Error: Unsupported operand types in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/template-checkout.php:254
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template-loader.php(74): include()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-blog-header.php(19): require_once('/home/deb108402...')
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/index.php(17): require('/home/deb108402...')
+#3 {main}
+  thrown
+

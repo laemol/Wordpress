@@ -1,0 +1,515 @@
+/*
+Theme Name: GrandTour Child
+Theme URI: http://themes.themegoods2.com/grandtour/demo
+Description: Premium Tour Travel Theme
+Version: 1.0
+Author: ThemeGoods
+Author URI: http://themeforest.net/user/ThemeGoods
+License: GNU General Public License
+License URI: http://themeforest.net/licenses/regular_extended
+Text Domain: grandtour
+Template: grandtour
+*/
+
+/* Loading div */
+#loadingDiv {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.3;
+    background-color: #000;
+    z-index: 99;
+    text-align: center;
+ }
+ 
+ .loader {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   z-index: 100;
+ }
+
+ .lds-dual-ring {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 92px;
+    height: 92px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 10px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+/* template fixes */
+
+#wpadminbar #wp-admin-bar-search .ab-item {
+    display:none;
+}
+
+.tour_attribute_rating  {
+    max-width: 100% !important;
+}
+
+#tour_search_form {
+  margin-left: calc(50% - 400px);
+  width: 800px;
+}
+
+.full_width {
+    width: 100%;
+}
+.classic .portfolio_type, .grid .portfolio_type {
+    transform:translateY(0);
+}
+
+.searchtxt {
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+    position: relative;
+}
+
+#tour_search_form, .tour_search_form {
+    padding: 0 !important;
+    border: 0px !important;
+}
+
+.one_fourth {
+    margin-bottom: 0;
+}
+
+#tour_search_form .one_fourth:not(.last):hover {
+    border-color: #dce0e0;
+}
+
+.searchtxt h1{
+    color: #fff;
+    padding: 20px;
+    text-shadow: #000 1px 0 10px;
+}
+
+.seperator {
+    height: 1px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.keyword {
+    width: 100%;
+    
+}
+
+#autocomplete a{
+    color: #000; 
+}
+
+.quote {
+    color: #fff;
+}
+.logo_wrapper img {
+    width: 300px;
+    height: auto;
+}
+
+.btn_wrapper {
+    width:100%;
+    text-align: center;
+}
+
+.collappsed {
+    margin-top: -60px;
+}
+
+@media only screen and (max-width: 767px)
+.logo_container {
+    top: 0 !important;
+}
+
+.tour_link {
+    display: block;
+    height: 3.8em;
+    overflow: hidden;
+}
+
+.tour_link:after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    height: 1.8em;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+.portfolio_info_content h3 {
+    text-shadow: #000 1px 0 10px;
+}
+
+#page_content_wrapper .inner .page_content_wrapper #autocomplete ul {
+    margin-left: 0px;
+}
+
+.form-control {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.15);
+}
+
+table tr th,
+table tr td {
+    padding: 10px;
+}
+
+#proceed_payment {
+    float: right;
+}
+
+.billing-details {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 40%;
+    padding: 20px;
+    margin: 20px 0 20px 0;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.15);
+}
+
+.tour_product_variable_title {
+    width: 50%;
+}
+
+.single_tour_view_desc {
+    width: calc(100% - 70px) !important;
+}
+
+.input-text {
+    width: 100%
+}
+
+.details {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0 20px 0;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.15);
+}
+  
+  @media screen and (min-width: 800px) {
+    .wrapper {
+        height: auto; overflow: hidden;
+     }
+     #one { width: 400px; float: left; padding-right: 60px;}
+     #two { margin-left: 400px; }
+  }
+
+select {
+    width: 100%;
+}
+
+.departure {
+    display:block;
+    list-style-type: none;
+}
+
+.departure input{
+    width: 20px;
+    height: 20px;
+}
+
+.departure li {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+}
+
+.disabled {
+  opacity: 0.65; 
+  cursor: not-allowed !important;
+}
+
+.error {
+    color: #FF4A52;
+}
+
+.valid {
+    color: #1abc9c;
+}
+
+.radio {
+    width: 40px;
+    height: 70px;
+    float:left;
+    display: flex;
+    align-items: center;
+}
+
+.text-container {
+    display: inline-block;
+    position: relative;
+    width: 100%
+  }
+
+.inline {
+    position: absolute;
+    top: 33px;
+    right: 20px;
+    transition: right 0.2s;
+  }
+
+.radio-toolbar input[type="radio"] {
+    display: none;
+}
+
+.radio-toolbar input[type="radio"] ~ * { 
+    padding: 4px;
+}
+
+.radio-toolbar input[type="radio"]:checked ~ * { 
+    background:#1abc9c !important;
+    border-radius: 4px;
+    color: #fff;
+}
+
+/* Calendar style */
+
+.calendar-wrapper {
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.month ul {
+    list-style-type: none;
+}
+
+/* Month header */
+.month {
+    padding: 20px;
+    width: calc(100% - 40px);
+    background: #1abc9c;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+/* Month list */
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+    float: left;
+}
+
+/* Next button */
+.month .next {
+    float: right;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+    font-size: 10px;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 12.6%;
+    color: #666;
+    text-align: center;
+}
+
+/* Days (1-31) */
+.days {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #777;
+}
+
+/* Highlight the "current" day */
+.days li .active {
+    padding: 2px 4px 6px 4px;
+    background: #1abc9c;
+    color: white !important;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+}
+
+/* Highlight the "available" day */
+.days li .available {
+    padding: 2px 4px 6px 4px;
+    background-color: #ddd;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+}
+
+/* Highlight the "selected" day */
+.days li .selected {
+    margin: -2px;
+    border: 2px solid #FF4A52;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.hidden {
+    opacity: 0;
+    display:none;
+}
+
+.count {
+    color: #FF4A52;
+}
+
+.form_wrapper {
+    padding: 30px;
+}
+
+.intl-tel-input { 
+    width: 100%; 
+}
+
+.hide {
+    display: none;
+}
+
+.validation {
+    margin: 5px;
+    padding-top:10px;
+    font-family: inherit;
+}
+
+/* Tooltip */
+
+.days li .selected:hover {
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, .2), 0 0 0 1px rgba(0, 0, 0, .08);
+}
+
+[tooltip] {
+
+    position: relative;
+    display: inline-block;
+}
+
+[tooltip]::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px 6px 0 6px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
+    z-index: 99;
+    opacity: 0;
+}
+
+[tooltip]::after {
+    content: attr(tooltip);
+    position: absolute;
+    left: 50%;
+    top: -6px;
+    transform: translateX(-50%) translateY(-100%);
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #fff;
+    padding: 4px 2px;
+    font-size: 12px;
+    min-width: 60px;
+    border-radius: 5px;
+    pointer-events: none;
+    padding: 4px 4px;
+    z-index: 99;
+    opacity: 0;
+}
+
+[tooltip]:hover::after,
+[tooltip]:hover::before {
+    opacity: 1
+}
+
+/* Destinations */
+
+.tags{
+    padding: 40% 15% 0 15%;
+    text-align: center;
+    margin-top: 90px;
+}
+
+.tags_wrapper {
+    max-width: 1425px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 0 90px;
+}
+
+.tagbox {
+    border-radius: 5px;
+    display: inline-block;
+    margin: 6px;
+    background-color: #1EC6B6;
+}
+
+.tagbox:hover {
+    transform: translateY(-3px);
+    transition-duration: 0.2s;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .2), 0 0 0 1px rgba(187, 136, 136, 0.08);
+}
+
+.linkdiv {
+    padding: 6px;
+}
+.linkdiv h5 {
+    color: #fff; 
+    margin: 0 6px 0 6px
+}

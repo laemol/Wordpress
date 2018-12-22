@@ -1,0 +1,8 @@
+2018-12-15T10:27:13+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Post as array in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/template-checkout.php:227
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template-loader.php(74): include()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-blog-header.php(19): require_once('/home/deb108402...')
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/index.php(17): require('/home/deb108402...')
+#3 {main}
+  thrown
+

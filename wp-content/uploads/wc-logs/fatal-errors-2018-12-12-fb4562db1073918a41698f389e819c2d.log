@@ -1,0 +1,34 @@
+2018-12-12T11:30:39+00:00 CRITICAL Maximum execution time of 30 seconds exceeded
+
+2018-12-12T11:32:03+00:00 CRITICAL Maximum execution time of 30 seconds exceeded
+
+2018-12-12T11:50:26+00:00 CRITICAL Uncaught Error: Call to undefined function () in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/templates/template-booking-form.php:40
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template.php(690): require()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template.php(647): load_template('/home/deb108402...', false)
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#3 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/plugins/Holli/holli.php(637): get_template_part('/templates/temp...')
+#4 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/shortcodes.php(319): Holli->addBookingForm('', '', 'booking-form')
+#5 [internal function]: do_shortcode_tag(Array)
+#6 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/shortcodes.php(197): preg_replace_callback('/\\[(\\[?)(bookin.
+
+2018-12-12T14:30:02+00:00 CRITICAL Uncaught Error: Function name must be a string in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/templates/template-booking-form.php:10
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template.php(690): require()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template.php(647): load_template('/home/deb108402...', false)
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#3 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/plugins/Holli/holli.php(637): get_template_part('/templates/temp...')
+#4 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/shortcodes.php(319): Holli->addBookingForm('', '', 'booking-form')
+#5 [internal function]: do_shortcode_tag(Array)
+#6 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/shortcodes.php(197): preg_replace_callback('/\\[(\\[?)(bookin
+
+2018-12-12T14:30:24+00:00 CRITICAL Uncaught Error: Function name must be a string in /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/themes/grandtour-child/templates/template-booking-form.php:10
+Stack trace:
+#0 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template.php(690): require()
+#1 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/template.php(647): load_template('/home/deb108402...', false)
+#2 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#3 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-content/plugins/Holli/holli.php(637): get_template_part('/templates/temp...')
+#4 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/shortcodes.php(319): Holli->addBookingForm('', '', 'booking-form')
+#5 [internal function]: do_shortcode_tag(Array)
+#6 /home/deb108402n2/domains/talpaq.com/public_html/sandbox/wp-includes/shortcodes.php(197): preg_replace_callback('/\\[(\\[?)(bookin
+
