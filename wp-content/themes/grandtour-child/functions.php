@@ -91,13 +91,18 @@ function apiPostRequest($resource, $data)
 function addProductListCode()
 {
     ob_start();
-    $area = $_GET['area'];
+    $limit = 12;
     $category_id = $_GET['category_id'] ? implode(',', $_GET['category_id']) : null;
     $destination_id = $_GET['destination_id'];
-    $offset = $_POST['offset'];
     $recommended = $_GET['destination_id'] || $_GET['category_id'] ? '' : 'true';
 
-    $data = apiGetRequest('products?recommended=' . $recommended . '&offset=' . $offset . '&limit=12&&area=' . $area . '&category_id=' . $category_id . '&zone_id=' . $destination_id . '&lang=' . pll_current_language());
+    if ($_POST['offset'] || $_POST['category'] || $_POST['destination']) {
+        $offset = $_POST['offset'];
+        $category_id = $_POST['category'];
+        $destination_id = $_POST['destination'];
+    }
+
+    $data = apiGetRequest('products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $limit . '&category_id=' . $category_id . '&zone_id=' . $destination_id . '&lang=' . pll_current_language());
 
     if (!$data) {
         echo '[no data found]';
@@ -138,39 +143,52 @@ function addProductListCode()
         }
 
         echo '</div></div></div>';
-    } ?>
+
+        if (count($data) >= $limit) {
+            ?>
+
+        <div class="btn_wrapper">
+        <a href="#/" class="button show_more" data-offset="<?php echo $offset ?> data-category="<?php echo $_GET['category_id'] ?> data-zone="<?php echo $_GET['destination_id'] ?>">Show More</a>
+        </div>
+        <div class="products<?php echo $offset ?>"></div>
        
     <?php
+        }
+    }
 
     /* AJAX check  */
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-        ?>
-        <div class="btn_wrapper">
-        <a href="#/" class="button show_more" id="<?php echo $offset ?>">Show More</a>
-        <span class="loding" style="display: none;"><span class="loding_txt">
-            <img src="<?php echo get_stylesheet_directory_uri() ?>/img/ajax-loader.gif" /></span>
-        </span>
-    </div>
-
-    <div class="products<?php echo $offset ?>"></div>
-
-    <?php
         die();
-    }
-
-    return ob_get_clean(); ?>
-    <!-- <script type="text/javascript">
+    } ?>
+    
+    <script type="text/javascript">
     jQuery(document).ready(function(){
-    jQuery(document).on('click','.show_more',function(){	var offset = jQuery(this).attr('id');	console.log(offset);	jQuery('.show_more').hide();	jQuery('.loding').show();
-    jQuery.ajax({		type: 'POST',
+    jQuery(document).on('click','.show_more',function(){	
+        var offset = jQuery(this).data('offset');
+        var category = jQuery(this).data('category');
+        var destination = jQuery(this).data('destination');
+        var loder = '<div class="loder"></div>'	
+        jQuery('.show_more').html(loder);	
+        jQuery('.loding').show();
+        jQuery.ajax({	
+                        type: 'POST',
                         url: "<?php echo admin_url('admin-ajax.php'); ?>",
-                        data: {							action: 'getProductList',							offset: offset,											},
-                        success: function( data ) {							jQuery('.products'+offset).append(data);							jQuery('.loding').hide();						}
+                        data: {		action: 'getProductList',							
+                                    offset: offset,	
+                                    category: category,
+                                    destination: destination,
+                        },
+                        success: function( data ) {		
+                        jQuery('.show_more').hide();			
+                        jQuery('.products'+offset).append(data);				
+                        jQuery('.loding').hide();			
+                        }
             });
         });
     });
-    </script> -->
+    </script>
 <?php
+return ob_get_clean();
 }
 
 /**
