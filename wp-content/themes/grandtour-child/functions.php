@@ -106,7 +106,7 @@ function addProductListCode()
     $url = 'products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $limit . '&category_id=' . $category_id . '&zone_id=' . $destination_id . '&lang=' . pll_current_language();
     $data = apiGetRequest($url);
 
-    echo '<div  class="ppb_tour_classic one nopadding " style="margin-bottom:50px;" >';
+    echo '<div  class="ppb_tour_classic one nopadding" >';
     echo '<div class="page_content_wrapper page_main_content sidebar_content full_width fixed_column">';
     echo '<div class="standard_wrapper">';
 
@@ -145,11 +145,12 @@ function addProductListCode()
 
         if (count($data) >= $limit) {
             ?>
+            <div class="products<?php echo $offset ?>"></div>
 
         <div class="btn_wrapper">
         <a href="#/" class="button show_more" data-offset="<?php echo $offset ?>" data-category="[<?php echo $category_id ?>]" data-zone="<?php echo $destination_id ?>">Show More</a>
         </div>
-        <div class="products<?php echo $offset ?>"></div>
+        
        
     <?php
         }
@@ -211,8 +212,13 @@ function addCategoryOptionsList()
     $categories = apiGetRequest('product/categories');
 
     echo '<form action="' . get_site_url() . '/tours" method="get" id="filterform"><div>';
+    echo '<input type="checkbox" class="all" id="all" name="category_id" value=""';
+    if (!$_GET['category_id']) {
+        echo 'checked';
+    }
+    echo '> All Categories<br>';
     foreach ($categories as $category) {
-        echo '<input type="checkbox" class="filter" id="scales" name="category_id[]" value="' . $category['id'] . '"';
+        echo '<input type="checkbox" class="filter" name="category_id[]" value="' . $category['id'] . '"';
         if ($_GET['category_id'] ? in_array($category['id'], $_GET['category_id']) : false) {
             echo 'checked';
         }
@@ -225,6 +231,11 @@ function addCategoryOptionsList()
 
     $zones = apiGetRequest('zones');
     echo '<div class="radio-toolbar">';
+    echo '<label><input type="radio" id="destination_0" class="filter" name="destination_id" value=""';
+    if (!$_GET['destination_id']) {
+        echo 'checked';
+    }
+    echo '><span for="destination_0">All Destinations</span></label>';
     foreach ($zones as $zone) {
         echo '<label><input type="radio" id="destination_' . $zone['id'] . '" class="filter" name="destination_id" value="' . $zone['id'] . '"';
         if ($zone['id'] == $_GET['destination_id']) {
@@ -238,6 +249,14 @@ function addCategoryOptionsList()
     
     <script>
        jQuery( ".filter" ).click(function() {
+        jQuery('body').append('<div style="" id="loadingDiv"><div class="loader"><div class="lds-dual-ring"></div></div></div>');
+        jQuery( "#filterform" ).submit();
+    });
+    </script>
+
+<script>
+       jQuery( "#all" ).click(function() {
+        jQuery('.filter').removeAttr('checked');
         jQuery('body').append('<div style="" id="loadingDiv"><div class="loader"><div class="lds-dual-ring"></div></div></div>');
         jQuery( "#filterform" ).submit();
     });
