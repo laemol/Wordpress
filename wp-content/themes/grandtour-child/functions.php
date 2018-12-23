@@ -31,6 +31,9 @@ add_action('area', 'addAreaCode', 10, 1);
 add_action('wp_ajax_getProductList', 'addProductListCode');
 add_action('wp_ajax_nopriv_getProductList', 'addProductListCode');
 
+// Create global
+global $product;
+
 /**
 * API GET request
 */
@@ -88,10 +91,18 @@ function apiPostRequest($resource, $data)
 /**
 * Adds the products list
 */
-function addProductListCode()
+function addProductListCode($atts = '')
 {
+
+    $value = shortcode_atts( array(
+        'limit' => 12,
+        'button' => 'show',
+        'lat' => null,
+        'long' => null,
+        'range' => null,
+    ), $atts );
+
     ob_start();
-    $limit = 12;
     $category_id = $_GET['category_id'] ? implode(',', $_GET['category_id']) : null;
     $destination_id = $_GET['destination_id'];
     $recommended = $_GET['destination_id'] || $_GET['category_id'] ? '' : 'true';
@@ -103,7 +114,8 @@ function addProductListCode()
         $recommended = '';
     }
 
-    $url = 'products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $limit . '&category_id=' . $category_id . '&zone_id=' . $destination_id . '&lang=' . pll_current_language();
+    $url = 'products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $value['limit'] . '&category_id=' . $category_id . '&zone_id=' . $destination_id . '&lang=' . pll_current_language() . '&lat=' . $value['lat'] . '&long=' . $value['long'] . '&range=' . $value['range'];
+    //echo $url;
     $data = apiGetRequest($url);
 
     echo '<div  class="ppb_tour_classic one nopadding" >';
@@ -125,25 +137,26 @@ function addProductListCode()
             echo '<div class="portfolio_info_wrapper">';
             echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['productId'] . '"><h4>' . $product['name'] . '</h4></a>';
             echo '<div class="tour_excerpt"><p>' . ucfirst($product['type']) . ', ' . $product['category'] . '</p></div>';
-            echo '<div class="tour_attribute_wrapper">';
-            echo '<div class="tour_attribute_rating"><div class="br-theme-fontawesome-stars-o">';
-            echo '<div class="br-widget">';
-            echo '<a href="javascript:;" class="br-selected"></a>';
-            echo '<a href="javascript:;" class="br-selected"></a>';
-            echo '<a href="javascript:;" class="br-selected"></a>';
-            echo '<a href="javascript:;" class="br-selected"></a>';
-            echo '<a href="javascript:;"></a></div></div>';
-            echo '<div class="tour_attribute_rating_count">' . rand(0, 93) . ' Reviews</div></div>';
+            // echo '<div class="tour_attribute_wrapper">';
+            // echo '<div class="tour_attribute_rating"><div class="br-theme-fontawesome-stars-o">';
+            // echo '<div class="br-widget">';
+            // echo '<a href="javascript:;" class="br-selected"></a>';
+            // echo '<a href="javascript:;" class="br-selected"></a>';
+            // echo '<a href="javascript:;" class="br-selected"></a>';
+            // echo '<a href="javascript:;" class="br-selected"></a>';
+            // echo '<a href="javascript:;"></a></div></div>';
+            // echo '<div class="tour_attribute_rating_count">' . rand(0, 93) . ' Reviews</div></div>';
             // if ($product['type'] == 'tours') {
             //     echo '<div class="tour_attribute_days"><span class="ti-time"></span>' . ucfirst($product['duration']) . ' Hours</div>';
             // }
-            echo '</div><br class="clear"/>';
+            // echo '</div><br class="clear"/>';
             echo '</div></div></div>';
         }
 
         echo '</div></div></div>';
 
         if (count($data) >= $limit) {
+            if($value['button'] != 'hide'){
             ?>
             <div class="products<?php echo $offset ?>"></div>
 
@@ -151,8 +164,8 @@ function addProductListCode()
         <a href="#/" class="button show_more" data-offset="<?php echo $offset ?>" data-category="[<?php echo $category_id ?>]" data-zone="<?php echo $destination_id ?>"><?php echo pll_e('Show More')  ?></a>
         </div>
         
-       
     <?php
+            }
         }
     } else {
         echo 'Sorry, nothing found';

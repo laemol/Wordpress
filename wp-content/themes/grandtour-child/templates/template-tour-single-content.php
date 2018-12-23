@@ -1,7 +1,7 @@
 <?php
     // Get current product
-    $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
-
+    $product = array_shift(apiGetRequest('products/' . $_GET['pid'] . '?lang=' . pll_current_language() ));
+    
 ?>
 
 <div class="sidebar_content <?php if ($tour_layout == 'Fullwidth') {
@@ -163,9 +163,15 @@
         }
 
     ?>
-		<div class="single_tour_content">
-            <?php echo $product['webDescription']; ?>
+    <!-- Start main content -->
 
+		<div class="single_tour_content">
+
+            <div class="sidebar-box">
+            <?php echo $product['webDescription']; ?>
+            <p class="read-more"><a href="#" class="button">Read More</a></p>
+            </div>
+         
 		</div>
 
 	<?php
@@ -175,7 +181,7 @@
 		<br class="clear"/><div class="single_tour_after_content_wrapper">
 	<?php
 
-        //Include tour content
+        //Include tour booking form
         get_template_part('/templates/template-booking-form'); ?>
 
 	<?php
@@ -251,7 +257,7 @@
                             }
                             if ($tour_included_item['key'] == 'usp') {
                                 ?>
-				<div class="one_half <?php echo esc_attr($last_class); ?>">
+				<div>
 					<span class="ti-plus"></span><?php echo esc_html($tour_included_item['value']); ?>
 				</div>
                 <?php
@@ -273,13 +279,13 @@
 				<?php
                     if (!empty($tour_included) && is_array($tour_included)) {
                         foreach ($tour_included as $key => $tour_included_item) {
-                            $last_class = '';
-                            if (($key + 1) % 2 == 0) {
-                                $last_class = 'last';
-                            }
+                            // $last_class = '';
+                            // if (($key + 1) % 2 == 0) {
+                            //     $last_class = 'last';
+                            // }
                             if ($tour_included_item['key'] == 'include') {
                                 ?>
-				<div class="one_half <?php echo esc_attr($last_class); ?>">
+				<div>
 					<span class="ti-check"></span><?php echo esc_html($tour_included_item['value']); ?>
 				</div>
                 <?php
@@ -347,3 +353,39 @@
     ?>
 		
 </div>
+
+<script>
+    var $el, $ps, $up, totalHeight;
+
+jQuery(".sidebar-box .button").click(function() {
+      
+  totalHeight = 0
+
+  $el = jQuery(this);
+  $p  = $el.parent();
+  $up = $p.parent();
+  $ps = $up.find("p:not('.read-more')");
+  
+  // measure how tall inside should be by adding together heights of all inside paragraphs (except read-more paragraph)
+  $ps.each(function() {
+    totalHeight += jQuery(this).outerHeight();
+  });
+        
+  $up
+    .css({
+      // Set height to prevent instant jumpdown when max height is removed
+      "height": $up.height(),
+      "max-height": 9999
+    })
+    .animate({
+      "height": totalHeight
+    });
+  
+  // fade out read-more
+  $p.fadeOut();
+  
+  // prevent jump-down
+  return false;
+    
+});
+</script>

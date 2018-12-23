@@ -8,9 +8,6 @@
  * @package WordPress
  */
 
-global $api_url;
-$api_url = 'https://test.backend.holliapp.com/api/v3';
-
 /**
  * Stores the location of the WordPress directory of functions, classes, and core content.
  *

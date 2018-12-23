@@ -555,3 +555,36 @@ select {
     color: #fff; 
     margin: 0 6px 0 6px
 }
+
+/* Themify Icons */
+
+.ti-plus:before, .ti-check:before{
+    color: #1abc9c
+}
+
+.ti-close:before {
+    color: #FF4A52;
+}
+
+/* Tour details */
+.sidebar-box {
+    max-height: 250px;
+    position: relative;
+    overflow: hidden;
+  }
+  .sidebar-box .read-more { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0;
+    width: 100%; 
+    text-align: center; 
+    margin: 0; 
+    height: 125px;
+      
+    /* "transparent" only works here because == rgba(0,0,0,0) */
+    background-image: linear-gradient(to bottom, transparent, #fff);
+  }
+  .sidebar-box .read-more a{
+    position: absolute; 
+    bottom: 0; 
+  }
