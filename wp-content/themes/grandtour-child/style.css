@@ -106,6 +106,7 @@ Template: grandtour
 #tour_search_form, .tour_search_form {
     padding: 0 !important;
     border: 0px !important;
+    
 }
 
 .one_fourth {
@@ -114,6 +115,25 @@ Template: grandtour
 
 #tour_search_form .one_fourth:not(.last):hover {
     border-color: #dce0e0;
+}
+
+#tour_search_form .one_fourth:not(.last), .tour_search_form .one_fourth:not(.last){
+    border: 0px !important;
+}
+
+#tour_search_form input[type=text]:focus {
+    background-color: #fff;
+}
+
+.autocomplete {
+    border: 0px;
+    right:0;
+    box-shadow: 0px 10px 20px -2px rgba(0, 0, 0, 0.15) !important;
+    -webkit-box-shadow: 0px 10px 20px -2px rgba(0, 0, 0, 0.15) !important;
+}
+.autocomplete ul {
+box-shadow: none  !important;
+padding-top:10px;
 }
 
 .searchtxt h1{

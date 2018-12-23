@@ -7,35 +7,31 @@ session_start();
  * @package WordPress
 */
 
-$product = getProductData($_POST['productId']);
+$product = array_shift(apiGetRequest('products/' . $_POST['productId']));
 
 //Check if single attachment page
-if($post->post_type == 'attachment')
-{
-	get_template_part("single-attachment");
-	die;
+if ($post->post_type == 'attachment') {
+    get_template_part('single-attachment');
+    die;
 }
 
 //Check if content builder preview
-if(isset($_GET['rel']) && !empty($_GET['rel']) && isset($_GET['ppb_preview']))
-{
-	get_template_part("page-preview");
-	die;
+if (isset($_GET['rel']) && !empty($_GET['rel']) && isset($_GET['ppb_preview'])) {
+    get_template_part('page-preview');
+    die;
 }
 
 //Check if content builder preview page
-if(isset($_GET['ppb_preview_page']))
-{
-	get_template_part("page-preview-page");
-	die;
+if (isset($_GET['ppb_preview_page'])) {
+    get_template_part('page-preview-page');
+    die;
 }
 
 /**
 *	Get Current page object
 **/
-if(!is_null($post))
-{
-	$page_obj = get_page($post->ID);
+if (!is_null($post)) {
+    $page_obj = get_page($post->ID);
 }
 
 $current_page_id = '';
@@ -44,12 +40,11 @@ $current_page_id = '';
 *	Get current page id
 **/
 
-if(!is_null($post) && isset($page_obj->ID))
-{
+if (!is_null($post) && isset($page_obj->ID)) {
     $current_page_id = $page_obj->ID;
 }
 
-get_header(); 
+get_header();
 ?>
 
 <?php
@@ -60,92 +55,94 @@ $page_menu_transparent = get_post_meta($current_page_id, 'page_menu_transparent'
 $page_title = get_the_title();
 $page_show_title = get_post_meta($current_page_id, 'page_show_title', true);
 
-if(empty($page_show_title))
-{
-	//Get current page tagline
-	$page_tagline = get_post_meta($current_page_id, 'page_tagline', true);
+if (empty($page_show_title)) {
+    //Get current page tagline
+    $page_tagline = get_post_meta($current_page_id, 'page_tagline', true);
 
-	$pp_page_bg = '';
-	//Get page featured image
-	if(has_post_thumbnail($current_page_id, 'full'))
-    {
-        $image_id = get_post_thumbnail_id($current_page_id); 
+    $pp_page_bg = '';
+    //Get page featured image
+    if (has_post_thumbnail($current_page_id, 'full')) {
+        $image_id = get_post_thumbnail_id($current_page_id);
         $image_thumb = wp_get_attachment_image_src($image_id, 'full', true);
-        
-        if(isset($image_thumb[0]) && !empty($image_thumb[0]))
-        {
-        	$pp_page_bg = $image_thumb[0];
+
+        if (isset($image_thumb[0]) && !empty($image_thumb[0])) {
+            $pp_page_bg = $image_thumb[0];
         }
     }
-    
+
     //Check if add parallax effect
-	$tg_page_header_bg_parallax = kirki_get_option('tg_page_header_bg_parallax');
-	
-	//Check if enable content builder
-	$ppb_enable = get_post_meta($current_page_id, 'ppb_enable', true);
-	
-	$grandtour_topbar = grandtour_get_topbar();
-	$page_header_type = '';
-	
-	//Get header featured content
-	$page_header_type = get_post_meta(get_the_ID(), 'page_header_type', true);
-	
-	$video_url = '';
-				
-	if($page_header_type == 'Youtube Video' OR $page_header_type == 'Vimeo Video')
-	{
-		//Add jarallax video script
-		wp_enqueue_script("jarallax-video", get_template_directory_uri()."/js/jarallax-video.js", false, GRANDTOUR_THEMEVERSION, true);
-		
-		if($page_header_type == 'Youtube Video')
-		{
-			$page_header_youtube = get_post_meta(get_the_ID(), 'page_header_youtube', true);
-			$video_url = 'https://www.youtube.com/watch?v='.$page_header_youtube;
-		}
-		else
-		{
-			$page_header_vimeo = get_post_meta(get_the_ID(), 'page_header_vimeo', true);
-			$video_url = 'https://vimeo.com/'.$page_header_vimeo;
-		}
-	}
-?>
-<div id="page_caption" class="<?php if(!empty($pp_page_bg)) { ?>hasbg <?php if(!empty($tg_page_header_bg_parallax)) { ?>parallax<?php } ?> <?php } ?> <?php if(!empty($grandtour_topbar)) { ?>withtopbar<?php } ?> <?php if(!empty($grandtour_screen_class)) { echo esc_attr($grandtour_screen_class); } ?> <?php if(!empty($grandtour_page_content_class)) { echo esc_attr($grandtour_page_content_class); } ?>" <?php if(!empty($pp_page_bg)) { ?>style="background-image:url(<?php echo esc_url($pp_page_bg); ?>);"<?php } ?> <?php if($page_header_type == 'Youtube Video' OR $page_header_type == 'Vimeo Video') { ?>data-jarallax-video="<?php echo esc_url($video_url); ?>"<?php } ?>>
+    $tg_page_header_bg_parallax = kirki_get_option('tg_page_header_bg_parallax');
+
+    //Check if enable content builder
+    $ppb_enable = get_post_meta($current_page_id, 'ppb_enable', true);
+
+    $grandtour_topbar = grandtour_get_topbar();
+    $page_header_type = '';
+
+    //Get header featured content
+    $page_header_type = get_post_meta(get_the_ID(), 'page_header_type', true);
+
+    $video_url = '';
+
+    if ($page_header_type == 'Youtube Video' or $page_header_type == 'Vimeo Video') {
+        //Add jarallax video script
+        wp_enqueue_script('jarallax-video', get_template_directory_uri() . '/js/jarallax-video.js', false, GRANDTOUR_THEMEVERSION, true);
+
+        if ($page_header_type == 'Youtube Video') {
+            $page_header_youtube = get_post_meta(get_the_ID(), 'page_header_youtube', true);
+            $video_url = 'https://www.youtube.com/watch?v=' . $page_header_youtube;
+        } else {
+            $page_header_vimeo = get_post_meta(get_the_ID(), 'page_header_vimeo', true);
+            $video_url = 'https://vimeo.com/' . $page_header_vimeo;
+        }
+    } ?>
+<div id="page_caption" class="<?php if (!empty($pp_page_bg)) {
+        ?>hasbg <?php if (!empty($tg_page_header_bg_parallax)) {
+            ?>parallax<?php
+        } ?> <?php
+    } ?> <?php if (!empty($grandtour_topbar)) {
+        ?>withtopbar<?php
+    } ?> <?php if (!empty($grandtour_screen_class)) {
+        echo esc_attr($grandtour_screen_class);
+    } ?> <?php if (!empty($grandtour_page_content_class)) {
+        echo esc_attr($grandtour_page_content_class);
+    } ?>" <?php if (!empty($pp_page_bg)) {
+        ?>style="background-image:url(<?php echo esc_url($pp_page_bg); ?>);"<?php
+    } ?> <?php if ($page_header_type == 'Youtube Video' or $page_header_type == 'Vimeo Video') {
+        ?>data-jarallax-video="<?php echo esc_url($video_url); ?>"<?php
+    } ?>>
 	
 	<?php
-		//Check page title vertical alignment
-		$tg_page_title_vertical_alignment = kirki_get_option('tg_page_title_vertical_alignment');
-		if($tg_page_title_vertical_alignment == 'center')
-		{	
-	?>
+        //Check page title vertical alignment
+        $tg_page_title_vertical_alignment = kirki_get_option('tg_page_title_vertical_alignment');
+    if ($tg_page_title_vertical_alignment == 'center') {
+        ?>
 		<div class="overlay_background visible"></div>
 	<?php
-		}
-	?>
+    } ?>
 
 	<?php
-		if(empty($page_show_title))
-		{
-	?>
+        if (empty($page_show_title)) {
+            ?>
 	<div class="page_title_wrapper">
 		<div class="page_title_inner">
 			<div class="page_title_content">
-				<h1 <?php if(!empty($pp_page_bg) && !empty($grandtour_topbar)) { ?>class ="withtopbar"<?php } ?>><?php echo esc_html($page_title); ?></h1>
+				<h1 <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
+                ?>class ="withtopbar"<?php
+            } ?>><?php echo esc_html($page_title); ?></h1>
 				<?php
-			    	if(!empty($page_tagline))
-			    	{
-			    ?>
+                    if (!empty($page_tagline)) {
+                        ?>
 			    	<div class="page_tagline">
 			    		<?php echo nl2br($page_tagline); ?>
 			    	</div>
 			    <?php
-			    	}
-			    ?>
+                    } ?>
 			</div>
 		</div>
 	</div>
 	<?php
-		}
-	?>
+        } ?>
 
 </div>
 <?php
@@ -153,55 +150,59 @@ if(empty($page_show_title))
 ?>
 
 <?php
-	//Check if use page builder
-	$ppb_form_data_order = '';
-	$ppb_form_item_arr = array();
-	$ppb_enable = get_post_meta($current_page_id, 'ppb_enable', true);
-	
-	$grandtour_topbar = grandtour_get_topbar();
+    //Check if use page builder
+    $ppb_form_data_order = '';
+    $ppb_form_item_arr = [];
+    $ppb_enable = get_post_meta($current_page_id, 'ppb_enable', true);
+
+    $grandtour_topbar = grandtour_get_topbar();
 ?>
 <?php
-	if(!empty($ppb_enable))
-	{
-		$grandtour_screen_class = grandtour_get_screen_class();
-		grandtour_set_screen_class('ppb_wrapper');
-		
-		//if dont have password set
-		if(!post_password_required())
-		{
-		wp_enqueue_script("grandtour-custom-onepage", get_template_directory_uri()."/js/custom_onepage.js", false, GRANDTOUR_THEMEVERSION, true);
-?>
-<div class="ppb_wrapper <?php if(!empty($pp_page_bg)) { ?>hasbg<?php } ?> <?php if(!empty($pp_page_bg) && !empty($grandtour_topbar)) { ?>withtopbar<?php } ?>">
+    if (!empty($ppb_enable)) {
+        $grandtour_screen_class = grandtour_get_screen_class();
+        grandtour_set_screen_class('ppb_wrapper');
+
+        //if dont have password set
+        if (!post_password_required()) {
+            wp_enqueue_script('grandtour-custom-onepage', get_template_directory_uri() . '/js/custom_onepage.js', false, GRANDTOUR_THEMEVERSION, true); ?>
+<div class="ppb_wrapper <?php if (!empty($pp_page_bg)) {
+                ?>hasbg<?php
+            } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
+                ?>withtopbar<?php
+            } ?>">
 <?php
-		grandtour_apply_builder($current_page_id);
-?>
+        grandtour_apply_builder($current_page_id); ?>
 </div>
-<?php		
-		} //end if dont have password set
-		else
-		{
-?>
-<div id="page_content_wrapper" class="<?php if(!empty($pp_page_bg)) { ?>hasbg<?php } ?> <?php if(!empty($pp_page_bg) && !empty($grandtour_topbar)) { ?>withtopbar<?php } ?>">
+<?php
+        } //end if dont have password set
+        else {
+            ?>
+<div id="page_content_wrapper" class="<?php if (!empty($pp_page_bg)) {
+                ?>hasbg<?php
+            } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
+                ?>withtopbar<?php
+            } ?>">
     <div class="inner">
     	<!-- Begin main content -->
     	<div class="inner_wrapper">
     		<div class="sidebar_content full_width"><br/><br/>
 <?php
-			the_content();
-?>
+            the_content(); ?>
     		<br/><br/></div>
     	</div>
     </div>
 </div>
 <?php
-		}
-	}
-	else
-	{
-?>
+        }
+    } else {
+        ?>
 <!-- Begin content -->
 
-<div id="page_content_wrapper" class="<?php if(!empty($pp_page_bg)) { ?>hasbg<?php } ?> <?php if(!empty($pp_page_bg) && !empty($grandtour_topbar)) { ?>withtopbar<?php } ?>">
+<div id="page_content_wrapper" class="<?php if (!empty($pp_page_bg)) {
+            ?>hasbg<?php
+        } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
+            ?>withtopbar<?php
+        } ?>">
 
 		<!-- Begin main content -->
 		<form action="<?php echo home_url() ?>/payment" method="POST" id="form" data-parsley-validate>
@@ -216,7 +217,8 @@ if(empty($page_show_title))
 			<input type="text" class="input-text" name="fullname" id="fullname" placeholder="" value="" autocomplete="fullname" required=""></p>
 			<p><strong>Email   </strong><br> <?php echo $_POST['email'] ; ?>
 			<input type="email" class="input-text" name="email" id="email" placeholder="" value="" autocomplete="email" required=""></p>
-			<?php if($product['type'] == 'tour'){ ?>
+			<?php if ($product['type'] == 'tour') {
+            ?>
 			<p><div class="text-container"><strong>Phone   </strong><br><?php echo $_POST['phone'] ; ?>
 			
 			<input type="text" class="input-text" name="phone" id="phone" placeholder="" value="" autocomplete="phone">
@@ -225,47 +227,43 @@ if(empty($page_show_title))
 			</div>
 			
 		</p>
-			<?php } ?>
+			<?php
+        } ?>
 		</div>
 	
-<?php if($product['type'] == 'tour'){ 
-	
-	$tour = $product['tours'][array_search($_POST['tour_id'], array_column($product['tours'], 'tourId'))];
-
-	?>
+<?php if ($product['type'] == 'tour') {
+            $tour = $product['tours'][array_search($_POST['tour_id'], array_column($product['tours'], 'tourId'))]; ?>
 
 		 <div id="two">
 		 <h4>Tour details</h4>
 
-		 <p><span class="ti-calendar"></span> <strong>Tour date: </strong> <?php echo date_format(date_create($tour['date']),"l d F Y") ?>
+		 <p><span class="ti-calendar"></span> <strong>Tour date: </strong> <?php echo date_format(date_create($tour['date']), 'l d F Y') ?>
 
 		 <p><span class="ti-direction-alt"></span> <strong>Meeting point</strong><br>
 		 Please select a meeting point.
 		  <?php 
-		 
-		 echo'<div style="overflow-y: scroll; height:250px; width:75%">';
 
-		 echo '<ul class="departure">';
-		 foreach($tour['stops'] as $stop){
-			 if($stop['type'] == 'stop'){
-			 echo '<li >';
-			 echo '<div class="radio"><input type="radio" name="stop_id" value="' . $stop['stopId'] . '"></div>';
-			 echo  '<h6>' . $stop['time'] . ' - ' . $stop['name'] . '</h6>';
-			 echo  ucfirst($stop['description']) . '<br>';
-			 echo '<a href="https://www.google.com/maps?q=@' . $stop['latitude'] . ',' . $stop['longitude'] . '" target="_blank"><span class="ti-location-pin"></span> Show on Google Maps </a></span>';
-			 echo '</li>';
-			 }
-			 
-		 }	
-		 
-		 ?>
+         echo'<div style="overflow-y: scroll; height:250px; width:75%">';
+
+            echo '<ul class="departure">';
+            foreach ($tour['stops'] as $stop) {
+                if ($stop['type'] == 'stop') {
+                    echo '<li >';
+                    echo '<div class="radio"><input type="radio" name="stop_id" value="' . $stop['stopId'] . '"></div>';
+                    echo  '<h6>' . $stop['time'] . ' - ' . $stop['name'] . '</h6>';
+                    echo  ucfirst($stop['description']) . '<br>';
+                    echo '<a href="https://www.google.com/maps?q=@' . $stop['latitude'] . ',' . $stop['longitude'] . '" target="_blank"><span class="ti-location-pin"></span> Show on Google Maps </a></span>';
+                    echo '</li>';
+                }
+            } ?>
 		 </ul>
 		 </div>
 		</p>
 			
 		 </div>
 
-		<?php } ?>
+		<?php
+        } ?>
 		<div style="clear: both; height: 20px;"></div>
 <h4>Your order</h4>
 			<div id="order_review" class="checkout-review-order">
@@ -279,21 +277,21 @@ if(empty($page_show_title))
 	<tbody>
 	
 	<?php 
-	$total = 0;
+    $total = 0;
 
-	foreach($_POST['price'] as $key => $value){ 
-
-		if($value > 0){
-		$price = $product['prices'][array_search($key, array_column($product['prices'], 'ticketId'))];
-		$total = $total + $value * $price['currentPrice'];
-	?>
+        foreach ($_POST['price'] as $key => $value) {
+            if ($value > 0) {
+                $price = $product['prices'][array_search($key, array_column($product['prices'], 'ticketId'))];
+                $total = $total + $value * $price['currentPrice']; ?>
 	<tr class="cart_item">
 		<td class="product-name">
 		<?php echo $product['name'] ?> - <?php echo $price['name'] ?>&nbsp;	<strong class="product-quantity">&times; <?php echo $value ?></strong></td>
 						<td class="product-total">
 							<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($value * $price['currentPrice'], 2, '.', '')  ?></span></td>
 	</tr>
-	<?php } } ?>
+	<?php
+            }
+        } ?>
 	</tbody>
 	<tfoot>
 
@@ -313,10 +311,9 @@ if(empty($page_show_title))
 
 	<!-- forward input fields -->
 	<?php
-	session_start();
-   	$rand=rand();
-   	$_SESSION['rand']=$rand;
-  	?>
+    session_start();
+        $rand = rand();
+        $_SESSION['rand'] = $rand; ?>
  	<input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
 	<input type="hidden" name="prices" value="<?php echo base64_encode(serialize($_POST['price'])) ; ?>" >
 	<input type="hidden" name="tour_id" value="<?php echo $_POST['tour_id']; ?>" >
@@ -324,16 +321,14 @@ if(empty($page_show_title))
 	<button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment">Proceed to Payment</button>
 	</div>
     		<?php
-    	
-			if (comments_open($post->ID)) 
-			{
-			?>
+
+            if (comments_open($post->ID)) {
+                ?>
 			<div class="fullwidth_comment_wrapper">
-				<?php comments_template( '', true ); ?>
+				<?php comments_template('', true); ?>
 			</div>
 			<?php
-			}
-			?>
+            } ?>
 			</div>
     		</div>
 		</div>
@@ -342,7 +337,7 @@ if(empty($page_show_title))
     </div> 
 </div>
 <?php
-}
+    }
 ?>
 <?php get_footer(); ?>
 

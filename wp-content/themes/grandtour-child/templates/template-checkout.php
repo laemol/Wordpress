@@ -3,7 +3,7 @@
     $tour_layout = get_post_meta($post->ID, 'tour_layout', true);
 
     // Get current product
-    $product = getProductData();
+    $product = array_shift(apiGetRequest('products/' . $_POST['productId']));
 ?>
 
 <div class="sidebar_content <?php if ($tour_layout == 'Fullwidth') {

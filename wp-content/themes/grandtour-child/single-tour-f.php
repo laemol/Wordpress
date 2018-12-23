@@ -5,7 +5,7 @@ grandtour_set_recently_view_tours();
  // Get current product
  global $product;
  $product = getProductData();
- 
+
 /**
  * The main template file for display single post page.
  *
@@ -35,7 +35,7 @@ get_template_part('/templates/template-tour-f-header');
     
     <?php
         //Include related tours
-        get_template_part('/templates/template-tour-single-related');
+        //get_template_part('/templates/template-tour-single-related');
     ?>
    
 </div>

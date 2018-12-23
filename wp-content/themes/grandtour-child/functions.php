@@ -20,7 +20,7 @@ add_shortcode('search', 'searchBar');
 add_shortcode('product-list', 'addProductListCode');
 add_shortcode('booking-form', 'addBookingForm');
 add_shortcode('zones', 'addZoneTags');
-add_shortcode('category-options', 'addCategoryOptionsList');
+add_shortcode('filter-list', 'addCategoryOptionsList');
 
 // Actions
 add_action('wp_ajax_grandtour_ajax_search_product_result', 'grandtour_ajax_search_product_result');
@@ -134,9 +134,9 @@ function addProductListCode()
             echo '<a href="javascript:;" class="br-selected"></a>';
             echo '<a href="javascript:;"></a></div></div>';
             echo '<div class="tour_attribute_rating_count">' . rand(0, 93) . ' Reviews</div></div>';
-            if ($product['type'] == 'tourzzz') {
-                echo '<div class="tour_attribute_days"><span class="ti-time"></span>' . ucfirst($product['duration']) . ' Hours</div>';
-            }
+            // if ($product['type'] == 'tours') {
+            //     echo '<div class="tour_attribute_days"><span class="ti-time"></span>' . ucfirst($product['duration']) . ' Hours</div>';
+            // }
             echo '</div><br class="clear"/>';
             echo '</div></div></div>';
         }
@@ -148,7 +148,7 @@ function addProductListCode()
             <div class="products<?php echo $offset ?>"></div>
 
         <div class="btn_wrapper">
-        <a href="#/" class="button show_more" data-offset="<?php echo $offset ?>" data-category="[<?php echo $category_id ?>]" data-zone="<?php echo $destination_id ?>">Show More</a>
+        <a href="#/" class="button show_more" data-offset="<?php echo $offset ?>" data-category="[<?php echo $category_id ?>]" data-zone="<?php echo $destination_id ?>"><?php echo pll_e('Show More')  ?></a>
         </div>
         
        
@@ -211,12 +211,18 @@ function addCategoryOptionsList()
 
     $categories = apiGetRequest('product/categories');
 
+    echo '<h2 class="widgettitle">';
+    echo pll_e('What do you want to do?');
+    echo '</h2>';
+    echo '<br>';
     echo '<form action="' . get_site_url() . '/tours" method="get" id="filterform"><div>';
     echo '<input type="checkbox" class="all" id="all" name="category_id" value=""';
     if (!$_GET['category_id']) {
         echo 'checked';
     }
-    echo '> All Categories<br>';
+    echo '> ';
+    echo pll_e('All Categories');
+    echo '<br>';
     foreach ($categories as $category) {
         echo '<input type="checkbox" class="filter" name="category_id[]" value="' . $category['id'] . '"';
         if ($_GET['category_id'] ? in_array($category['id'], $_GET['category_id']) : false) {
@@ -226,7 +232,9 @@ function addCategoryOptionsList()
     }
     echo '<br>';
     echo '</div>';
-    echo '<h2 class="widgettitle">Where do you want to go?</h2>';
+    echo '<h2 class="widgettitle">';
+    echo pll_e('Where do you want to go?');
+    echo '</h2>';
     echo '<br>';
 
     $zones = apiGetRequest('zones');
@@ -235,7 +243,9 @@ function addCategoryOptionsList()
     if (!$_GET['destination_id']) {
         echo 'checked';
     }
-    echo '><span for="destination_0">All Destinations</span></label>';
+    echo '><span for="destination_0">';
+    echo pll_e('All Destination');
+    echo '</span></label>';
     foreach ($zones as $zone) {
         echo '<label><input type="radio" id="destination_' . $zone['id'] . '" class="filter" name="destination_id" value="' . $zone['id'] . '"';
         if ($zone['id'] == $_GET['destination_id']) {
@@ -372,15 +382,16 @@ function grandtour_ajax_search_product_result()
 
         foreach ($zones as $zone) {
             echo '<li>';
-            echo '<a href="' . get_site_url() . '/tours?destination_id=' . $zone['id'] . '"><span class="ti-location-pin"></span> ' . $zone['name'] . '</a> ';
+            echo '<a href="' . get_site_url() . '/' . pll_current_language() . '/tours?destination_id=' . $zone['id'] . '"><span class="ti-location-pin"></span> ' . $zone['name'] . '</a> ';
             echo '</li>';
         }
-
-        echo '<li class="seperator"></li>';
+        if (count($zones)) {
+            echo '<li class="seperator"></li>';
+        }
 
         foreach ($products as $product) {
             echo '<li>';
-            echo '<a href="' . get_site_url() . '/tour/details?pid=' . $product['productId'] . '"><span class="ti-ticket"></span> ' . $product['name'] . '</a>';
+            echo '<a href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['productId'] . '"><span class="ti-ticket"></span> ' . $product['name'] . '</a>';
             echo '</li>';
         }
 
@@ -400,42 +411,23 @@ function searchBar()
 
     wp_enqueue_script('script-ajax-search', admin_url('admin-ajax.php') . '?action=grandtour_ajax_search&id=keyword&form=tour_search_form&result=autocomplete', false, GRANDTOUR_THEMEVERSION, true);
 
-    $categories = apiGetRequest('product/categories');
-    //$zones = apiGetRequest('zones?search=' . $_POST['destination_id']);?>
+    $categories = apiGetRequest('product/categories'); ?>
         <div  class="one withsmallpadding ppb_tour_search" style="margin-top:-600px;" >
         
         <div class="standard_wrapper">
         <div class="page_content_wrapper">
         <div class="inner">
             <div class="searchtxt">
-                <h1 >What do you want to do?</h1>
+                <h1 ><?php pll_e('What do you want to do?'); ?></h1>
             </div>
         <form id="tour_search_form" class="tour_search_form" method="get" action="<?php echo get_site_url() ?>/<?php echo pll_current_language() ?>/search">
         <div class="tour_search_wrapper">
-        <!-- <div class="one_fourth themeborder">
-        <select id="category" name="category_id">
-        <option value=""><?php pll_e('All Categories'); ?></option>
-        <?php
-        foreach ($categories as $category) {
-            echo '<option value="' . $category['id'] . '"';
-            if ($_GET['category_id'] == $category['id']) {
-                echo 'selected="selected"';
-            }
-            echo '>' . $category['name'] . '</option>';
-        } ?>    
-        </select><span class="ti-angle-down"></span>
-        </div> -->
         
         <div class="one_fourth themeborder keyword">
     		<input id="keyword" name="keyword" type="text" autocomplete="off" placeholder="<?php pll_e('Tour, Park or Destination'); ?>"/>
     		<span class="ti-search"></span>
     		<div id="autocomplete" class="autocomplete" data-mousedown="false"></div>
-        </div>
-    	<!-- <div class="one_fourth last themeborder">
-    		<input id="tour_search_btn" type="submit" class="button" value="<?php pll_e('Search'); ?>"/>
-        </div> -->
-        
-            </div></div>
+        </div></div></div>
         </div>
         </form></div></div>
         <?php
@@ -447,22 +439,16 @@ function searchBar()
 */
 function acf_load_product_field_choices($field)
 {
-    // reset choices
     $field['choices'] = ['' => 'Select'];
 
-    // get the textarea value from options page without any formatting
     $zones = apiGetRequest('zones');
 
     foreach ($zones as $zone) {
-        // vars
         $value = $zone['id'];
         $label = $zone['name'];
-
-        // append to choices
         $field['choices'][$value] = $label;
     }
 
-    // return the field
     return $field;
 }
 add_filter('acf/load_field/name=zone_id', 'acf_load_product_field_choices');
