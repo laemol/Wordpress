@@ -89,6 +89,16 @@ Template: grandtour
   width: 800px;
 }
 
+@media only screen and (max-width: 600px) {
+    #tour_search_form {
+        margin-left: 0px;
+        width: 100%;
+      }
+      .searchtxt {
+          display: none;
+      }
+  }
+
 .full_width {
     width: 100%;
 }
