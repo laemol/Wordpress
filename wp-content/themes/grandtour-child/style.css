@@ -568,7 +568,11 @@ select {
 
 /* Themify Icons */
 
-.ti-plus:before, .ti-check:before{
+.ti-plus:before {
+    color: #ddd
+}
+
+.ti-check:before{
     color: #1abc9c
 }
 
@@ -578,14 +582,13 @@ select {
 
 /* Tour details */
 .sidebar-box {
-    max-height: 250px;
+    max-height: 150px;
     position: relative;
     overflow: hidden;
   }
   .sidebar-box .read-more { 
     position: absolute; 
     bottom: 0; 
-    left: 0;
     width: 100%; 
     text-align: center; 
     margin: 0; 
@@ -597,4 +600,58 @@ select {
   .sidebar-box .read-more a{
     position: absolute; 
     bottom: 0; 
+  }
+
+  /* Accordion */
+
+  .accordion-main {
+      border-radius: 5px;
+  }
+
+  /* Ratings */
+  .glsr-default .glsr-summary-stars .glsr-star {
+      width: 15px !important;
+      height: 15px !important;
+      background-size: 15px !important;
+      padding-right: 3px;
+  }
+
+  .glsr-review {
+      border: 1px solid #dedede;
+      border-radius: 5px;
+      /* box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .2), 0 0 0 1px rgba(187, 136, 136, 0.08); */
+      padding: 10px;
+      margin-bottom: 15px !important;
+  } 
+  .glsr-review-title{
+      display: none !important;
+  }
+
+  .glsr-form-wrap {
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .2), 0 0 0 1px rgba(187, 136, 136, 0.08);
+    padding: 20px;
+  }
+
+  .single_tour_departure_content .glsr-summary-wrap {
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .2), 0 0 0 1px rgba(187, 136, 136, 0.08);
+    padding: 20px;
+  }
+
+  .glsr-has-success {
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #1abc9c;
+      border-radius: 5px;
+      width: 90%;
+      color: #fff;
+  }
+
+  .showall {
+      position: relative;
+      width:100%;
+      box-sizing:border-box;
   }

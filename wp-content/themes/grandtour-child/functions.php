@@ -136,19 +136,13 @@ function addProductListCode($atts = '')
             echo '<div class="portfolio_info_wrapper">';
             echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['productId'] . '"><h4>' . $product['name'] . '</h4></a>';
             echo '<div class="tour_excerpt"><p>' . ucfirst($product['type']) . ', ' . $product['category'] . '</p></div>';
-            // echo '<div class="tour_attribute_wrapper">';
-            // echo '<div class="tour_attribute_rating"><div class="br-theme-fontawesome-stars-o">';
-            // echo '<div class="br-widget">';
-            // echo '<a href="javascript:;" class="br-selected"></a>';
-            // echo '<a href="javascript:;" class="br-selected"></a>';
-            // echo '<a href="javascript:;" class="br-selected"></a>';
-            // echo '<a href="javascript:;" class="br-selected"></a>';
-            // echo '<a href="javascript:;"></a></div></div>';
-            // echo '<div class="tour_attribute_rating_count">' . rand(0, 93) . ' Reviews</div></div>';
-            // if ($product['type'] == 'tours') {
-            //     echo '<div class="tour_attribute_days"><span class="ti-time"></span>' . ucfirst($product['duration']) . ' Hours</div>';
-            // }
-            // echo '</div><br class="clear"/>';
+            echo '<div class="tour_attribute_wrapper">';
+            echo '<div class="tour_attribute_rating">';
+            $shortcode_reviews_summary = '[site_reviews_summary assigned_to="' . $product['productId'] . '" ';
+            echo do_shortcode($shortcode_reviews_summary . 'hide="bars,if_empty,rating,summary"]');
+            //preg_match('([1-9] reviews)', do_shortcode($shortcode_reviews_summary . 'hide="bars,if_empty,rating,stars"]'), $matches);
+            //echo '<div class="tour_attribute_rating_count">' . $matches[0] . '</div></div>';
+            echo '</div></div><br class="clear"/>';
             echo '</div></div></div>';
         }
 
@@ -464,3 +458,11 @@ function acf_load_product_field_choices($field)
     return $field;
 }
 add_filter('acf/load_field/name=zone_id', 'acf_load_product_field_choices');
+
+function customize_post_admin_menu_labels()
+{
+    global $menu;
+    $menu[33][0] = 'Help';
+    echo '';
+}
+    add_action('admin_menu', 'customize_post_admin_menu_labels');

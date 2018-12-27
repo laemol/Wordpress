@@ -1,7 +1,7 @@
 <?php
     // Get current product
-    $product = array_shift(apiGetRequest('products/' . $_GET['pid'] . '?lang=' . pll_current_language() ));
-    
+    $product = array_shift(apiGetRequest('products/' . $_GET['pid'] . '?lang=' . pll_current_language()));
+
 ?>
 
 <div class="sidebar_content <?php if ($tour_layout == 'Fullwidth') {
@@ -35,85 +35,73 @@
         }
 
         //Display tour attributes
-        $tour_days = 99;
-        $tour_minimum_age = $product['ageDescription'];
-        $tour_months = get_post_meta($post->ID, 'tour_months', true);
-        $tour_availability = get_post_meta($post->ID, 'tour_availability', true);
-
         $tour_attribute_class = 'one_fourth';
         if ($tour_layout == 'Fullwidth') {
             $tour_attribute_class = 'one_fifth';
         }
 
-        if (!empty($tour_days) or !empty($tour_minimum_age) or !empty($tour_months) or !empty($tour_availability)) {
+        if ($product) {
             ?>
 		<div class="single_tour_attribute_wrapper themeborder <?php echo esc_attr(strtolower($tour_layout)); ?>">
 			<?php
-                if (!empty($tour_days)) {
+
                     ?>
 				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
 					<div class="tour_attribute_icon ti-time"></div>
 					<div class="tour_attribute_content">
 					<?php
-                        //Display tour durations
-                        echo $product['duration']; ?> <?php esc_html_e('Hours', 'grandtour'); ?>
+                        // Display tour duration
+                        echo $product['duration']; ?> 
+                        <?php if (empty($product['duration'])) {
+                            echo 'All Day';
+                        } else {
+                            if (!strpos($product['duration'], 'hours')) {
+                                esc_html_e('Hours', 'grandtour');
+                            }
+                        } ?>
 					</div>
 				</div>
-			<?php
-                } ?>
 			
 			<?php
-                if (!empty($tour_minimum_age)) {
+                if (!empty($product['ageDescription'])) {
                     ?>
 				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
 					<div class="tour_attribute_icon ti-id-badge"></div>
 					<div class="tour_attribute_content">
-						<?php esc_html_e('Age', 'grandtour'); ?>
-						<?php echo intval($tour_minimum_age) . '+'; ?>
+                        <!-- <?php esc_html_e('Free', 'grandtour'); ?> -->
+                        <?php 
+                        // Display age description
+                        echo $product['ageDescription']; ?>
 					</div>
 				</div>
 			<?php
                 } ?>
 			
 			<?php
-                if (!empty($tour_months)) {
+                if (!empty($product['period'])) {
                     ?>
 				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
 					<div class="tour_attribute_icon ti-calendar"></div>
 					<div class="tour_attribute_content">
-						<?php 
-                            if (is_array($tour_months)) {
-                                if (count($tour_months) == 12) {
-                                    echo esc_html__('All Months', 'grandtour');
-                                } else {
-                                    $i = 0;
-                                    $len = count($tour_months);
-                                    foreach ($tour_months as $tour_month) {
-                                        echo date_i18n('M', strtotime('1 ' . $tour_month . ' 2017'));
-
-                                        if ($i != $len - 1) {
-                                            echo ',&nbsp;';
-                                        }
-
-                                        $i++;
-                                    }
-                                }
-                            } ?>
+                    <?php 
+                    // Display period
+                    echo date_i18n('M', strtotime($product['period']['start']));
+                    echo ' - ';
+                    echo date_i18n('M', strtotime($product['period']['end'])); ?>
 					</div>
 				</div>
 			<?php
                 } ?>
 			
 			<?php
-                if (!empty($tour_availability)) {
+                if (!empty($product['status'])) {
                     if ($tour_attribute_class == 'one_fourth') {
                         $tour_attribute_class = 'one_fourth last';
                     } ?>
 				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
-					<div class="tour_attribute_icon ti-user"></div>
+					<div class="tour_attribute_icon ti-home"></div>
 					<div class="tour_attribute_content">
-						<?php esc_html_e('Availability', 'grandtour'); ?>
-						<?php echo intval($tour_availability); ?>
+						<?php echo $product['status'] ?>
 					</div>
 				</div>
 			<?php
@@ -168,8 +156,13 @@
 		<div class="single_tour_content">
 
             <div class="sidebar-box">
-            <?php echo $product['webDescription']; ?>
+            <?php echo $product['webDescription'];
+            if (strlen($product['webDescription']) > 200) {
+                ?>
             <p class="read-more"><a href="#" class="button">Read More</a></p>
+            <?php
+            } ?>
+            
             </div>
          
 		</div>
@@ -210,7 +203,7 @@
     ?>
 	<ul class="single_tour_departure_wrapper themeborder">
 		<?php
-            if (!empty($tour_departure)) {
+            if ($product['type'] == 'tour') {
                 ?>
 		<!-- <li>
 			<div class="single_tour_departure_title"><?php esc_html_e('Departure', 'grandtour'); ?></div>
@@ -279,10 +272,6 @@
 				<?php
                     if (!empty($tour_included) && is_array($tour_included)) {
                         foreach ($tour_included as $key => $tour_included_item) {
-                            // $last_class = '';
-                            // if (($key + 1) % 2 == 0) {
-                            //     $last_class = 'last';
-                            // }
                             if ($tour_included_item['key'] == 'include') {
                                 ?>
 				<div>
@@ -307,13 +296,9 @@
 				<?php
                     if (!empty($tour_not_included) && is_array($tour_not_included)) {
                         foreach ($tour_not_included as $key => $tour_not_included_item) {
-                            $last_class = '';
-                            if (($key + 1) % 2 == 0) {
-                                $last_class = 'last';
-                            }
                             if ($tour_not_included_item['key'] == 'exclude') {
                                 ?>
-				<div class="one_half <?php echo esc_attr($last_class); ?>">
+				<div>
 					<span class="ti-close"></span><?php echo esc_html($tour_not_included_item['value']); ?>
 				</div>
                 <?php
@@ -331,16 +316,45 @@
                 $tg_tour_map_marker = kirki_get_option('tg_tour_map_marker'); ?>
 		<li>
 			<div class="single_tour_departure_title"><?php esc_html_e('Maps', 'grandtour'); ?></div>
-			<div class="single_tour_departure_content"><?php echo do_shortcode('[tg_map width="1000" height="300" address="' . esc_attr($tour_map_address) . '" zoom="13" marker="' . esc_url($tg_tour_map_marker) . '"]'); ?></div>
+			<div class="single_tour_departure_content">
+                <?php echo do_shortcode('[tg_map width="1000" height="300" address="' . esc_attr($tour_map_address) . '" zoom="13" marker="' . esc_url($tg_tour_map_marker) . '"]'); ?></div>
 		</li>
 		<?php
             }
         ?>
+
+        <li>
+        <div class="single_tour_departure_title"><?php esc_html_e('Reviews', 'grandtour'); ?></div>
+        <div class="single_tour_departure_content">
+        <?php 
+        $shortcode_reviews = '[site_reviews_summary assigned_to="' . $product['productId'] . '" hide="if_empty"]';
+        echo do_shortcode($shortcode_reviews);
+        echo '<br>';
+
+        if (strlen(do_shortcode($shortcode_reviews)) > 65) {
+            echo '<a href="javascript:;" class="button showall" onclick="toggleReviews()">Show Reviews</a><br><br><div id="reviews" style="display:none">';
+            $shortcode_reviews = '[site_reviews assigned_to="' . $product['productId'] . '"]';
+            echo do_shortcode($shortcode_reviews) . '</div>';
+        } else {
+            echo '<p><i>Be the first one to write a review!</i></p>';
+        }
+        $shortcode_reviews_form = '[site_reviews_form assign_to="' . $product['productId'] . '" hide="title"]';
+        echo do_shortcode($shortcode_reviews_form);
+
+        ?>
+        </div>
+        </li>
+
 	</ul>
 
 	<?php
         //Check if enable tour review
         $tg_tour_single_review = kirki_get_option('tg_tour_single_review');
+
+        ?>
+        
+
+    <?php
 
         //Display tour comment
         if (comments_open($post->ID) && !empty($tg_tour_single_review)) {
@@ -388,4 +402,16 @@ jQuery(".sidebar-box .button").click(function() {
   return false;
     
 });
+</script>
+
+<script>
+function toggleReviews() {
+  var x = document.getElementById("reviews");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
 </script>
