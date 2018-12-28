@@ -93,6 +93,7 @@ function apiPostRequest($resource, $data)
 */
 function addProductListCode($atts = '')
 {
+    $limit = 12;
     $value = shortcode_atts([
         'limit' => 12,
         'button' => 'show',
@@ -459,10 +460,10 @@ function acf_load_product_field_choices($field)
 }
 add_filter('acf/load_field/name=zone_id', 'acf_load_product_field_choices');
 
-function customize_post_admin_menu_labels()
-{
-    global $menu;
-    $menu[33][0] = 'Help';
-    echo '';
-}
-    add_action('admin_menu', 'customize_post_admin_menu_labels');
+// function customize_post_admin_menu_labels()
+// {
+//     global $menu;
+//     $menu[34][0] = 'Help';
+//     echo '';
+// }
+//     add_action('admin_menu', 'customize_post_admin_menu_labels');
