@@ -127,9 +127,15 @@ if (empty($page_show_title)) {
 	<div class="page_title_wrapper">
 		<div class="page_title_inner">
 			<div class="page_title_content">
-				<h1 <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
-                ?>class ="withtopbar"<?php
-            } ?>><?php echo esc_html($page_title); ?></h1>
+
+            <h1>Checkout</h1>
+            <nav>
+            <ol class="cd-multi-steps text-bottom count">
+            <li class="current"><a href="#0">Checkout</a></li>
+            <li ><a href="#0">Payment</a></li>
+            <li ><a href="#0">Confirmation</a></li>
+            </ol>
+            </nav>
 
 				<?php
                     if (!empty($page_tagline)) {
@@ -263,6 +269,15 @@ if (empty($page_show_title)) {
 		 </div>
 
 		<?php
+        }else{
+        ?>
+
+        <div id="two">
+        <h4></h4>
+            <img src="<?php echo $product['media'][0]['imageUrl'] ?>" class="preview" />
+        </div>
+
+        <?php
         } ?>
 		<div style="clear: both; height: 20px;"></div>
         <h4>Your order</h4>
