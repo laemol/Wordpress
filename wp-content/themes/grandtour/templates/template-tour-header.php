@@ -110,13 +110,13 @@ if (has_post_thumbnail($current_page_id, 'original') && !empty($tg_tour_single_h
 			
 			<?php
                 //Get tour video review
-                $tour_video_preview = get_post_meta($current_page_id, 'tour_video_preview', true);
+                echo 'HELLO';
 
-    if (!empty($tour_video_preview)) {
+    if ($product['video']) {
         ?>
 			<a href="#video_review<?php echo esc_attr($current_page_id); ?>" id="single_tour_video_preview_open" class="button" data-type="inline"><span class="ti-control-play"></span><?php esc_html_e('Video Preview', 'grandtour'); ?></a>
 			
-			<div id="video_review<?php echo esc_attr($current_page_id); ?>" class="tour_video_preview_wrapper" style="display:none;"><?php echo $tour_video_preview; ?></div>
+			<div id="video_review<?php echo esc_attr($current_page_id); ?>" class="tour_video_preview_wrapper" style="display:none;"><?php echo $product['video'] ?></div>
 			<?php
     } ?>
 			

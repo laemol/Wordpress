@@ -130,6 +130,7 @@ if (empty($page_show_title)) {
 				<h1 <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
                 ?>class ="withtopbar"<?php
             } ?>><?php echo esc_html($page_title); ?></h1>
+
 				<?php
                     if (!empty($page_tagline)) {
                         ?>
@@ -138,7 +139,8 @@ if (empty($page_show_title)) {
 			    	</div>
 			    <?php
                     } ?>
-			</div>
+            </div>
+
 		</div>
 	</div>
 	<?php
@@ -185,7 +187,8 @@ if (empty($page_show_title)) {
     <div class="inner">
     	<!-- Begin main content -->
     	<div class="inner_wrapper">
-    		<div class="sidebar_content full_width"><br/><br/>
+            
+    		<div class="sidebar_content full_width">
 <?php
             the_content(); ?>
     		<br/><br/></div>
@@ -208,6 +211,7 @@ if (empty($page_show_title)) {
 		<form action="<?php echo home_url() ?>/payment" method="POST" id="form" data-parsley-validate>
 
     	<div class="wrapper">
+            
 		<div class="form_wrapper">
 
 		<div id="one">
@@ -217,8 +221,6 @@ if (empty($page_show_title)) {
 			<input type="text" class="input-text" name="fullname" id="fullname" placeholder="" value="" autocomplete="fullname" required=""></p>
 			<p><strong>Email   </strong><br> <?php echo $_POST['email'] ; ?>
 			<input type="email" class="input-text" name="email" id="email" placeholder="" value="" autocomplete="email" required=""></p>
-			<?php if ($product['type'] == 'tour') {
-            ?>
 			<p><div class="text-container"><strong>Phone   </strong><br><?php echo $_POST['phone'] ; ?>
 			
 			<input type="text" class="input-text" name="phone" id="phone" placeholder="" value="" autocomplete="phone">
@@ -227,8 +229,6 @@ if (empty($page_show_title)) {
 			</div>
 			
 		</p>
-			<?php
-        } ?>
 		</div>
 	
 <?php if ($product['type'] == 'tour') {
@@ -265,16 +265,16 @@ if (empty($page_show_title)) {
 		<?php
         } ?>
 		<div style="clear: both; height: 20px;"></div>
-<h4>Your order</h4>
+        <h4>Your order</h4>
 			<div id="order_review" class="checkout-review-order">
 		<table class="shop_table checkout-review-order-table">
-	<thead>
+	    <thead>
 		<tr>
 			<th class="product-name">Product</th>
 			<th class="product-total">Total</th>
 		</tr>
-	</thead>
-	<tbody>
+	    </thead>
+	    <tbody>
 	
 	<?php 
     $total = 0;
@@ -307,7 +307,19 @@ if (empty($page_show_title)) {
 
 	</tfoot>
 </table>
-	</div>
+    </div>
+
+    <!-- Payments -->
+    
+    <div class="payment-details">
+        <input type="radio" name="payment_type" value="card" checked="checked"> Creditcard <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/credit-cards.png" class="cards"/><br>
+    </div>
+
+    <!-- <div class="payment_options">
+        <input type="radio" name="payment_type" value="ideal" disabled> iDeal (not available yet) <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/ideal.png" class="cards" /><br>
+    </div> -->
+
+    <div class="clear"></div>
 
 	<!-- forward input fields -->
 	<?php

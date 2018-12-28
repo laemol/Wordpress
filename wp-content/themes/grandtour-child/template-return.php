@@ -87,7 +87,7 @@ if(empty($page_show_title))
 	<div class="page_title_wrapper">
 		<div class="page_title_inner">
 			<div class="page_title_content">
-				<h1 <?php if(!empty($pp_page_bg) && !empty($grandtour_topbar)) { ?>class ="withtopbar"<?php } ?>><?php echo esc_html($page_title); ?></h1>
+				<h1 <?php if(!empty($pp_page_bg) && !empty($grandtour_topbar)) { ?>class ="withtopbar"<?php } ?>>Confirmation</h1>
 				<?php
 			    	if(!empty($page_tagline))
 			    	{
@@ -174,31 +174,38 @@ if(empty($page_show_title))
 	$payment = apiPostRequest('orders/' . $order_id . '/charge', $data);
 
 	// Get the order status
-	$result = apiGetRequest('orders/' . $order_id . '/status');
+	$result = array_shift(apiGetRequest('orders/' . $order_id . '/status'));
+
+	// Get the details
+	$order = apiGetRequest('orders/' .  $_POST['code'] . '/details');
 
 	if($result['status'] == 'paid'){
 		?>
 
-		Thanks for your booking!
+		<h4>Your tickets are ready!</h4><br>
+		<div class="payment-details">
+		Your tickets have been sent to: 
+		<p>
+		E-mail: <strong><?php echo $order['email'] ?></strong><br>
+		SMS: <strong><?php echo $order['phone'] ?></strong><br>
+		</p>
+
+		<p><a href="/help">Is your contact data incorrect?</a></p>
+    	</div>
 
 		<?php
 		}else{
 		?>
 
-		Sorry, We could not charge your card.
+		Sorry, We could not charge your card.<br>
 
 		<?php
 		}
     	
-			if (comments_open($post->ID)) 
-			{
-			?>
-			<div class="fullwidth_comment_wrapper">
-				<?php comments_template( '', true ); ?>
-			</div>
-			<?php
-			}
-			?>
+        //Include related tours
+        get_template_part('/templates/template-tour-single-related');
+	?>
+	
     		</div>
 		</div>
 		</form>

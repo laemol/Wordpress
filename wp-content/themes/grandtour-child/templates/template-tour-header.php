@@ -37,13 +37,13 @@ foreach($product['media'] as $image){ ?>
 <?php } ?>
 
 <!-- Next and previous buttons -->
-<a class="prevslide nav" onclick="plusSlides(-1)"><div class="ti-angle-left"></div></a>
-<a class="nextslide nav" onclick="plusSlides(1)"><div class="ti-angle-right"></div></a>
+<!-- <a class="prevslide nav" onclick="plusSlides(-1)"><div class="ti-angle-left"></div></a>
+<a class="nextslide nav" onclick="plusSlides(1)"><div class="ti-angle-right"></div></a> -->
 </div>
 <br>
 
 <!-- The dots/circles -->
-<div class="dots">
+<!-- <div class="dots">
 <?php 
 $slide = 1;
 foreach($product['media'] as $image){ ?>
@@ -51,10 +51,39 @@ foreach($product['media'] as $image){ ?>
 <?php 
 $slide++ ;
 } ?>
-</div>
+</div> -->
 
 	<div class="single_tour_header_content">
 		<div class="standard_wrapper">
+              <!-- Photo Gallery -->
+              <?php if(count($product['media']) > 1){ ?>
+                    <a href="<?php echo esc_url($image['imageUrl']); ?>" id="single_tour_gallery_open" class="button fancy-gallery"><span class="ti-camera"></span>View Photos</a>
+                    <div style="display:none;">
+                <?php
+                $count = 1;
+                foreach($product['media'] as $image){ ?>
+			        <a id="single_tour_gallery_image<?php echo $count ?>"" href="<?php echo esc_url($image['imageUrl']); ?>" title="<?php echo esc_url($image['name']); ?>" class="fancy-gallery"></a>
+                <?php 
+                    $count++;
+                    } 
+                ?>
+		                </div>
+                <?php
+                }
+                ?>
+<?php
+if ($product['video']) {
+        ?>
+			<a href="#video_review<?php echo esc_attr($current_page_id); ?>" id="single_tour_video_preview_open" class="button" data-type="inline"><span class="ti-control-play"></span><?php esc_html_e('Video Preview', 'grandtour'); ?></a>
+			
+            <div id="video_review<?php echo esc_attr($current_page_id); ?>" class="tour_video_preview_wrapper" style="display:none;height:800px;width:100%">
+            <!-- <iframe width="100%" height="800px" src="<?php echo $product['video'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+            <?php $embed_code = wp_oembed_get( $product['video'], ['height' => 1420, 'width' => 1425]); echo $embed_code  ?> 
+            
+        </div>
+			<?php
+    } ?>
+
 			<?php
 
     if (!empty($product['prices'])) {
@@ -100,10 +129,9 @@ $slide++ ;
         echo esc_attr($grandtour_page_content_class);
     } ?>">
 
-
 <script>
 
-var slideIndex = 1;
+var slideIndex = 0;
 showSlides(slideIndex);  
 
 // Next/previous controls
@@ -120,12 +148,12 @@ function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("dot");
-  var navs = document.getElementsByClassName("nav");
-  if (slides.length == 1) { 
-      for (i = 0; i < navs.length; i++) {
-      navs[i].className = nav[i].style.display = "none";  
-  }
-    } 
+//   var navs = document.getElementsByClassName("nav");
+//   if (slides.length == 1) { 
+//       for (i = 0; i < navs.length; i++) {
+//       navs[i].className = nav[i].style.display = "none";  
+//   }
+    //} 
   if (n > slides.length) { slideIndex = 1;} 
   if (n < 1) {slideIndex = slides.length}
   for (i = 0; i < slides.length; i++) {

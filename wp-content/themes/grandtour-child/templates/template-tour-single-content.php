@@ -155,16 +155,8 @@
 
 		<div class="single_tour_content">
 
-            <div class="sidebar-box">
-            <?php echo $product['webDescription'];
-            if (strlen($product['webDescription']) > 200) {
-                ?>
-            <p class="read-more"><a href="#" class="button">Read More</a></p>
-            <?php
-            } ?>
+            <?php echo $product['webDescription']; ?>
             
-            </div>
-         
 		</div>
 
 	<?php
@@ -353,7 +345,6 @@
 
         ?>
         
-
     <?php
 
         //Display tour comment
@@ -367,42 +358,6 @@
     ?>
 		
 </div>
-
-<script>
-    var $el, $ps, $up, totalHeight;
-
-jQuery(".sidebar-box .button").click(function() {
-      
-  totalHeight = 0
-
-  $el = jQuery(this);
-  $p  = $el.parent();
-  $up = $p.parent();
-  $ps = $up.find("p:not('.read-more')");
-  
-  // measure how tall inside should be by adding together heights of all inside paragraphs (except read-more paragraph)
-  $ps.each(function() {
-    totalHeight += jQuery(this).outerHeight();
-  });
-        
-  $up
-    .css({
-      // Set height to prevent instant jumpdown when max height is removed
-      "height": $up.height(),
-      "max-height": 9999
-    })
-    .animate({
-      "height": totalHeight
-    });
-  
-  // fade out read-more
-  $p.fadeOut();
-  
-  // prevent jump-down
-  return false;
-    
-});
-</script>
 
 <script>
 function toggleReviews() {
