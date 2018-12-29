@@ -269,12 +269,11 @@ if (empty($page_show_title)) {
 		 </div>
 
 		<?php
-        }else{
-        ?>
+        } else {
+            ?>
 
         <div id="two">
-        <h4></h4>
-            <img src="<?php echo $product['media'][0]['imageUrl'] ?>" class="preview" />
+        <!-- no conetnt yet... -->
         </div>
 
         <?php
@@ -334,7 +333,9 @@ if (empty($page_show_title)) {
         <input type="radio" name="payment_type" value="ideal" disabled> iDeal (not available yet) <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/ideal.png" class="cards" /><br>
     </div> -->
 
-    <div class="clear"></div>
+    <div style="clear: both; height: 20px;"></div>
+
+    
 
 	<!-- forward input fields -->
 	<?php
@@ -357,15 +358,27 @@ if (empty($page_show_title)) {
 			<?php
             } ?>
 			</div>
-    		</div>
-		</div>
+ 
 		</form>
-    	<!-- End main content -->
-    </div> 
-</div>
+        <!-- End main content -->
+        
+        <div class="help" >
+    <?php echo do_shortcode('[accordion category="73"]'); ?>
+        </div>
+
+
+        </div>
+
 <?php
     }
 ?>
+
+
+
+
+
+
+
 <?php get_footer(); ?>
 
 <script>
