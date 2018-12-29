@@ -34,6 +34,10 @@ add_action('wp_ajax_nopriv_getProductList', 'addProductListCode');
 // Create global
 global $product;
 
+function lang_url(){
+    return ($lang = pll_current_language() == 'en' ? '/' : '/' . pll_current_language() . '/');
+}
+
 /**
 * API GET request
 */
@@ -468,3 +472,47 @@ add_filter('acf/load_field/name=zone_id', 'acf_load_product_field_choices');
 //     echo '';
 // }
 //     add_action('admin_menu', 'customize_post_admin_menu_labels');
+
+add_action('admin_head', 'custom_icons');
+
+function custom_icons() {
+  echo '<style>
+  #adminmenu div.wp-menu-image {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+      -o-filter: grayscale(100%);
+     -ms-filter: grayscale(100%);
+         filter: grayscale(100%);
+    } 
+  </style>';
+}
+
+if ( function_exists('register_sidebar') )
+  register_sidebar(array(
+    'name' => 'Footer Checkout',
+    'before_widget' => '<div class = "widgetizedArea">',
+    'after_widget' => '</div>',
+    'before_title' => '<h3>',
+    'after_title' => '</h3>',
+  )
+);
+
+if ( function_exists('register_sidebar') )
+  register_sidebar(array(
+    'name' => 'Footer Payment',
+    'before_widget' => '<div class = "widgetizedArea">',
+    'after_widget' => '</div>',
+    'before_title' => '<h3>',
+    'after_title' => '</h3>',
+  )
+);
+
+if ( function_exists('register_sidebar') )
+  register_sidebar(array(
+    'name' => 'Footer Return',
+    'before_widget' => '<div class = "widgetizedArea">',
+    'after_widget' => '</div>',
+    'before_title' => '<h3>',
+    'after_title' => '</h3>',
+  )
+);

@@ -88,12 +88,12 @@ if(empty($page_show_title))
 		<div class="page_title_inner">
 			<div class="page_title_content">
 				
-		<h1>Checkout</h1>
+		<h1><?php pll_e('Checkout'); ?></h1>
 			<nav>
             <ol class="cd-multi-steps text-bottom count">
-            <li class="visited"><a href="#0">Checkout</a></li>
-            <li class="visited"><a href="#0">Payment</a></li>
-            <li class="current"><a href="#0">Confirmation</a></li>
+            <li class="visited"><a href="#0"><?php pll_e('Checkout'); ?></a></li>
+            <li class="visited"><a href="#0"><?php pll_e('Payment'); ?></a></li>
+            <li class="current"><a href="#0"><?php pll_e('Confirmation'); ?></a></li>
             </ol>
 			</nav>
 			
@@ -191,22 +191,24 @@ if(empty($page_show_title))
 	if($result['status'] == 'paid'){
 		?>
 
-		<h4>Your tickets are ready!</h4><br>
+		<h4><?php pll_e('Your tickets are ready!'); ?></h4><br>
 		<div class="payment-details">
-		Your tickets have been sent to: 
+		<?php pll_e('Your tickets have been sent to'); ?>: 
 		<p>
 		E-mail: <strong><?php echo $order['email'] ?></strong><br>
 		SMS: <strong><?php echo $order['phone'] ?></strong><br>
 		</p>
 
-		<p><a href="/help">Is your contact data incorrect?</a></p>
+		<p><a href="<?php echo site_url() ?><?php echo lang_url()  ?>help"><?php pll_e('Is your contact data incorrect?'); ?></a></p>
     	</div>
 
 		<?php
-		}else{
+		}
+		else
+		{
 		?>
 
-		Sorry, We could not charge your card.<br>
+		<?php pll_e('Sorry, We could not charge your card'); ?>. <?php pll_e('Please try again or contact support'); ?>.<br>
 
 		<?php
 		}
@@ -221,7 +223,18 @@ if(empty($page_show_title))
     	<!-- End main content -->
     </div> 
 </div>
+
+<!-- Help pre-footer -->
+<div class="one withsmallpadding ppb_text pre-footer" style="padding:40px 0 40px 0;">
+<div class="standard_wrapper">
+    <div class="page_content_wrapper"><div class="inner"><div style="margin:auto;width:100%">   
+    <h4><?php pll_e('Frequently asked questions'); ?></h4> 
+	<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer Return") ) : ?>
+	<?php endif;?>
+</div></div></div></div></div>
+
+<?php get_footer(); ?>
+
 <?php
 }
 ?>
-<?php get_footer(); ?>

@@ -161,14 +161,17 @@ padding-top:10px;
     width: 100%;
 }
 
-.help {
-    position: relative;
-    background-color: #dedede;
-    float:left;
-    width: 100%;
-    margin-bottom: -20px;
-    margin-top: 20px;
+.pre-footer {
+    background-color: #eeeeee;
+    margin-bottom: -20px !important;
+    margin-top: 40px !important;
 }
+
+.pre-footer h4 {
+    margin-left: 5px;
+    padding: 10px;
+}
+
 #autocomplete a{
     color: #000; 
 }
@@ -610,9 +613,22 @@ select {
   }
 
   /* Accordion */
+  .accordion-content {
+      padding:10px !important;
+  }
 
   .accordion-main {
       border-radius: 5px;
+      border: none !important;
+  }
+
+  .accordion-title h4 {
+      font-size:16px !important;
+      line-height: 16px !important;
+  }
+
+  .owl-theme .owl-controls {
+      display: none !important;
   }
 
   /* Ratings */
@@ -836,7 +852,8 @@ select {
   .cd-breadcrumb li > *, .cd-multi-steps li > * {
     /* single step */
     display: inline-block;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    font-weight: bold;
     color: #1abc9c ;
   }
   /* -------------------------------- 
@@ -865,12 +882,12 @@ select {
       position: absolute;
       content: '';
       height: 4px;
-      background: #edeff0;
+      background: #fff;
       /* reset style */
       margin: 0;
     }
     .cd-multi-steps li.visited::after {
-      background-color: #000;
+      background-color: #1C3F6A;
     }
     .cd-multi-steps li > *, .cd-multi-steps li.current > * {
       position: relative;
@@ -900,11 +917,11 @@ select {
       background-color: #fff;
     }
     .no-touch .cd-multi-steps.text-center a:hover {
-      background-color: #2c3f4c;
+      background-color: #1C3F6A;
     }
     .cd-multi-steps.text-center li.current > *, .cd-multi-steps.text-center li.visited > * {
       color: #ffffff;
-      background-color: #000;
+      background-color: #1C3F6A;
     }
     .cd-multi-steps.text-center.custom-icons li.visited a::before {
       /* change the custom icon for the visited item - check icon */
@@ -937,15 +954,15 @@ select {
       height: 12px;
       width: 12px;
       border-radius: 50%;
-      background-color: #edeff0;
+      background-color: #fff;
     }
     .cd-multi-steps.text-top li.visited > *::before,
     .cd-multi-steps.text-top li.current > *::before, .cd-multi-steps.text-bottom li.visited > *::before,
     .cd-multi-steps.text-bottom li.current > *::before {
-      background-color: #000;
+      background-color: #1C3F6A;
     }
     .no-touch .cd-multi-steps.text-top a:hover, .no-touch .cd-multi-steps.text-bottom a:hover {
-      color: #000;
+      color: #1C3F6A;
     }
     .no-touch .cd-multi-steps.text-top a:hover::before, .no-touch .cd-multi-steps.text-bottom a:hover::before {
       box-shadow: 0 0 0 3px rgba(150, 192, 61, 0.3);
@@ -996,7 +1013,8 @@ select {
       height: 26px;
       width: 26px;
       line-height: 26px;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
+      font-weight: bold;
       color: #1abc9c ;
     }
   

@@ -128,12 +128,12 @@ if (empty($page_show_title)) {
 		<div class="page_title_inner">
 			<div class="page_title_content">
 
-            <h1>Checkout</h1>
+            <h1><?php pll_e('Checkout'); ?></h1>
             <nav>
             <ol class="cd-multi-steps text-bottom count">
-            <li class="current"><a href="#0">Checkout</a></li>
-            <li ><a href="#0">Payment</a></li>
-            <li ><a href="#0">Confirmation</a></li>
+            <li class="current"><a href="#0"><?php pll_e('Checkout'); ?></a></li>
+            <li ><a href="#0"><?php pll_e('Payment'); ?></a></li>
+            <li ><a href="#0"><?php pll_e('Confirmation'); ?></a></li>
             </ol>
             </nav>
 
@@ -214,23 +214,23 @@ if (empty($page_show_title)) {
         } ?>">
 
 		<!-- Begin main content -->
-		<form action="<?php echo home_url() ?>/payment" method="POST" id="form" data-parsley-validate>
+		<form action="<?php echo site_url() ?><?php echo lang_url() ?>payment" method="POST" id="form" data-parsley-validate>
 
     	<div class="wrapper">
             
 		<div class="form_wrapper">
 
 		<div id="one">
-		<h4>Billing details</h4>
+		<h4><?php pll_e('Billing details'); ?></h4>
   
-			<p><strong>Name </strong><br>
+			<p><strong><?php pll_e('Name'); ?></strong><br>
 			<input type="text" class="input-text" name="fullname" id="fullname" placeholder="" value="" autocomplete="fullname" required=""></p>
-			<p><strong>Email   </strong><br> <?php echo $_POST['email'] ; ?>
+			<p><strong><?php pll_e('Email'); ?></strong><br> <?php echo $_POST['email'] ; ?>
 			<input type="email" class="input-text" name="email" id="email" placeholder="" value="" autocomplete="email" required=""></p>
-			<p><div class="text-container"><strong>Phone   </strong><br><?php echo $_POST['phone'] ; ?>
+			<p><div class="text-container"><strong><?php pll_e('Phone'); ?></strong><br><?php echo $_POST['phone'] ; ?>
 			
 			<input type="text" class="input-text" name="phone" id="phone" placeholder="" value="" autocomplete="phone">
-			<span id="valid-msg" class="hide valid inline">Valid</span>
+			<span id="valid-msg" class="hide valid inline"><?php pll_e('Valid'); ?></span>
 			<span id="error-msg" class="hide error inline"></span>  
 			</div>
 			
@@ -241,12 +241,12 @@ if (empty($page_show_title)) {
             $tour = $product['tours'][array_search($_POST['tour_id'], array_column($product['tours'], 'tourId'))]; ?>
 
 		 <div id="two">
-		 <h4>Tour details</h4>
+		 <h4><?php pll_e('Tour details'); ?></h4>
 
-		 <p><span class="ti-calendar"></span> <strong>Tour date: </strong> <?php echo date_format(date_create($tour['date']), 'l d F Y') ?>
+		 <p><span class="ti-calendar"></span> <strong><?php pll_e('Tour date'); ?>: </strong> <?php echo date_format(date_create($tour['date']), 'l d F Y') ?>
 
-		 <p><span class="ti-direction-alt"></span> <strong>Meeting point</strong><br>
-		 Please select a meeting point.
+		 <p><span class="ti-direction-alt"></span> <strong><?php pll_e('Meeting point'); ?></strong><br>
+		 <?php pll_e('Please select a meeting point'); ?>.
 		  <?php 
 
          echo'<div style="overflow-y: scroll; height:250px; width:75%">';
@@ -279,13 +279,13 @@ if (empty($page_show_title)) {
         <?php
         } ?>
 		<div style="clear: both; height: 20px;"></div>
-        <h4>Your order</h4>
+        <h4><?php pll_e('Your order'); ?></h4>
 			<div id="order_review" class="checkout-review-order">
 		<table class="shop_table checkout-review-order-table">
 	    <thead>
 		<tr>
-			<th class="product-name">Product</th>
-			<th class="product-total">Total</th>
+			<th class="product-name"><?php pll_e('Product'); ?></th>
+			<th class="product-total"><?php pll_e('Total'); ?></th>
 		</tr>
 	    </thead>
 	    <tbody>
@@ -310,12 +310,12 @@ if (empty($page_show_title)) {
 	<tfoot>
 
 		<tr class="cart-subtotal">
-			<th>Subtotal</th>
+			<th><?php pll_e('Subtotal'); ?></th>
 			<td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($total, 2, '.', '')  ?></span></td>
 		</tr>
 
 		<tr class="order-total">
-			<th>Total</th>
+			<th><?php pll_e('Total'); ?></th>
 			<td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($total, 2, '.', '')  ?></span></strong> </td>
 		</tr>
 
@@ -326,7 +326,7 @@ if (empty($page_show_title)) {
     <!-- Payments -->
     
     <div class="payment-details">
-        <input type="radio" name="payment_type" value="card" checked="checked"> Creditcard <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/credit-cards.png" class="cards"/><br>
+        <input type="radio" name="payment_type" value="card" checked="checked"> <?php pll_e('Creditcard'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/credit-cards.png" class="cards"/><br>
     </div>
 
     <!-- <div class="payment_options">
@@ -334,8 +334,6 @@ if (empty($page_show_title)) {
     </div> -->
 
     <div style="clear: both; height: 20px;"></div>
-
-    
 
 	<!-- forward input fields -->
 	<?php
@@ -346,7 +344,7 @@ if (empty($page_show_title)) {
 	<input type="hidden" name="prices" value="<?php echo base64_encode(serialize($_POST['price'])) ; ?>" >
 	<input type="hidden" name="tour_id" value="<?php echo $_POST['tour_id']; ?>" >
 	<input type="hidden" name="product_id" value="<?php echo $product['productId']; ?>" >
-	<button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment">Proceed to Payment</button>
+	<button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment"><?php pll_e('Proceed to Payment'); ?></button>
 	</div>
     		<?php
 
@@ -361,11 +359,6 @@ if (empty($page_show_title)) {
  
 		</form>
         <!-- End main content -->
-        
-        <div class="help" >
-    <?php echo do_shortcode('[accordion category="73"]'); ?>
-        </div>
-
 
         </div>
 
@@ -373,11 +366,15 @@ if (empty($page_show_title)) {
     }
 ?>
 
+<!-- Help pre-footer -->
+<div class="one withsmallpadding ppb_text pre-footer" style="padding:40px 0 40px 0;">
+<div class="standard_wrapper">
+    <div class="page_content_wrapper"><div class="inner"><div style="margin:auto;width:100%">   
+    <h4><?php pll_e('Frequently asked questions'); ?></h4> 
+    <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer Checkout") ) : ?>
+<?php endif;?>
 
-
-
-
-
+</div></div></div></div></div>
 
 <?php get_footer(); ?>
 

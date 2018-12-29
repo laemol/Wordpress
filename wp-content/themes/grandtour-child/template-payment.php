@@ -93,12 +93,12 @@ if (empty($page_show_title)) {
 		<div class="page_title_inner">
 			<div class="page_title_content">
               
-            <h1>Checkout</h1>
+            <h1><?php pll_e('Checkout'); ?></h1>
             <nav>
             <ol class="cd-multi-steps text-bottom count">
-            <li class="visited"><a href="#0">Checkout</a></li>
-            <li class="current"><a href="#0">Payment</a></li>
-            <li ><a href="#0">Confirmation</a></li>
+            <li class="visited"><a href="#0"><?php pll_e('Checkout'); ?></a></li>
+            <li class="current"><a href="#0"><?php pll_e('Payment'); ?></a></li>
+            <li ><a href="#0"><?php pll_e('Confirmation'); ?></a></li>
             </ol>
             </nav>
 
@@ -181,8 +181,8 @@ if (empty($page_show_title)) {
 <?php
 session_start();
         // Prevent resubmission of the form
-        // if ($_POST['randcheck'] == $_SESSION['rand']) {
-            if(true){
+        if ($_POST['randcheck'] == $_SESSION['rand']) {
+            // if(true){
             unset($_SESSION['rand']);
             $prices = unserialize(base64_decode($_POST['prices']));
             $tickets = [];
@@ -207,14 +207,14 @@ session_start();
 
             if ($result['orderId']) {
                 ?>
-            <h4>Almost there!</h4>
-            Your tickets are reserved for <strong><span id="time">30:00</span></strong> minutes. Please click the payment button to proceed with the creditcard payment. <br><br>
+            <h4><?php pll_e('Almost there!'); ?></h4>
+             <?php pll_e('Your tickets are reserved for'); ?> <strong><span id="time">30:00</span></strong> <?php pll_e('minutes. Please click the payment button to proceed with the creditcard payment'); ?> . <br><br>
             
             <?php
             if($_POST['payment_type'] == 'card'){
                 ?>
 
-			<form action="<?php echo home_url() ?>/return" method="POST">
+			<form action="<?php echo site_url() ?><?php echo lang_url() ?>return" method="POST">
             <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="pk_test_VNG4isUFQaA1V9Y6Kx9Eh0sd"
@@ -238,7 +238,7 @@ session_start();
             <div class="payment-details">
             <form id="payment-form">
                 
-                <p><strong>Name </strong><br>
+                <p><strong><?php pll_e('Name'); ?></strong><br>
                 <input type="text" class="input-text" name="name" id="name" placeholder="Name" value="<?php echo $_POST['fullname'] ?>" autocomplete="name" required=""></p>
             
                 <div id="ideal-bank-element">
@@ -246,7 +246,7 @@ session_start();
                 </div>
             
                 <p>
-              <button class="button">Submit Payment</button>
+              <button class="button"><?php pll_e('Submit Payment'); ?></button>
             </p>
 
               <!-- Used to display form errors. -->
@@ -260,21 +260,12 @@ session_start();
         } else {
             ?>
 
-        <h4>Oops, something went wrong...</h4>
-        Please try again or contact support.
+        <h4><?php pll_e('Oops, something went wrong...'); ?></h4>
+        <?php pll_e('Please try again or contact support'); ?>.
 
 				<?php
         } ?>
 			
-    		<?php
-
-            if (comments_open($post->ID)) {
-                ?>
-			<div class="fullwidth_comment_wrapper">
-				<?php comments_template('', true); ?>
-			</div>
-			<?php
-            } ?>
     		</div>
 		</div>
 		</form>
@@ -284,6 +275,16 @@ session_start();
 <?php
     }
 ?>
+
+<!-- Help pre-footer -->
+<div class="one withsmallpadding ppb_text pre-footer" style="padding:40px 0 40px 0;">
+<div class="standard_wrapper">
+    <div class="page_content_wrapper"><div class="inner"><div style="margin:auto;width:100%">   
+    <h4><?php pll_e('Frequently asked questions'); ?></h4> 
+    <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer Payment") ) : ?>
+<?php endif;?>
+</div></div></div></div></div>
+
 <?php get_footer(); ?>
 
 <?php

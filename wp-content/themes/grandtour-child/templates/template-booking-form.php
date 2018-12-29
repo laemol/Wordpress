@@ -3,7 +3,7 @@
 $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
 ?>
 
-<form action="<?php echo home_url() ?>/checkout" method="POST">
+<form action="<?php echo site_url() ?><?php echo lang_url()  ?>checkout" method="POST">
 
 <?php if ($product['type'] == 'tour') {
     $date = $_GET['date'] ?: date('Y-m-d');
