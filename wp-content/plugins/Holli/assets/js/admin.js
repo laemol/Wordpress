@@ -1,5 +1,5 @@
 /**
- * Feedier plugin Saving process
+ * Plugin Saving process
  */
 jQuery( document ).ready( function () {
 
@@ -18,8 +18,7 @@ jQuery( document ).ready( function () {
             data: jQuery(this).serialize(),
             success: function (response) {
                 location.reload();
-                alert(response);
-                
+                // alert(response); 
             }
         } );
 

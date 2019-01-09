@@ -1,21 +1,32 @@
-# Feedier WordPress plugin integration (tutorial)
+# Holli API WordPress plugin 
 
-This is a very simple plugin to integrate the Feedier widgets with WordPress automatically
-
-## Description and tutorial
-
-This repository is the result of a tutorial wrote for the Alkaweb's blog:
-
-http://alka-web.com/create-plugin-for-your-webapp/
-
-If you want to get everything working, I highly recommend you to have a look on this article. 
+This is a very simple plugin to get products from the Holli API
 
 ## Setup 
 
- * Place the repository in wp-content/plugins/`
- * Activate the plugin in WordPress > Plugins > Feedier > Activate
- * Go to Settings > Feedier and set up your keys
+ * Place the holli folder in in `wp-content/plugins/`
+ * Activate the plugin in WordPress > Plugins > Holli > Activate
+ * Go to Settings > Holli and set up your API key
 
-## Going further
+## Usage
 
-Feel free to make any change, you can see the list of possible improvements at the end of the article. 
+You can use the shortcode `[products]` to display Holli products
+
+## Options
+
+`limit` Sets the number of products that will be displayed. Default value is 4.
+
+`area` Display products in a certain area. Default all areas are available. A list of areas is available in the Holli API settings page.
+
+`recommended` Shows only recommended products in random order if set to 1. Default is 0.
+
+`button` Sets the text on the button. Default value is "Buy Now".
+
+`lang` Sets the language. Default value is EN.
+
+## Support
+
+Please add For questions, supprt 
+
+
+
