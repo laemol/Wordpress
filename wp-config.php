@@ -39,6 +39,9 @@ define('DB_CHARSET', 'utf8mb4');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
+/** The Database Collate type. Don't change this if in doubt. */
+define('HOLLI_KEY', '539169d340eda42d50c384efc2f9aa227eabcce7');
+
 /**#@+
  * Authentication Unique Keys and Salts.
  *

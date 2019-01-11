@@ -51,9 +51,14 @@ get_header();
 		    if($tg_destination_single_tour_order == 'before')
 		    {
 		  		//Include related tours
-				//get_template_part("/templates/template-destination-single-related");
-				do_action('area');
 
+				// Get the region_id value from ACF field 
+				$region = get_field( "region_id" );
+				?>
+				<div class="portfolio_filter_wrapper gallery classic four_cols" data-columns="4">
+				<?php
+				echo do_shortcode("[product-list limit=8 button=hide region=$region ]");
+				echo '</div>';
 		  	}
 		?>
         	
@@ -86,7 +91,7 @@ get_header();
 			<br class="clear"/><br/><br/>
 			<?php
 			  		//Include related tours
-			  		get_template_part("/templates/template-destination-single-related");
+					get_template_part("/templates/template-destination-single-related");
 			  	}
 			?>
 			 

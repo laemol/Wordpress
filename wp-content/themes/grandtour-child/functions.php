@@ -4,22 +4,11 @@ Theme Name: Grand Tour Child Theme
 Theme URI: http://themes.themegoods.com/grandtour
 */
 
-// Constants
-if (!defined('HOLLI_BASICAUTH')) {
-    define('HOLLI_BASICAUTH', 'hollidev:hollidev03847');
-}
-if (!defined('HOLLI_KEY')) {
-    define('HOLLI_KEY', '539169d340eda42d50c384efc2f9aa227eabcce7');
-}
-if (!defined('API_URL')) {
-    define('API_URL', 'http://ticketandtours.test/api/v3/');
-}
-
 // Shortcodes
 add_shortcode('search', 'searchBar');
 add_shortcode('product-list', 'addProductListCode');
 add_shortcode('booking-form', 'addBookingForm');
-add_shortcode('zones', 'addZoneTags');
+add_shortcode('zones', 'addRegionTags');
 add_shortcode('filter-list', 'addCategoryOptionsList');
 
 // Actions
@@ -27,14 +16,14 @@ add_action('wp_ajax_grandtour_ajax_search_product_result', 'grandtour_ajax_searc
 add_action('wp_ajax_nopriv_grandtour_ajax_search_product_result', 'grandtour_ajax_search_product_result');
 add_action('product-list', 'addProductListCode');
 add_action('product', 'addProductData');
-// add_action('area', 'addAreaCode', 10, 1);
 add_action('wp_ajax_getProductList', 'addProductListCode');
 add_action('wp_ajax_nopriv_getProductList', 'addProductListCode');
 
 // Create global
 global $product;
 
-function lang_url(){
+function lang_url()
+{
     return ($lang = pll_current_language() == 'en' ? '/' : '/' . pll_current_language() . '/');
 }
 
@@ -109,18 +98,17 @@ function addProductListCode($atts = '')
 
     ob_start();
     $category_id = $_GET['category_id'] ? implode(',', $_GET['category_id']) : null;
-    $destination_id = $_GET['destination_id'];
-    $recommended = $_GET['destination_id'] || $_GET['category_id'] ? '' : 'true';
+    $region_id = $_GET['region_id'];
+    $recommended = $_GET['region_id'] || $_GET['category_id'] ? '' : 'true';
 
     if ($_POST['offset'] || $_POST['category'] || $_POST['destination']) {
         $offset = $_POST['offset'];
         $category_id = $_POST['category'] ? implode(',', $_POST['category']) : null;
-        $destination_id = $_POST['destination'];
+        $region_id = $_POST['destination'];
         $recommended = '';
     }
 
-    $url = 'products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $value['limit'] . '&category_id=' . $category_id . '&zone_id=' . $destination_id . '&lang=' . pll_current_language() . '&lat=' . $value['lat'] . '&long=' . $value['long'] . '&range=' . $value['range'];
-    //echo $url;
+    $url = 'products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $value['limit'] . '&category_id=' . $category_id . '&region_id=' . $region_id . '&lang=' . pll_current_language() . '&lat=' . $value['lat'] . '&long=' . $value['long'] . '&range=' . $value['range'];
     $data = apiGetRequest($url);
 
     echo '<div  class="ppb_tour_classic one nopadding" >';
@@ -160,7 +148,7 @@ function addProductListCode($atts = '')
             <div class="products<?php echo $offset ?>"></div>
 
         <div class="btn_wrapper">
-        <a href="#/" class="button show_more" data-offset="<?php echo $offset ?>" data-category="[<?php echo $category_id ?>]" data-zone="<?php echo $destination_id ?>"><?php echo pll_e('Show More')  ?></a>
+        <a href="#/" class="button show_more" data-offset="<?php echo $offset ?>" data-category="[<?php echo $category_id ?>]" data-zone="<?php echo $region_id ?>"><?php echo pll_e('Show More')  ?></a>
         </div>
         
     <?php
@@ -227,7 +215,7 @@ function addCategoryOptionsList()
     echo pll_e('What do you want to do?');
     echo '</h2>';
     echo '<br>';
-    echo '<form action="' . get_site_url() . '/tours" method="get" id="filterform"><div>';
+    echo '<form action="" method="get" id="filterform"><div>';
     echo '<input type="checkbox" class="all" id="all" name="category_id" value=""';
     if (!$_GET['category_id']) {
         echo 'checked';
@@ -240,7 +228,7 @@ function addCategoryOptionsList()
         if ($_GET['category_id'] ? in_array($category['id'], $_GET['category_id']) : false) {
             echo 'checked';
         }
-        echo '> ' . $category['name'] . '<br>';
+        echo '> ' . ucfirst($category['name']) . '<br>';
     }
     echo '<br>';
     echo '</div>';
@@ -249,21 +237,21 @@ function addCategoryOptionsList()
     echo '</h2>';
     echo '<br>';
 
-    $zones = apiGetRequest('zones');
+    $regions = apiGetRequest('regions');
     echo '<div class="radio-toolbar">';
-    echo '<label><input type="radio" id="destination_0" class="filter" name="destination_id" value=""';
-    if (!$_GET['destination_id']) {
+    echo '<label><input type="radio" id="region_0" class="filter" name="region_id" value=""';
+    if (!$_GET['region_id']) {
         echo 'checked';
     }
-    echo '><span for="destination_0">';
+    echo '><span for="region_0">';
     echo pll_e('All Destination');
     echo '</span></label>';
-    foreach ($zones as $zone) {
-        echo '<label><input type="radio" id="destination_' . $zone['id'] . '" class="filter" name="destination_id" value="' . $zone['id'] . '"';
-        if ($zone['id'] == $_GET['destination_id']) {
+    foreach ($regions as $region) {
+        echo '<label><input type="radio" id="region_' . $zone['id'] . '" class="filter" name="region_id" value="' . $region['id'] . '"';
+        if ($region['id'] == $_GET['region_id']) {
             echo 'checked';
         }
-        echo '><span for="destination_' . $zone['id'] . '">' . $zone['name'] . '</span></label>';
+        echo '><span for="region_' . $region['id'] . '">' . ucfirst($region['name'])  . '</span></label>';
     }
     echo '</div>';
 
@@ -301,79 +289,25 @@ function removeLoader(){
     return ob_get_clean();
 }
 
-// /**
-// * Adds the area tags cloud
-// */
-// function addAreaCode()
-// {
-//     $data = apiGetRequest('products?limit=8&zone_id=' . get_field('zone_id'));
-
-//     echo '<div  class="ppb_tour_classic one nopadding " style="margin-bottom:50px;" >';
-//     echo '<div class="page_content_wrapper page_main_content sidebar_content full_width fixed_column">';
-//     echo '<div class="standard_wrapper">';
-
-//     echo '<div class="portfolio_filter_wrapper gallery classic four_cols" data-columns="4">';
-
-//     foreach ($data as $product) {
-//         echo '<div class="element grid classic4_cols animated4">';
-//         echo '<div class="one_fourth gallery4 classic static filterable portfolio_type themeborder">';
-//         echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['productId'] . '">';
-//         echo '<img src="' . $product['media'][0]['imageUrl'] . '" alt="' . $product['name'] . '" style="height:140px"/>';
-//         if ($product['prices'][0]['originalPrice'] > $product['prices'][0]['currentPrice']) {
-//             echo '<div class="tour_price has_discount"><span class="normal_price">&euro; ' . $product['prices'][0]['originalPrice'] . '</span>&euro; ' . $product['prices'][0]['currentPrice'] . '</div></a>';
-//         } else {
-//             echo '<div class="tour_price">&euro; ' . $product['prices'][0]['currentPrice'] . '</div></a>';
-//         }
-//         echo '<div class="portfolio_info_wrapper">';
-//         echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['productId'] . '"><h4>' . $product['name'] . '</h4></a>';
-//         echo '<div class="tour_excerpt"><p>' . ucfirst($product['type']) . ', ' . $product['category'] . '</p></div>';
-//         echo '<div class="tour_attribute_wrapper">';
-//         echo '<div class="tour_attribute_rating"><div class="br-theme-fontawesome-stars-o">';
-//         echo '<div class="br-widget">';
-//         echo '<a href="javascript:;" class="br-selected"></a>';
-//         echo '<a href="javascript:;" class="br-selected"></a>';
-//         echo '<a href="javascript:;" class="br-selected"></a>';
-//         echo '<a href="javascript:;" class="br-selected"></a>';
-//         echo '<a href="javascript:;"></a></div></div>';
-//         echo '<div class="tour_attribute_rating_count">' . rand(0, 93) . ' Reviews</div></div>';
-//         if ($product['type'] == 'tour') {
-//             echo '<div class="tour_attribute_days"><span class="ti-time"></span>' . ucfirst($product['duration']) . ' Hours</div>';
-//         }
-//         echo '</div><br class="clear"/>';
-//         echo '</div></div></div>';
-//     }
-
-//     echo '</div></div></div></div>';
-// }
-
-/**
-* Adds the products details code
-*/
-// function addProductData()
-// {
-//     $data = apiGetRequest('products/' . $_GET['pid']);
-
-//     return($product);
-// }
-
 /*
 * Adds the destinations tag cloud
 */
-function addZoneTags()
+function addRegionTags()
 {
     ob_start();
 
-    $zones = apiGetRequest('zones'); ?>
+    $regions = apiGetRequest('regions'); 
+    ?>
     
     <div class="tags_wrapper">
     <?php
-    foreach ($zones as $zone) {
+    foreach ($regions as $region) {
         echo '<span class="tagbox"><a href="';
         echo get_site_url() . '/' . pll_current_language();
-        echo '/tours?destination_id=';
-        echo $zone['id'];
+        echo '/tickets?region_id=';
+        echo $region['id'];
         echo '"><div class="linkdiv"><h5>';
-        echo $zone['name'];
+        echo ucfirst($region['name']);
         echo '</h5></div></a></span>';
     }
     echo '<br class="clear"></div>';
@@ -388,16 +322,16 @@ function grandtour_ajax_search_product_result()
 {
     if (strlen($_POST['keyword']) > 1) {
         $products = apiGetRequest('products?search=' . $_POST['keyword']);
-        $zones = apiGetRequest('zones?search=' . $_POST['keyword']);
+        $regions = apiGetRequest('regions?search=' . $_POST['keyword']);
 
         echo '<ul>';
 
-        foreach ($zones as $zone) {
+        foreach ($regions as $region) {
             echo '<li>';
-            echo '<a href="' . get_site_url() . '/' . pll_current_language() . '/tours?destination_id=' . $zone['id'] . '"><span class="ti-location-pin"></span> ' . $zone['name'] . '</a> ';
+            echo '<a href="' . get_site_url() . '/' . pll_current_language() . '/tickets?region_id=' . $region['id'] . '"><span class="ti-location-pin"></span> ' . $region['name'] . '</a> ';
             echo '</li>';
         }
-        if (count($zones)) {
+        if (count($regions)) {
             echo '<li class="seperator"></li>';
         }
 
@@ -453,17 +387,17 @@ function acf_load_product_field_choices($field)
 {
     $field['choices'] = ['' => 'Select'];
 
-    $zones = apiGetRequest('zones');
+    $regions = apiGetRequest('regions');
 
-    foreach ($zones as $zone) {
-        $value = $zone['id'];
-        $label = $zone['name'];
+    foreach ($regions as $region) {
+        $value = $region['id'];
+        $label = ucfirst($region['name']);
         $field['choices'][$value] = $label;
     }
 
     return $field;
 }
-add_filter('acf/load_field/name=zone_id', 'acf_load_product_field_choices');
+add_filter('acf/load_field/name=region_id', 'acf_load_product_field_choices');
 
 // function customize_post_admin_menu_labels()
 // {
@@ -475,8 +409,9 @@ add_filter('acf/load_field/name=zone_id', 'acf_load_product_field_choices');
 
 add_action('admin_head', 'custom_icons');
 
-function custom_icons() {
-  echo '<style>
+function custom_icons()
+{
+    echo '<style>
   #adminmenu div.wp-menu-image {
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
@@ -487,32 +422,49 @@ function custom_icons() {
   </style>';
 }
 
-if ( function_exists('register_sidebar') )
-  register_sidebar(array(
+if (function_exists('register_sidebar')) {
+    register_sidebar(
+      [
     'name' => 'Footer Checkout',
     'before_widget' => '<div class = "widgetizedArea">',
     'after_widget' => '</div>',
     'before_title' => '<h3>',
     'after_title' => '</h3>',
-  )
+  ]
 );
+}
 
-if ( function_exists('register_sidebar') )
-  register_sidebar(array(
+if (function_exists('register_sidebar')) {
+    register_sidebar(
+      [
     'name' => 'Footer Payment',
     'before_widget' => '<div class = "widgetizedArea">',
     'after_widget' => '</div>',
     'before_title' => '<h3>',
     'after_title' => '</h3>',
-  )
+  ]
 );
+}
 
-if ( function_exists('register_sidebar') )
-  register_sidebar(array(
+if (function_exists('register_sidebar')) {
+    register_sidebar(
+      [
     'name' => 'Footer Return',
     'before_widget' => '<div class = "widgetizedArea">',
     'after_widget' => '</div>',
     'before_title' => '<h3>',
     'after_title' => '</h3>',
-  )
+  ]
 );
+}
+
+function remove_admin_menu_bar_items($wp_toolbar)
+{
+    $wp_toolbar->remove_node('my-sites');
+    $wp_toolbar->remove_node('wp-logo');
+    $wp_toolbar->remove_node('new-content');
+    $wp_toolbar->remove_node('view');
+    $wp_toolbar->remove_node('search');  // remove the search element
+    return $wp_toolbar;
+}
+add_filter('admin_bar_menu', 'remove_admin_menu_bar_items');
