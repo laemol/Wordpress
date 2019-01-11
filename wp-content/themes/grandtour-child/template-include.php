@@ -58,6 +58,9 @@ p {
     if($_GET['area']){
         $shortcode .= ' area=' . $_GET['area'] . ' ';
     }
+    if($_GET['partnerId']){
+        $shortcode .= ' partner_id=' . $_GET['partnerId'] . ' ';
+    }
     $shortcode .= ']';
    echo do_shortcode($shortcode);
    ?>
