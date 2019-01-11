@@ -321,7 +321,7 @@ function addRegionTags()
 function grandtour_ajax_search_product_result()
 {
     if (strlen($_POST['keyword']) > 1) {
-        $products = apiGetRequest('products?search=' . $_POST['keyword']);
+        $products = array_shift(apiGetRequest('list/products?q=' . $_POST['keyword']));
         $regions = apiGetRequest('regions?search=' . $_POST['keyword']);
 
         echo '<ul>';
@@ -337,7 +337,7 @@ function grandtour_ajax_search_product_result()
 
         foreach ($products as $product) {
             echo '<li>';
-            echo '<a href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['productId'] . '"><span class="ti-ticket"></span> ' . $product['name'] . '</a>';
+            echo '<a href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['id'] . '"><span class="ti-ticket"></span> ' . $product['name'] . '</a>';
             echo '</li>';
         }
 
