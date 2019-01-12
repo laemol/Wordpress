@@ -193,12 +193,18 @@ if (empty($page_show_title)) {
 			<div class="page_title_content">
 				<h1 <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
                 ?>class ="withtopbar"<?php
-            } ?>><?php echo esc_html($page_title); ?></h1>
+            } ?>><?php echo esc_html($page_title); 
+            ?></h1>
 				<?php
-                    if (!empty($page_tagline)) {
+                    if ($_GET['region_id']) {
                         ?>
 			    	<div class="page_tagline">
-			    		<?php echo nl2br($page_tagline); ?>
+                        <?php 
+                        if($_GET['region_id']){
+                            echo pll_e('All activities for');
+                            echo do_shortcode("[region-name]");
+                        }
+                        ?>
 			    	</div>
 			    <?php
                     } ?>

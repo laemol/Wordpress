@@ -179,6 +179,7 @@ if(empty($page_show_title))
 			'stripeToken' => $_POST['stripeToken']
 	);
 	
+	if($order_id){
 	// Charge the creditcard
 	$payment = apiPostRequest('orders/' . $order_id . '/charge', $data);
 
@@ -188,18 +189,22 @@ if(empty($page_show_title))
 	// Get the details
 	$order = apiGetRequest('orders/' .  $_POST['code'] . '/details');
 
+	}
+
 	if($result['status'] == 'paid'){
 		?>
 
 		<h4><?php pll_e('Your tickets are ready!'); ?></h4><br>
 		<div class="payment-details">
+		<?php pll_e('Order ID: '); ?>
+		<h4><?php echo $order['code'] ?></h4><br>
 		<?php pll_e('Your tickets have been sent to'); ?>: 
 		<p>
 		E-mail: <strong><?php echo $order['email'] ?></strong><br>
 		SMS: <strong><?php echo $order['phone'] ?></strong><br>
 		</p>
 
-		<p><a href="<?php echo site_url() ?><?php echo lang_url()  ?>help"><?php pll_e('Is your contact data incorrect?'); ?></a></p>
+		<p><a href="<?php echo lang_url()  ?>help"><?php pll_e('Is your contact data incorrect?'); ?></a></p>
     	</div>
 
 		<?php
@@ -208,6 +213,7 @@ if(empty($page_show_title))
 		{
 		?>
 
+		<h4>Oops...</h4>
 		<?php pll_e('Sorry, We could not charge your card'); ?>. <?php pll_e('Please try again or contact support'); ?>.<br>
 
 		<?php

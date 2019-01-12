@@ -39,8 +39,11 @@ define('DB_CHARSET', 'utf8mb4');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
-/** The Database Collate type. Don't change this if in doubt. */
+/** The Holli backend API key */
 define('HOLLI_KEY', '539169d340eda42d50c384efc2f9aa227eabcce7');
+
+/** The Stripe API key */
+define('STRIPE_KEY', 'pk_test_VNG4isUFQaA1V9Y6Kx9Eh0sd');
 
 /**#@+
  * Authentication Unique Keys and Salts.

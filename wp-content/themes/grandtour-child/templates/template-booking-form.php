@@ -3,9 +3,11 @@
 $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
 ?>
 
-<form action="<?php echo site_url() ?><?php echo lang_url()  ?>checkout" method="POST">
+<form action="<?php echo lang_url()  ?>checkout" method="POST">
 
 <?php if ($product['type'] == 'tour') {
+    $dates = array_shift(apiGetRequest('products/' . $_GET['pid'] . '/dates?date=' . $_GET['date']  ));
+
     $date = $_GET['date'] ?: date('Y-m-d');
     $month = date('m', strtotime($date));
     $year = date('Y', strtotime($date));
@@ -46,28 +48,39 @@ $running_day = date('w', mktime(0, 0, 0, $month, 1, $year));
     for ($x = 1; $x < $running_day; $x++) {
         echo '<li></li>';
     }
+ 
     // Print days of the month
     for ($day = 1; $day <= $days_in_month; $day++) {
-        $full_date = $year . '-' . $month . '-' . $day;
-        // Check if the day is in the available tours tours
-        $tour_date = in_array($full_date, array_column($product['tours'], 'date'));
-
+        $full_date = $year . '-' . $month . '-' . str_pad($day, 2, '0', STR_PAD_LEFT);
+        // Check if the day is in the available tours 
+        if($full_date > date('Y-m-d')){
+        $tour_date = in_array($full_date, array_column($dates, 'date'));
+        
+        }
         if ($tour_date) {
-            $tour = $product['tours'][array_search($full_date, array_column($product['tours'], 'date'))];
+        $tour = $dates[array_search($full_date, array_column($dates, 'date'))];
+
+        $filteredDates = array_filter($dates, function($element) use($full_date){
+            return isset($element['date']) && $element['date'] == $full_date;
+        });
+        $tickets = array_sum(array_column($filteredDates,'availableTickets'));
         }
         echo '<li>';
         if ($tour_date) {
-            echo '<a href="javascript:;" class="select_date" data-date="' . $full_date . '" data-tour_id="' . $tour['tourId'] . '" data-available="' . $tour['availableTickets'] . '"tooltip="' . $tour['availableTickets'] . ' Available">';
+            echo '<a href="javascript:;" class="select_date" data-count="' . count($filteredDates) . '" data-date="' . $full_date . '" data-tour_id="' . $tour['id'] . '" data-available="' . $tickets . '"tooltip="' . $tickets . ' Available">';
         }
         echo '<span class="' . ($full_date == date('Y-m-d') ? 'active' : '') . ($tour_date ? 'available' : '') . '">' . $day . '</span></li>';
         if ($tour_date) {
             echo '</a>';
         }
+
     }
     echo '</ul></div>';
+
 }
+
 ?>
-  
+
 <?php foreach ($product['prices'] as $price) {
     ?>
     <div class="tour_product_variable_wrapper">
@@ -102,7 +115,7 @@ $running_day = date('w', mktime(0, 0, 0, $month, 1, $year));
      		</div>
                              
     <p>
-    <input type="hidden" name="date" value="" id="date">
+    <input type="text" name="date" value="" id="date">
     <input type="hidden" name="tour_id" value="" id="tour_id">
     <input type="hidden" name="available" value="" id="available">
     <input type="hidden" name="productId" value="<?php echo $product['productId']; ?>" >

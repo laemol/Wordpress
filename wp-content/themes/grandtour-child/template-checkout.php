@@ -7,7 +7,7 @@ session_start();
  * @package WordPress
 */
 
-$product = array_shift(apiGetRequest('products/' . $_POST['productId']));
+$product = array_shift(apiGetRequest('products/' . $_POST['productId'] . '?date=' . $_POST['date']));
 
 //Check if single attachment page
 if ($post->post_type == 'attachment') {
@@ -214,7 +214,7 @@ if (empty($page_show_title)) {
         } ?>">
 
 		<!-- Begin main content -->
-		<form action="<?php echo site_url() ?><?php echo lang_url() ?>payment" method="POST" id="form" data-parsley-validate>
+		<form action="<?php echo lang_url() ?>payment" method="POST" id="form" data-parsley-validate>
 
     	<div class="wrapper">
             
@@ -238,7 +238,13 @@ if (empty($page_show_title)) {
 		</div>
 	
 <?php if ($product['type'] == 'tour') {
-            $tour = $product['tours'][array_search($_POST['tour_id'], array_column($product['tours'], 'tourId'))]; ?>
+            $tour = $product['tours'][array_search($_POST['tour_id'], array_column($product['tours'], 'tourId'))]; 
+            $date = $tour['date'];
+            // $filteredTours = array_filter($product['tours'], function($element) use($date){
+            //     return isset($element['date']) && $element['date'] == $date;
+            // });
+           
+            ?>
 
 		 <div id="two">
 		 <h4><?php pll_e('Tour details'); ?></h4>
@@ -252,15 +258,17 @@ if (empty($page_show_title)) {
          echo'<div style="overflow-y: scroll; height:250px; width:75%">';
 
             echo '<ul class="departure">';
-            foreach ($tour['stops'] as $stop) {
-                if ($stop['type'] == 'stop') {
+            foreach($product['tours'] as $tour){
+                foreach ($tour['stops'] as $stop) {
+                    if ($stop['type'] == 'stop' && $tour['availableTickets'] >= array_sum($_POST['price'])) {
                     echo '<li >';
-                    echo '<div class="radio"><input type="radio" name="stop_id" value="' . $stop['stopId'] . '"></div>';
+                    echo '<div class="radio"><input type="radio" class="stop" name="stop_id" value="' . $stop['stopId'] . '" data-tour="' . $tour['tourId'] . '"></div>';
                     echo  '<h6>' . $stop['time'] . ' - ' . $stop['name'] . '</h6>';
                     echo  ucfirst($stop['description']) . '<br>';
                     echo '<a href="https://www.google.com/maps?q=@' . $stop['latitude'] . ',' . $stop['longitude'] . '" target="_blank"><span class="ti-location-pin"></span> Show on Google Maps </a></span>';
                     echo '</li>';
                 }
+            }
             } ?>
 		 </ul>
 		 </div>
@@ -323,8 +331,7 @@ if (empty($page_show_title)) {
 </table>
     </div>
 
-    <!-- Payments -->
-    
+    <!-- Payments --> 
     <div class="payment-details">
         <input type="radio" name="payment_type" value="card" checked="checked"> <?php pll_e('Creditcard'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/credit-cards.png" class="cards"/><br>
     </div>
@@ -342,7 +349,7 @@ if (empty($page_show_title)) {
         $_SESSION['rand'] = $rand; ?>
  	<input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
 	<input type="hidden" name="prices" value="<?php echo base64_encode(serialize($_POST['price'])) ; ?>" >
-	<input type="hidden" name="tour_id" value="<?php echo $_POST['tour_id']; ?>" >
+	<input type="hidden" name="tour_id" id="tour_id"  value="<?php echo $_POST['tour_id']; ?>" >
 	<input type="hidden" name="product_id" value="<?php echo $product['productId']; ?>" >
 	<button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment"><?php pll_e('Proceed to Payment'); ?></button>
 	</div>
@@ -392,12 +399,10 @@ jQuery(function()
   </script>
 
 <script>
-    jQuery(".select_date").on("click", function(){
+    jQuery(".stop").on("click", function(){
         jQuery('.selected').removeClass('selected');
         jQuery(this).addClass('selected');
-        jQuery('#date').val(jQuery(this).data('date'));
-        jQuery('#tour_id').val(jQuery(this).data('tour_id'));
-        jQuery('#available').val(jQuery(this).data('available'));
+        jQuery('#tour_id').val(jQuery(this).data('tour'));
 });
 </script>
 

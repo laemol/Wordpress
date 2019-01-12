@@ -182,7 +182,7 @@ if (empty($page_show_title)) {
 session_start();
         // Prevent resubmission of the form
         if ($_POST['randcheck'] == $_SESSION['rand']) {
-            // if(true){
+            
             unset($_SESSION['rand']);
             $prices = unserialize(base64_decode($_POST['prices']));
             $tickets = [];
@@ -214,10 +214,10 @@ session_start();
             if($_POST['payment_type'] == 'card'){
                 ?>
 
-			<form action="<?php echo site_url() ?><?php echo lang_url() ?>return" method="POST">
+			<form action="<?php echo lang_url() ?>return" method="POST">
             <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="pk_test_VNG4isUFQaA1V9Y6Kx9Eh0sd"
+                    data-key="<?php echo STRIPE_KEY ?>"
                     data-amount="<?php echo $result['totalPrice'] * 100 ?>"
                     data-name="Order <?php echo $result['code'] ?>"
                     data-email="<?php echo $_POST['email'] ?>"
@@ -382,12 +382,14 @@ function stripeTokenHandler(token) {
 
         if (--timer < 0) {
             timer = duration;
+            window.location.href = location.protocol + '//' + window.location.hostname + '/return';
+
         }
     }, 1000);
 }
 
 window.onload = function () {
-    var minutes = 60 * 30,
+    var minutes = 30 * 60,
         display = document.querySelector('#time');
     startTimer(minutes, display);
 };

@@ -1040,4 +1040,17 @@ select {
       padding-top: 34px;
     }
   }
+
+  .infobox {
+      border: 1px solid rgb(226, 175, 79);
+      background: rgba(248, 203, 118, 0.562);
+      border-radius: 5px;
+      padding: 10px;
+  }
+
+  .info {
+      color: #1abc9c;
+      margin-left:6px;
+      font-weight: 600;
+  }
   

@@ -170,7 +170,6 @@ if (empty($page_show_title)) {
 
 <!-- Begin main content -->
 
-
 <?php
 
 do_action('product-list'); ?>

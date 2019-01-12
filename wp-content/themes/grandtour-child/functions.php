@@ -9,6 +9,7 @@ add_shortcode('search', 'searchBar');
 add_shortcode('product-list', 'addProductListCode');
 add_shortcode('booking-form', 'addBookingForm');
 add_shortcode('zones', 'addRegionTags');
+add_shortcode('region-name', 'addRegionName');
 add_shortcode('filter-list', 'addCategoryOptionsList');
 
 // Actions
@@ -139,6 +140,11 @@ function addProductListCode($atts = '')
             echo '</div></div><br class="clear"/>';
             echo '</div></div></div>';
         }
+    } else {
+        echo '<div class="infobox">';
+        echo pll_e('Sorry, nothing found that matches your seach criteria') ;
+        echo '</div>';
+    }
 
         echo '</div></div></div>';
 
@@ -154,10 +160,7 @@ function addProductListCode($atts = '')
     <?php
             }
         }
-    } else {
-        echo 'Sorry, nothing found';
-    }
-
+    
     /* AJAX check  */
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         die();
@@ -209,7 +212,7 @@ function addCategoryOptionsList()
 {
     ob_start();
 
-    $categories = apiGetRequest('product/categories');
+    $categories = apiGetRequest('product/categories?lang=' . pll_current_language() . '&region_id=' . $_GET['region_id'] );
 
     echo '<h2 class="widgettitle">';
     echo pll_e('What do you want to do?');
@@ -224,11 +227,13 @@ function addCategoryOptionsList()
     echo pll_e('All Categories');
     echo '<br>';
     foreach ($categories as $category) {
+        if($category['count'] > 0){
         echo '<input type="checkbox" class="filter" name="category_id[]" value="' . $category['id'] . '"';
         if ($_GET['category_id'] ? in_array($category['id'], $_GET['category_id']) : false) {
             echo 'checked';
         }
-        echo '> ' . ucfirst($category['name']) . '<br>';
+        echo '> ' . ucfirst($category['name']) . '<span class="info">' . $category['count'] . '</span><br>';
+        }
     }
     echo '<br>';
     echo '</div>';
@@ -313,6 +318,21 @@ function addRegionTags()
     echo '<br class="clear"></div>';
 
     return ob_get_clean();
+}
+
+/*
+* Adds the destinations tag cloud
+*/
+function addRegionName()
+{
+    ob_start();
+    $regions = apiGetRequest('regions'); 
+    foreach ($regions as $region) {
+        if($_GET['region_id'] == $region['id']){
+            return ' ' . $region['name'];
+        }
+    }
+     ob_get_clean();
 }
 
 /*
