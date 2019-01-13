@@ -1053,4 +1053,9 @@ select {
       margin-left:6px;
       font-weight: 600;
   }
+
+  .autocomplete li:last-child:hover a{
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+  }
   
