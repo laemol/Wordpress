@@ -53,11 +53,12 @@ get_header();
 		  		//Include related tours
 
 				// Get the region_id value from ACF field 
-				$region = get_field( "region_id" );
+				$region = get_field('region_id');
 				?>
 				<div class="portfolio_filter_wrapper gallery classic four_cols" data-columns="4">
 				<?php
-				echo do_shortcode("[product-list limit=8 button=hide region=$region ]");
+				$shortcode = '[product-list limit=8 button=hide region=' . $region . ']';
+				echo do_shortcode($shortcode);
 				?>
 				<div class="btn_wrapper">
 				<a href="<?php echo pll_current_language()  ?>/tickets?region_id=<?php echo $region ?>" class="button"><?php echo pll_e('Show More')  ?></a>

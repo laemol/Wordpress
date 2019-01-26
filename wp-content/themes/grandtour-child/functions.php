@@ -95,11 +95,12 @@ function addProductListCode($atts = '')
         'lat' => null,
         'long' => null,
         'range' => null,
+        'region' => null
     ], $atts);
 
     ob_start();
     $category_id = $_GET['category_id'] ? implode(',', $_GET['category_id']) : null;
-    $region_id = $_GET['region_id'];
+    $region_id = $value['region'] ?: $_GET['region_id'];
     $recommended = $_GET['region_id'] || $_GET['category_id'] ? '' : 'true';
 
     if ($_POST['offset'] || $_POST['category'] || $_POST['destination']) {
@@ -109,7 +110,7 @@ function addProductListCode($atts = '')
         $recommended = '';
     }
 
-    $url = 'products?recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $value['limit'] . '&category_id=' . $category_id . '&region_id=' . $region_id . '&lang=' . pll_current_language() . '&lat=' . $value['lat'] . '&long=' . $value['long'] . '&range=' . $value['range'];
+    $url = 'products?region_id=' . $region_id . '&recommended=' . $recommended . '&offset=' . $offset . '&limit=' . $value['limit'] . '&category_id=' . $category_id . '&lang=' . pll_current_language() . '&lat=' . $value['lat'] . '&long=' . $value['long'] . '&range=' . $value['range'];
     $data = apiGetRequest($url);
 
     echo '<div  class="ppb_tour_classic one nopadding" >';
@@ -146,11 +147,11 @@ function addProductListCode($atts = '')
         echo '</div>';
     }
 
-        echo '</div></div></div>';
+    echo '</div></div></div>';
 
-        if (count($data) >= $limit) {
-            if ($value['button'] != 'hide') {
-                ?>
+    if (count($data) >= $limit) {
+        if ($value['button'] != 'hide') {
+            ?>
             <div class="products<?php echo $offset ?>"></div>
 
         <div class="btn_wrapper">
@@ -158,9 +159,9 @@ function addProductListCode($atts = '')
         </div>
         
     <?php
-            }
         }
-    
+    }
+
     /* AJAX check  */
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         die();
@@ -212,7 +213,7 @@ function addCategoryOptionsList()
 {
     ob_start();
 
-    $categories = apiGetRequest('product/categories?lang=' . pll_current_language() . '&region_id=' . $_GET['region_id'] );
+    $categories = apiGetRequest('product/categories?lang=' . pll_current_language() . '&region_id=' . $_GET['region_id']);
 
     echo '<h2 class="widgettitle">';
     echo pll_e('What do you want to do?');
@@ -227,12 +228,12 @@ function addCategoryOptionsList()
     echo pll_e('All Categories');
     echo '<br>';
     foreach ($categories as $category) {
-        if($category['count'] > 0){
-        echo '<input type="checkbox" class="filter" name="category_id[]" value="' . $category['id'] . '"';
-        if ($_GET['category_id'] ? in_array($category['id'], $_GET['category_id']) : false) {
-            echo 'checked';
-        }
-        echo '> ' . ucfirst($category['name']) . '<span class="info">' . $category['count'] . '</span><br>';
+        if ($category['count'] > 0) {
+            echo '<input type="checkbox" class="filter" name="category_id[]" value="' . $category['id'] . '"';
+            if ($_GET['category_id'] ? in_array($category['id'], $_GET['category_id']) : false) {
+                echo 'checked';
+            }
+            echo '> ' . ucfirst($category['name']) . '<span class="info">' . $category['count'] . '</span><br>';
         }
     }
     echo '<br>';
@@ -256,7 +257,7 @@ function addCategoryOptionsList()
         if ($region['id'] == $_GET['region_id']) {
             echo 'checked';
         }
-        echo '><span for="region_' . $region['id'] . '">' . ucfirst($region['name'])  . '</span></label>';
+        echo '><span for="region_' . $region['id'] . '">' . ucfirst($region['name']) . '</span></label>';
     }
     echo '</div>';
 
@@ -301,8 +302,7 @@ function addRegionTags()
 {
     ob_start();
 
-    $regions = apiGetRequest('regions'); 
-    ?>
+    $regions = apiGetRequest('regions'); ?>
     
     <div class="tags_wrapper">
     <?php
@@ -326,13 +326,13 @@ function addRegionTags()
 function addRegionName()
 {
     ob_start();
-    $regions = apiGetRequest('regions'); 
+    $regions = apiGetRequest('regions');
     foreach ($regions as $region) {
-        if($_GET['region_id'] == $region['id']){
+        if ($_GET['region_id'] == $region['id']) {
             return ' ' . $region['name'];
         }
     }
-     ob_get_clean();
+    ob_get_clean();
 }
 
 /*
