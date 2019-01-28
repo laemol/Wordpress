@@ -53,6 +53,8 @@ function apiGetRequest($resource)
         $data = array_shift(json_decode($response['body'], true));
     }
 
+    //var_dump($response );
+
     return $data;
 }
 
@@ -131,14 +133,18 @@ function addProductListCode($atts = '')
             }
             echo '<div class="portfolio_info_wrapper">';
             echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['productId'] . '"><h4>' . $product['name'] . '</h4></a>';
-            echo '<div class="tour_excerpt"><p>' . ucfirst($product['type']) . ', ' . $product['category'] . '</p></div>';
-            echo '<div class="tour_attribute_wrapper">';
-            echo '<div class="tour_attribute_rating">';
-            $shortcode_reviews_summary = '[site_reviews_summary assigned_to="' . $product['productId'] . '" ';
-            echo do_shortcode($shortcode_reviews_summary . 'hide="bars,if_empty,rating,summary"]');
+            if($product['type'] == 'tour'){
+            echo '<div class="tour_excerpt"><p><i class="ti-location-pin"> </i> ' . $product['area'] . '<br><i class="ti-time"> </i> ' . $product['duration'] . ' Hours</p></div>';
+            }else{
+            echo '<div class="tour_excerpt"><p><i class="ti-location-pin"> </i> ' . $product['area'] . '<br><i class="ti-ticket"> </i> ' . $product['category'] . '</p></div>';   
+            }
+            //echo '<div class="tour_attribute_wrapper">';
+            //echo '<div class="tour_attribute_rating">';
+            //$shortcode_reviews_summary = '[site_reviews_summary assigned_to="' . $product['productId'] . '" ';
+            //echo do_shortcode($shortcode_reviews_summary . 'hide="bars,if_empty,rating,summary"]');
             //preg_match('([1-9] reviews)', do_shortcode($shortcode_reviews_summary . 'hide="bars,if_empty,rating,stars"]'), $matches);
             //echo '<div class="tour_attribute_rating_count">' . $matches[0] . '</div></div>';
-            echo '</div></div><br class="clear"/>';
+            //echo '</div></div><br class="clear"/>';
             echo '</div></div></div>';
         }
     } else {

@@ -12,79 +12,193 @@ $page_menu_transparent = 0;
 $tg_tour_single_header = kirki_get_option('tg_tour_single_header');
 
 if (isset($product['media'])) {
-    
     if (isset($image_thumb[0]) && !empty($image_thumb[0])) {
         $pp_page_bg = $image_thumb[0];
         $page_menu_transparent = 1;
     }
 
     $grandtour_topbar = grandtour_get_topbar();
-    $grandtour_screen_class = grandtour_get_screen_class();
+    $grandtour_screen_class = grandtour_get_screen_class(); ?>
 
-?>
+<div id="page_caption" class="hasbg">
+<div class="standard_wrapper">
 
-<div id="page_caption" class="hasbg parralax">
-    <!-- Slideshow container -->
+<?php 
+$tour_detail_header = false;
+
+if($tour_detail_header){
+    ?>
+<div class="single_tour_header_info">
+    
+<?php
+
+if ($product) {
+            ?>
+
+			<?php
+
+                    ?>
+				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
+
+					<div class="tour_attribute_content">
+                    <span class="tour_attribute_icon ti-time"></span>
+					<?php
+                        // Display tour duration
+                        echo $product['duration']; ?> 
+                        <?php if (empty($product['duration'])) {
+                            echo 'All Day';
+                        } else {
+                            if (!strpos($product['duration'], 'hours')) {
+                                esc_html_e('Hours', 'grandtour');
+                            }
+                        } ?>
+					</div>
+				</div>
+			
+			<?php
+                if (!empty($product['ageDescription'])) {
+                    ?>
+				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
+					
+					<div class="tour_attribute_content">
+                    <span class="tour_attribute_icon ti-id-badge"></span>
+                        <!-- <?php esc_html_e('Free', 'grandtour'); ?> -->
+                        <?php 
+                        // Display age description
+                        echo $product['ageDescription']; ?>
+					</div>
+				</div>
+			<?php
+                } ?>
+			
+			<?php
+                if (!empty($product['period'])) {
+                    ?>
+				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
+					
+					<div class="tour_attribute_content">
+                    <span class="tour_attribute_icon ti-calendar"></span>
+                    <?php 
+                    // Display period
+                    echo date_i18n('M', strtotime($product['period']['start']));
+                    echo ' - ';
+                    echo date_i18n('M', strtotime($product['period']['end'])); ?>
+					</div>
+				</div>
+			<?php
+                } ?>
+			
+			<?php
+                if (!empty($product['status'])) {
+                    if ($tour_attribute_class == 'one_fourth') {
+                        $tour_attribute_class = 'one_fourth last';
+                    } ?>
+				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
+					
+					<div class="tour_attribute_content">
+                    <span class="tour_attribute_icon ti-home"></span>
+						<?php echo $product['status'] ?>
+					</div>
+				</div>
+			<?php
+                } ?>
+			
+			<?php
+                if ($tour_layout == 'Fullwidth') {
+                    //Get tour price
+                    $tour_price = get_post_meta($post->ID, 'tour_price', true);
+
+                    if (!empty($tour_price)) {
+                        $tour_discount_price = get_post_meta($post->ID, 'tour_discount_price', true); ?>
+		 		<div class="<?php echo esc_attr($tour_attribute_class); ?> last" style="position:relative;">
+			 		<?php
+                        //Get tour label
+                        $tour_label = get_post_meta($post->ID, 'tour_label', true);
+
+                        if (!empty($tour_label)) {
+                            ?>
+					<div class="tour_label"><?php echo esc_html($tour_label); ?></div>
+					<?php
+                        } ?>
+					<div class="tour_attribute_icon ti-money"></div>
+					<div class="tour_attribute_content">
+						<div class="single_tour_price <?php echo esc_attr(strtolower($tour_layout)); ?>">
+						<?php
+                        if ($product) {
+                            ?>
+		 					<span class="normalPrice">
+		 						<?php echo $product['prices'][0]['originalPrice']; ?>
+		 					</span>
+		 					<?php echo $product['prices'][0]['discountPrice']; ?>
+		 				<?php
+                        } else {
+                            ?>
+		 					<?php echo $product['prices'][0]['discountPrice']; ?>
+		 				<?php
+                        } ?>
+						</div>
+					</div>
+				</div>
+		 	<?php
+                    }
+                } ?>
+	<?php
+        }
+    ?>
+
+        </div>
+
+<?php
+
+    }
+
+    ?>
+        
+<!-- Slideshow container -->
 <div class="slideshow-container">
 
-<!-- Full-width images with number and caption text -->
+<!-- Images with number and caption text -->
 <?php 
-foreach($product['media'] as $image){ ?>
+foreach ($product['media'] as $image) {
+    ?>
 <div class="mySlides fade">
   <img src="<?php echo esc_url($image['imageUrl']); ?>" style="width:100%">
 </div>
 
-<?php } ?>
+<?php
+} 
+?>
+
+<?php if($product['video']){
+    echo '<div class="mySlides fade">';
+    $embed_code = wp_oembed_get($product['video'], ['width' => 800]); 
+    echo $embed_code;
+    echo '</div>';
+}
+?> 
 
 <!-- Next and previous buttons -->
-<!-- <a class="prevslide nav" onclick="plusSlides(-1)"><div class="ti-angle-left"></div></a>
-<a class="nextslide nav" onclick="plusSlides(1)"><div class="ti-angle-right"></div></a> -->
-</div>
-<br>
-
+<a class="prevslide nav" onclick="plusSlides(-1)"><div class="ti-angle-left"></div></a>
+<a class="nextslide nav" onclick="plusSlides(1)"><div class="ti-angle-right"></div></a>
 <!-- The dots/circles -->
-<!-- <div class="dots">
+<div class="dots">
 <?php 
 $slide = 1;
-foreach($product['media'] as $image){ ?>
+    foreach ($product['media'] as $image) {
+        ?>
 <span class="dot" onclick="currentSlide($slide)"></span> 
 <?php 
 $slide++ ;
-} ?>
-</div> -->
+    } ?>
+</div>
+</div>
+
+</div>
 
 	<div class="single_tour_header_content">
 		<div class="standard_wrapper">
-              <!-- Photo Gallery -->
-              <?php if(count($product['media']) > 1){ ?>
-                    <a href="<?php echo esc_url($image['imageUrl']); ?>" id="single_tour_gallery_open" class="button fancy-gallery"><span class="ti-camera"></span>View Photos</a>
-                    <div style="display:none;">
-                <?php
-                $count = 1;
-                foreach($product['media'] as $image){ ?>
-			        <a id="single_tour_gallery_image<?php echo $count ?>"" href="<?php echo esc_url($image['imageUrl']); ?>" title="<?php echo esc_url($image['name']); ?>" class="fancy-gallery"></a>
-                <?php 
-                    $count++;
-                    } 
-                ?>
-		                </div>
-                <?php
-                }
-                ?>
-<?php
-if ($product['video']) {
-        ?>
-			<a href="#video_review<?php echo esc_attr($current_page_id); ?>" id="single_tour_video_preview_open" class="button" data-type="inline"><span class="ti-control-play"></span><?php esc_html_e('Video Preview', 'grandtour'); ?></a>
-			
-            <div id="video_review<?php echo esc_attr($current_page_id); ?>" class="tour_video_preview_wrapper" style="display:none;height:800px;width:100%">
-            <!-- <iframe width="100%" height="800px" src="<?php echo $product['video'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-            <?php $embed_code = wp_oembed_get( $product['video'], ['height' => 1420, 'width' => 1425]); echo $embed_code  ?> 
-            
-        </div>
-			<?php
-    } ?>
 
-			<?php
+	<?php
 
     if (!empty($product['prices'])) {
         ?>
@@ -128,54 +242,3 @@ if ($product['video']) {
     } ?><?php if (!empty($grandtour_page_content_class)) {
         echo esc_attr($grandtour_page_content_class);
     } ?>">
-
-<script>
-
-var slideIndex = 0;
-showSlides(slideIndex);  
-
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-//   var navs = document.getElementsByClassName("nav");
-//   if (slides.length == 1) { 
-//       for (i = 0; i < navs.length; i++) {
-//       navs[i].className = nav[i].style.display = "none";  
-//   }
-    //} 
-  if (n > slides.length) { slideIndex = 1;} 
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";   
-  }
-  
-  slides[slideIndex-1].style.display = "block"; 
-
-}
-
-// var slideIndex = 0;
-// showSlides();
-
-// function showSlides() {
-//   var i;
-//   var slides = document.getElementsByClassName("mySlides");
-//   for (i = 0; i < slides.length; i++) {
-//     slides[i].style.display = "none"; 
-//   }
-//   slideIndex++;
-//   if (slideIndex > slides.length) {slideIndex = 1} 
-//   slides[slideIndex-1].style.display = "block"; 
-//   setTimeout(showSlides, 5000); // Change image every 5 seconds
-// }
-</script>

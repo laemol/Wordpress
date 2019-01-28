@@ -20,7 +20,7 @@
                 'terms' => $_GET['keyword']
             )
         );*/
-        $args['s'] = $_GET['keyword'];
+        //$args['s'] = $_GET['keyword'];
     }
 
     if (isset($_GET['month']) && !empty($_GET['month'])) {

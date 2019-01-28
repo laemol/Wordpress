@@ -7,7 +7,46 @@
 <div class="sidebar_content <?php if ($tour_layout == 'Fullwidth') {
     ?>full_width<?php
 } ?>">
-					
+
+<!-- Slideshow container -->
+<div class="slideshow-container">
+
+<!-- Images with number and caption text -->
+<?php 
+foreach ($product['media'] as $image) {
+    ?>
+<div class="mySlides fade">
+  <img src="<?php echo esc_url($image['imageUrl']); ?>" style="width:100%">
+</div>
+
+<?php
+} 
+?>
+
+<?php if($product['video']){
+    echo '<div class="mySlides fade">';
+    $embed_code = wp_oembed_get($product['video'], ['width' => 800]); 
+    echo $embed_code;
+    echo '</div>';
+}
+?> 
+
+<!-- Next and previous buttons -->
+<a class="prevslide nav" onclick="plusSlides(-1)"><div class="ti-angle-left"></div></a>
+<a class="nextslide nav" onclick="plusSlides(1)"><div class="ti-angle-right"></div></a>
+<!-- The dots/circles -->
+<div class="dots">
+<?php 
+$slide = 1;
+    foreach ($product['media'] as $image) {
+        ?>
+<span class="dot" onclick="currentSlide($slide)"></span> 
+<?php 
+$slide++ ;
+    } ?>
+</div>
+</div>
+
 	<?php
         //If single tour fullwidth layout, display title
         if ($tour_layout != 'Fullwidth') {
@@ -40,122 +79,12 @@
             $tour_attribute_class = 'one_fifth';
         }
 
-        if ($product) {
-            ?>
-		<div class="single_tour_attribute_wrapper themeborder <?php echo esc_attr(strtolower($tour_layout)); ?>">
-			<?php
-
-                    ?>
-				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
-					<div class="tour_attribute_icon ti-time"></div>
-					<div class="tour_attribute_content">
-					<?php
-                        // Display tour duration
-                        echo $product['duration']; ?> 
-                        <?php if (empty($product['duration'])) {
-                            echo 'All Day';
-                        } else {
-                            if (!strpos($product['duration'], 'hours')) {
-                                esc_html_e('Hours', 'grandtour');
-                            }
-                        } ?>
-					</div>
-				</div>
-			
-			<?php
-                if (!empty($product['ageDescription'])) {
-                    ?>
-				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
-					<div class="tour_attribute_icon ti-id-badge"></div>
-					<div class="tour_attribute_content">
-                        <!-- <?php esc_html_e('Free', 'grandtour'); ?> -->
-                        <?php 
-                        // Display age description
-                        echo $product['ageDescription']; ?>
-					</div>
-				</div>
-			<?php
-                } ?>
-			
-			<?php
-                if (!empty($product['period'])) {
-                    ?>
-				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
-					<div class="tour_attribute_icon ti-calendar"></div>
-					<div class="tour_attribute_content">
-                    <?php 
-                    // Display period
-                    echo date_i18n('M', strtotime($product['period']['start']));
-                    echo ' - ';
-                    echo date_i18n('M', strtotime($product['period']['end'])); ?>
-					</div>
-				</div>
-			<?php
-                } ?>
-			
-			<?php
-                if (!empty($product['status'])) {
-                    if ($tour_attribute_class == 'one_fourth') {
-                        $tour_attribute_class = 'one_fourth last';
-                    } ?>
-				<div class="<?php echo esc_attr($tour_attribute_class); ?>">
-					<div class="tour_attribute_icon ti-home"></div>
-					<div class="tour_attribute_content">
-						<?php echo $product['status'] ?>
-					</div>
-				</div>
-			<?php
-                } ?>
-			
-			<?php
-                if ($tour_layout == 'Fullwidth') {
-                    //Get tour price
-                    $tour_price = get_post_meta($post->ID, 'tour_price', true);
-
-                    if (!empty($tour_price)) {
-                        $tour_discount_price = get_post_meta($post->ID, 'tour_discount_price', true); ?>
-		 		<div class="<?php echo esc_attr($tour_attribute_class); ?> last" style="position:relative;">
-			 		<?php
-                        //Get tour label
-                        $tour_label = get_post_meta($post->ID, 'tour_label', true);
-
-                        if (!empty($tour_label)) {
-                            ?>
-					<div class="tour_label"><?php echo esc_html($tour_label); ?></div>
-					<?php
-                        } ?>
-					<div class="tour_attribute_icon ti-money"></div>
-					<div class="tour_attribute_content">
-						<div class="single_tour_price <?php echo esc_attr(strtolower($tour_layout)); ?>">
-						<?php
-                        if ($product) {
-                            ?>
-		 					<span class="normalPrice">
-		 						<?php echo $product['prices'][0]['originalPrice']; ?>
-		 					</span>
-		 					<?php echo $product['prices'][0]['discountPrice']; ?>
-		 				<?php
-                        } else {
-                            ?>
-		 					<?php echo $product['prices'][0]['discountPrice']; ?>
-		 				<?php
-                        } ?>
-						</div>
-					</div>
-				</div>
-		 	<?php
-                    }
-                } ?>
-		</div><br class="clear"/>
-	<?php
-        }
-
     ?>
     <!-- Start main content -->
 
 		<div class="single_tour_content">
 
-            <?php echo $product['webDescription']; ?>
+            <?php echo $product['description']; ?>
             
 		</div>
 
@@ -210,7 +139,7 @@
                 ?>
 		<li>
 			<div class="single_tour_departure_title"><?php esc_html_e('Departure Time', 'grandtour'); ?></div>
-			<div class="single_tour_departure_content"><?php echo $product['startTime']; ?></div>
+			<div class="single_tour_departure_content indent_content"><?php echo $product['startTime']; ?></div>
 		</li>
 		<?php
             }
@@ -221,7 +150,7 @@
                 ?>
 		<li>
 			<div class="single_tour_departure_title"><?php esc_html_e('Return Time', 'grandtour'); ?></div>
-			<div class="single_tour_departure_content"><?php echo $product['endTime']; ?></div>
+			<div class="single_tour_departure_content indent_content"><?php echo $product['endTime']; ?></div>
 		</li>
 		<?php
             }
@@ -260,7 +189,7 @@
                 ?>
 		<li>
 			<div class="single_tour_departure_title"><?php esc_html_e('Included', 'grandtour'); ?></div>
-			<div class="single_tour_departure_content">
+			<div class="single_tour_departure_content indent_content">
 				<?php
                     if (!empty($tour_included) && is_array($tour_included)) {
                         foreach ($tour_included as $key => $tour_included_item) {
@@ -273,19 +202,7 @@
                             }
                         }
                     } ?>
-			</div>
-		</li>
-		<?php
-            }
-        ?>
-
-		<?php
-            if (!empty($tour_included)) {
-                ?>
-		<li>
-			<div class="single_tour_departure_title"><?php esc_html_e('Not Included', 'grandtour'); ?></div>
-			<div class="single_tour_departure_content">
-				<?php
+                <?php
                     if (!empty($tour_not_included) && is_array($tour_not_included)) {
                         foreach ($tour_not_included as $key => $tour_not_included_item) {
                             if ($tour_not_included_item['key'] == 'exclude') {
@@ -302,6 +219,29 @@
 		<?php
             }
         ?>
+
+		<?php
+            if (!empty($tour_included)) {
+                ?>
+		<li>
+			<div class="single_tour_departure_title"><?php esc_html_e('Description', 'grandtour'); ?></div>
+			<div class="single_tour_departure_content">
+
+            <div class="txt-wrapper">
+            <a href="#panel-show" class="panel-show txt" id="panel-show">Read more</a> 
+            <a href="#panel-hide" class="panel-hide txt" id="panel-hide">Read less</a> 
+            <div class="txt-panel">
+            <?php echo $product['webDescription'] ?>
+            
+            </div><!-- end panel -->
+            <div class="txt-fade"></div>
+            </div><!-- end panel-wrapper -->
+
+			</div>
+		</li>
+		<?php
+            }
+        ?>
 		
 		<?php
             if (!empty($tour_map_address)) {
@@ -313,6 +253,8 @@
 		</li>
 		<?php
             }
+
+        if($reviews){
         ?>
 
         <li>
@@ -336,6 +278,11 @@
         ?>
         </div>
         </li>
+
+        <?php
+
+    }
+    ?>
 
 	</ul>
 
@@ -368,5 +315,21 @@ function toggleReviews() {
     x.style.display = "none";
   }
 }
+</script>
+<script>
+    function readMore() {
+  var dots = document.getElementById("dots");
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("myBtn");
 
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "Read more"; 
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "Read less"; 
+    moreText.style.display = "inline";
+  }
+}
 </script>

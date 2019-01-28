@@ -678,15 +678,64 @@ select {
       width:100%;
       box-sizing:border-box;
   }
+
 /* Slider */
 
-/* Slideshow container */
+@media only screen and (max-width: 767px){
+#page_caption.hasbg {
+    height: 340px !important;
+
+}
+.slideshow-container img{
+    min-height: 250px;
+}
 .slideshow-container {
-  max-width: 100%;
-  height: 620px;
-  overflow: hidden;
-  position: relative;
-  margin: auto;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    margin-top:20px;
+  }
+}
+
+@media only screen and (min-width: 768px){
+#page_caption.hasbg {
+    height: 450px !important;
+}
+.slideshow-container img{
+    min-height: 450px;
+}
+
+.slideshow-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+.slideshow-container  {
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.single_tour_header_info {
+    float: right;
+    position: absolute;
+    top: 30px;
+    right: 90px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.548);
+    padding: 20px;
+    width: 21.5%;
+}
+
+.tour_attribute_content {
+    padding-bottom: 10px;
+}
+
+.tour_attribute_icon {
+    padding-right: 10px;
 }
 
 #page_caption{
@@ -696,6 +745,7 @@ select {
 
 #page_caption h1 {
     color: #fff !important;
+
 }
 
 /* Hide the images by default */
@@ -714,20 +764,20 @@ select {
   color: white;
   font-weight: bold;
   font-size: 30px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
+  border-radius: 50%;
   user-select: none;
+  margin: 5px;
 }
 
 /* Position the "next button" to the right */
 .nextslide {
   right: 0;
-  border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
 .prevslide:hover, .nextslide:hover {
   background-color: rgba(0, 0, 0, 0.479);
+  border-radius: 50%;
   color: white;
 
 }
@@ -754,25 +804,25 @@ select {
 
 /* The dots/bullets/indicators */
 .dots {
-    text-align:center;
+    text-align: center;
     position: absolute;
+    width: 100%;
     bottom: 20px;
-    left: 47%
 }
 
 .dot {
   cursor: pointer;
-  height: 8px;
-  width: 8px;
+  height: 6px;
+  width: 6px;
   margin: 0 2px;
-  background-color: rgb(114, 114, 114);
+  background-color: #fff;
   border-radius: 50%;
   display: inline-block;
-  transition: background-color 0.6s ease;
+
 }
 
 .active, .dot:hover {
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.479);
 }
 
 /* Fading animation */
@@ -1057,5 +1107,70 @@ select {
   .autocomplete li:last-child:hover a{
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
+  }
+
+  #more {
+      display: none;
+      border: 1px solid red;
+    }
+  .more {
+        display: inline;
+      }
+
+  .indent_content div {
+    padding-left: 1.7em;
+    text-indent:-1.7em;
+}
+
+#page_content_wrapper .inner .sidebar_wrapper .sidebar .content .single_tour_header_price {
+    display: block !important;
+    margin-top: 15px;
+}
+
+.txt-wrapper {
+    position: relative;
+  }
+  
+  .txt {
+    padding: 1em;
+    text-decoration: none;
+    padding: 1em;
+    width:90%;
+  }
+  .panel-show, .panel-hide {
+    position: absolute;
+    z-index: 100;
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    text-align: center;
+  }
+  
+  .panel-hide {display: none;}
+  .panel-show:target {display: none;}
+  .panel-show:target ~ .panel-hide {display: block;}
+  .panel-show:target ~ .txt-panel {
+     max-height: 100%; 
+  }
+  .panel-show:target ~ .txt-fade {
+    margin-top: 0;
+  }
+  
+  .txt-panel {
+    position: relative;
+    margin-bottom: 40px;
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height .5s ease;
+    padding-bottom: 40px;
+  }
+  .txt-fade {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    background: -webkit-linear-gradient(rgba(255, 255,255, .4), rgba(255, 255, 255, 1));
   }
   
