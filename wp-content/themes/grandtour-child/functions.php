@@ -163,8 +163,9 @@ function addProductListCode($atts = '')
         <div class="btn_wrapper">
         <a href="#/" class="button show_more" data-offset="<?php echo $offset ?>" data-category="[<?php echo $category_id ?>]" data-zone="<?php echo $region_id ?>"><?php echo pll_e('Show More')  ?></a>
         </div>
-        
+
     <?php
+
         }
     }
 
@@ -172,28 +173,28 @@ function addProductListCode($atts = '')
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         die();
     } ?>
-    
+
     <script type="text/javascript">
     jQuery(document).ready(function(){
-    jQuery(document).on('click','.show_more',function(){	
+    jQuery(document).on('click','.show_more',function(){
         var offset = jQuery(this).data('offset');
         var category = jQuery(this).data('category');
         var destination = jQuery(this).data('zone');
-        var loder = '<div class="loder"></div>'	
-        jQuery('.show_more').html(loder);	
+        var loder = '<div class="loder"></div>'
+        jQuery('.show_more').html(loder);
         jQuery('.loding').show();
-        jQuery.ajax({	
+        jQuery.ajax({
                         type: 'POST',
                         url: "<?php echo admin_url('admin-ajax.php'); ?>",
-                        data: {		action: 'getProductList',							
-                                    offset: offset,	
+                        data: {		action: 'getProductList',
+                                    offset: offset,
                                     category: category,
                                     destination: destination,
                         },
-                        success: function( data ) {		
-                        jQuery('.show_more').hide();			
-                        jQuery('.products'+offset).append(data);				
-                        jQuery('.loding').hide();			
+                        success: function( data ) {
+                        jQuery('.show_more').hide();
+                        jQuery('.products'+offset).append(data);
+                        jQuery('.loding').hide();
                         }
             });
         });
@@ -268,7 +269,7 @@ function addCategoryOptionsList()
     echo '</div>';
 
     //echo '<input type="submit" value="Filter Results" class="submit full_width" id="submitform"></form>';?>
-    
+
     <script>
        jQuery( ".filter" ).click(function() {
         jQuery('body').append('<div style="" id="loadingDiv"><div class="loader"><div class="lds-dual-ring"></div></div></div>');
@@ -285,18 +286,18 @@ function addCategoryOptionsList()
     </script>
 
 <script>
-  
+
   jQuery(window).on('load', function(){
   setTimeout(removeLoader, 1000); //wait for page load PLUS two seconds.
 });
 function removeLoader(){
     jQuery( "#loadingDiv" ).fadeOut(500, function() {
       // fadeOut complete. Remove the loading div
-      jQuery( "#loadingDiv" ).remove(); //makes page more lightweight 
-  });  
+      jQuery( "#loadingDiv" ).remove(); //makes page more lightweight
+  });
 }
 </script>
-    
+
     <?php
     return ob_get_clean();
 }
@@ -309,7 +310,7 @@ function addRegionTags()
     ob_start();
 
     $regions = apiGetRequest('regions'); ?>
-    
+
     <div class="tags_wrapper">
     <?php
     foreach ($regions as $region) {
@@ -385,7 +386,7 @@ function searchBar()
 
     $categories = apiGetRequest('product/categories'); ?>
         <div  class="one withsmallpadding ppb_tour_search" style="margin-top:-600px;" >
-        
+
         <div class="standard_wrapper">
         <div class="page_content_wrapper">
         <div class="inner">
@@ -394,7 +395,7 @@ function searchBar()
             </div>
         <form id="tour_search_form" class="tour_search_form" method="get" action="<?php echo get_site_url() ?>/<?php echo pll_current_language() ?>/search">
         <div class="tour_search_wrapper">
-        
+
         <div class="one_fourth themeborder keyword">
     		<input id="keyword" name="keyword" type="text" autocomplete="off" placeholder="<?php pll_e('Tour, Park or Destination'); ?>"/>
     		<span class="ti-search"></span>
@@ -444,7 +445,7 @@ function custom_icons()
       -o-filter: grayscale(100%);
      -ms-filter: grayscale(100%);
          filter: grayscale(100%);
-    } 
+    }
   </style>';
 }
 
