@@ -11,6 +11,31 @@ Text Domain: grandtour
 Template: grandtour
 */
 
+input[type=submit], input[type=button], 
+a.button, .button, .pagination span, 
+.pagination a:hover, .woocommerce .footer_bar .button, 
+.woocommerce .footer_bar .button:hover, 
+.woocommerce-page div.product form.cart .button, .woocommerce #respond input#submit.alt, 
+.woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt, .post_type_icon, 
+.filter li a:hover, .filter li a.active, #portfolio_wall_filters li a.active, #portfolio_wall_filters li a:hover, 
+.comment_box, .one_half.gallery2 .portfolio_type_wrapper, .one_third.gallery3 .portfolio_type_wrapper, 
+.one_fourth.gallery4 .portfolio_type_wrapper, .one_fifth.gallery5 .portfolio_type_wrapper, .portfolio_type_wrappe, 
+.post_share_text, #close_share, .widget_tag_cloud div a:hover, a.tour_image .tour_price, 
+.mobile_menu_wrapper #close_mobile_menu, a.tour_image .tour_price, .grid.portfolio_type 
+.tour_price, .ui-accordion .ui-accordion-header .ui-icon, .mobile_menu_wrapper #mobile_menu_close.button, 
+.header_cart_wrapper .cart_count {
+    background-color: #ff1689 !important;
+}
+
+.cf7-smart-grid.has-grid .wpcf7-form-control {
+    text-align: center;
+}
+
+.cf7-smart-grid.has-grid .wpcf7-submit {
+    border: none !important;
+    margin-top: 20px;
+}
+
 /* Loading div */
 #loadingDiv {
     width: 100%;
@@ -305,7 +330,7 @@ select {
 }
 
 .error {
-    color: #FF4A52;
+    color: #ff1689;
 }
 
 .valid {
@@ -455,7 +480,7 @@ select {
 /* Highlight the "selected" day */
 .days li .selected {
     margin: -2px;
-    border: 2px solid #FF4A52;
+    border: 2px solid #ff1689;
     border-radius: 50%;
     height: 24px;
     width: 24px;
@@ -469,7 +494,7 @@ select {
 }
 
 .count {
-    color: #FF4A52;
+    color: #FF1689;
 }
 
 .form_wrapper {
@@ -587,7 +612,7 @@ select {
 }
 
 .ti-close:before {
-    color: #FF4A52;
+    color: #FF1689;
 }
 
 /* Tour details */
@@ -708,7 +733,7 @@ select {
 
 .slideshow-container {
     width: 100%;
-    height: auto;
+    height: 450px;
     overflow: hidden;
     position: relative;
   }
@@ -1172,5 +1197,9 @@ select {
     height: 40px;
     width: 100%;
     background: -webkit-linear-gradient(rgba(255, 255,255, .4), rgba(255, 255, 255, 1));
+  }
+
+  .single_tour_departure_wrapper li .single_tour_departure_content .map_shortcode_wrapper {
+      border-radius: 5px;
   }
   
