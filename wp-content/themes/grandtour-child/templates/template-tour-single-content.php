@@ -161,7 +161,7 @@ $slide++ ;
                 ?>
 		<li>
 			<div class="single_tour_departure_title"><?php esc_html_e('Benefits', 'grandtour'); ?></div>
-			<div class="single_tour_departure_content">
+			<div class="single_tour_departure_content indent_content">
 				<?php
                     if (!empty($tour_included) && is_array($tour_included)) {
                         foreach ($tour_included as $key => $tour_included_item) {

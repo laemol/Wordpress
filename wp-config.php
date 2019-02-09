@@ -18,7 +18,7 @@
  * @package WordPress
  */
 
-define('API_URL', 'http://ticketandtours.test/api/v3/');
+define('API_URL', 'http://ticketandtours.test/api/v4/');
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */

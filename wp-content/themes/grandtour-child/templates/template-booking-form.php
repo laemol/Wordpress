@@ -1,79 +1,20 @@
 <?php
 // Get current product
 $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
+
 ?>
 
 <form action="<?php echo lang_url()  ?>checkout" method="POST">
+<script>var api_url = 'http://ticketandtours.test/api/v4'; </script>
 
-<?php if ($product['type'] == 'tour') {
-    $dates = array_shift(apiGetRequest('products/' . $_GET['pid'] . '/dates?date=' . $_GET['date']));
+<?php if ($product['type'] == 'tour' || $product['scheduleRequired'] ) {
+    $dates = apiGetRequest('products/' . $_GET['pid'] . '/dates');
 
-    $date = $_GET['date'] ?: date('Y-m-d');
-    $month = date('m', strtotime($date));
-    $year = date('Y', strtotime($date));
-    $month_name = date('F', strtotime($date)); ?>
+    echo do_shortcode('[calendar]');
+    ?>
+    <div id="calendar-widget"><calendar-component :schedule-data='<?php echo json_encode($dates) ?>' :product-id="<?php echo $product['id'] ?>"></calendar-component></div><br>
+    <?php
 
-<div class="calendar-wrapper"> 
-<div class="month"> 
-  <ul>
-<?php if ($date > date('Y-m-d')) {
-        ?>
-    <a href="<?php echo parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)?>?pid=<?php echo $product['productId'] ?>&date=<?php echo date('Y-m-d', strtotime('-1 month', strtotime($date))); ?>"><li class="prev">&#10094;</li></a>
-<?php
-    } else {
-        echo '<li class="prev hidden">&#10094;</li>';
-    } ?>
-<a href="<?php echo parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)?>?pid=<?php echo $product['productId'] ?>&date=<?php echo date('Y-m-d', strtotime('+1 month', strtotime($date))); ?>"><li class="next">&#10095;</li></a>
-    <li><span class="monthName"><?php echo $month_name ?> <?php echo $year ?></span></li>
-  </ul>
-</div>
-
-<ul class="weekdays">
-  <li>Mon</li>
-  <li>Tue</li>
-  <li>Wed</li>
-  <li>Thu</li>
-  <li>Fri</li>
-  <li>Sat</li>
-  <li>Sun</li>
-</ul>
-
-<ul class="days"> 
-<?php
-$running_day = date('w', mktime(0, 0, 0, $month, 1, $year));
-    $days_in_month = date('t', mktime(0, 0, 0, $month, 1, $year));
-    $x = 1;
-
-    // Print blank days until the first of the current week
-    for ($x = 1; $x < $running_day; $x++) {
-        echo '<li></li>';
-    }
-
-    // Print days of the month
-    for ($day = 1; $day <= $days_in_month; $day++) {
-        $full_date = $year . '-' . $month . '-' . str_pad($day, 2, '0', STR_PAD_LEFT);
-        // Check if the day is in the available tours
-        if ($full_date > date('Y-m-d')) {
-            $tour_date = in_array($full_date, array_column($dates, 'date'));
-        }
-        if ($tour_date) {
-            $tour = $dates[array_search($full_date, array_column($dates, 'date'))];
-
-            $filteredDates = array_filter($dates, function ($element) use ($full_date) {
-                return isset($element['date']) && $element['date'] == $full_date;
-            });
-            $tickets = array_sum(array_column($filteredDates, 'availableTickets'));
-        }
-        echo '<li>';
-        if ($tour_date) {
-            echo '<a href="javascript:;" class="select_date" data-count="' . count($filteredDates) . '" data-date="' . $full_date . '" data-tour_id="' . $tour['id'] . '" data-available="' . $tickets . '"tooltip="' . $tickets . ' Available">';
-        }
-        echo '<span class="' . ($full_date == date('Y-m-d') ? 'active' : '') . ($tour_date ? 'available' : '') . '">' . $day . '</span></li>';
-        if ($tour_date) {
-            echo '</a>';
-        }
-    }
-    echo '</ul></div>';
 }
 
 ?>
@@ -82,9 +23,10 @@ $running_day = date('w', mktime(0, 0, 0, $month, 1, $year));
     ?>
     <div class="tour_product_variable_wrapper">
  		<div class="tour_product_variable_title">
-           <?php echo mb_strimwidth($price['name'], 0, 22, '...');
-    ; ?>
-           <?php echo $price['availableTickets'] === 0 ? '<br><span class="error">Sold Out<span>' : null ?>
+             <div class="title_wrapper">
+           <?php echo mb_strimwidth($price['name'], 0, 20, '..'); ?>
+           <?php echo $price['availableTickets'] === 0 ? '<br><span class="error">Sold Out<span>' : '<br><span class="subtitle">' . $price['description'] . '</span>' ?>
+        </div>
          </div>
  		<div class="tour_product_variable_qty">
  			<input type="number" class="price" data-amount="<?php echo $price['currentPrice']; ?>" name="price[<?php echo $price['ticketId']; ?>]" id="<?php echo $price['ticketId']; ?>" value="0" min="0" max="<?php echo $price['availableTickets']; ?>">
@@ -96,6 +38,10 @@ $running_day = date('w', mktime(0, 0, 0, $month, 1, $year));
     </div>
 <?php
 } ?>
+<div class="tour_product_variable_title">
+<?php pll_e('Free'); ?>
+<br><span class="subtitle"><?php echo $product['ageDescription']; ?></span>
+</div>
 
 <div class="single_tour_view_wrapper themeborder">
      			<div class="single_tour_view_desc">
@@ -112,11 +58,9 @@ $running_day = date('w', mktime(0, 0, 0, $month, 1, $year));
      		</div>
                              
     <p>
-    <input type="hidden" name="date" value="" id="date">
     <input type="hidden" name="tour_id" value="" id="tour_id">
-    <input type="hidden" name="available" value="" id="available">
-    <input type="hidden" name="productId" value="<?php echo $product['productId']; ?>" >
-    <input type='hidden' name='post_id' value="<?php echo $product['productId']; ?>">
+    <input type="hidden" name="productId" value="<?php echo $product['id']; ?>" >
+    <input type='hidden' name='post_id' value="<?php echo $product['id']; ?>">
     <input type="submit" value="<?php pll_e('Book Now'); ?>" class="submit" id="submitform">
     </p>
 

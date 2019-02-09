@@ -277,13 +277,14 @@ session_start();
 ?>
 
 <!-- Help pre-footer -->
-<div class="one withsmallpadding ppb_text pre-footer" style="padding:40px 0 40px 0;">
+<!-- <div class="one withsmallpadding ppb_text pre-footer" style="padding:40px 0 40px 0;">
 <div class="standard_wrapper">
-    <div class="page_content_wrapper"><div class="inner"><div style="margin:auto;width:100%">   
+    <div class="page_content_wrapper"><div class="inner">
+        <div style="margin:auto;width:100%">   
     <h4><?php pll_e('Frequently asked questions'); ?></h4> 
     <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer Payment") ) : ?>
 <?php endif;?>
-</div></div></div></div></div>
+</div></div></div></div></div> -->
 
 <?php get_footer(); ?>
 

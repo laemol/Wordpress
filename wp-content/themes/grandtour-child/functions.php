@@ -11,6 +11,7 @@ add_shortcode('booking-form', 'addBookingForm');
 add_shortcode('zones', 'addRegionTags');
 add_shortcode('region-name', 'addRegionName');
 add_shortcode('filter-list', 'addCategoryOptionsList');
+add_shortcode('calendar', 'showCalendar');
 
 // Actions
 add_action('wp_ajax_grandtour_ajax_search_product_result', 'grandtour_ajax_search_product_result');
@@ -124,19 +125,19 @@ function addProductListCode($atts = '')
             $offset++;
             echo '<div class="element grid classic4_cols animated4">';
             echo '<div class="one_fourth gallery4 classic static filterable portfolio_type themeborder">';
-            echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['productId'] . '">';
+            echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['id'] . '">';
             echo '<img src="' . $product['media'][0]['imageUrl'] . '" alt="' . $product['name'] . '" style="height:140px"/>';
-            if ($product['prices'][0]['originalPrice'] > $product['prices'][0]['currentPrice']) {
-                echo '<div class="tour_price has_discount"><span class="normal_price">&euro; ' . $product['prices'][0]['originalPrice'] . '</span>&euro; ' . $product['prices'][0]['currentPrice'] . '</div></a>';
+            if ($product['originalPrice'] > $product['currentPrice']) {
+                echo '<div class="tour_price has_discount"><span class="normal_price">&euro; ' . $product['originalPrice'] . '</span>&euro; ' . $product['currentPrice'] . '</div></a>';
             } else {
-                echo '<div class="tour_price">&euro; ' . $product['prices'][0]['currentPrice'] . '</div></a>';
+                echo '<div class="tour_price">&euro; ' . $product['currentPrice'] . '</div></a>';
             }
             echo '<div class="portfolio_info_wrapper">';
-            echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['productId'] . '"><h4>' . $product['name'] . '</h4></a>';
+            echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['id'] . '"><h4>' . $product['name'] . '</h4></a>';
             if ($product['type'] == 'tour') {
-                echo '<div class="tour_excerpt"><p><i class="ti-location-pin"> </i> ' . $product['area'] . '<br><i class="ti-time"> </i> ' . $product['duration'] . ' Hours</p></div>';
+                echo '<div class="tour_excerpt"><p><i class="ti-location-pin"> </i> ' . $product['location'] . '<br><i class="ti-time"> </i> ' . $product['duration'] . ' Hours</p></div>';
             } else {
-                echo '<div class="tour_excerpt"><p><i class="ti-location-pin"> </i> ' . $product['area'] . '<br><i class="ti-ticket"> </i> ' . $product['category'] . '</p></div>';
+                echo '<div class="tour_excerpt"><p><i class="ti-location-pin"> </i> ' . $product['location'] . '<br><i class="ti-ticket"> </i> ' . $product['category'] . '</p></div>';
             }
             //echo '<div class="tour_attribute_wrapper">';
             //echo '<div class="tour_attribute_rating">';
@@ -407,6 +408,13 @@ function searchBar()
          return ob_get_clean();
 }
 
+/*
+* Adds the calendar code
+*/
+function showCalendar() {
+    //wp_enqueue_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js', [], '2.5.17');
+    wp_enqueue_script('calendar', get_stylesheet_directory_uri() . '/js/app.js', [], '1.0', true);
+}
 /*
 * Adds the ACF LOV
 */

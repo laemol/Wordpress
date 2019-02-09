@@ -377,191 +377,8 @@ select {
     border-radius: 4px;
 }
 
-/* Calendar style */
-
-.calendar-wrapper {
-    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 25px;
-}
-
-.month ul {
-    list-style-type: none;
-}
-
-/* Month header */
-.month {
-    padding: 20px;
-    width: calc(100% - 40px);
-    background: #1abc9c;
-    text-align: center;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-/* Month list */
-.month ul {
-    margin: 0;
-    padding: 0;
-}
-
-.month ul li {
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
-
-/* Previous button inside month header */
-.month .prev {
-    float: left;
-}
-
-/* Next button */
-.month .next {
-    float: right;
-}
-
-/* Weekdays (Mon-Sun) */
-.weekdays {
-    margin: 0;
-    padding: 10px 0;
-    background-color: #ddd;
-    font-size: 10px;
-}
-
-.weekdays li {
-    display: inline-block;
-    width: 12.6%;
-    color: #666;
-    text-align: center;
-}
-
-/* Days (1-31) */
-.days {
-    padding: 10px 0;
-    background: #eee;
-    margin: 0;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-.days li {
-    list-style-type: none;
-    display: inline-block;
-    width: 13.6%;
-    text-align: center;
-    margin-bottom: 5px;
-    font-size: 12px;
-    color: #777;
-}
-
-/* Highlight the "current" day */
-.days li .active {
-    padding: 2px 4px 6px 4px;
-    background: #1abc9c;
-    color: white !important;
-    border-radius: 50%;
-    height: 16px;
-    width: 16px;
-    display: inline-block;
-}
-
-/* Highlight the "available" day */
-.days li .available {
-    padding: 2px 4px 6px 4px;
-    background-color: #ddd;
-    border-radius: 50%;
-    height: 16px;
-    width: 16px;
-    display: inline-block;
-}
-
-/* Highlight the "selected" day */
-.days li .selected {
-    margin: -2px;
-    border: 2px solid #ff1689;
-    border-radius: 50%;
-    height: 24px;
-    width: 24px;
-    display: inline-block;
-    border-radius: 50%;
-}
-
-.hidden {
-    opacity: 0;
-    display:none;
-}
-
-.count {
-    color: #FF1689;
-}
-
-.form_wrapper {
-    padding: 30px;
-}
-
-.intl-tel-input { 
-    width: 100%; 
-}
-
-.hide {
-    display: none;
-}
-
-.validation {
-    margin: 5px;
-    padding-top:10px;
-    font-family: inherit;
-}
-
-/* Tooltip */
-
-.days li .selected:hover {
-    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, .2), 0 0 0 1px rgba(0, 0, 0, .08);
-}
-
-[tooltip] {
-
-    position: relative;
-    display: inline-block;
-}
-
-[tooltip]::before {
-    content: "";
-    position: absolute;
-    top: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 4px 6px 0 6px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
-    z-index: 99;
-    opacity: 0;
-}
-
-[tooltip]::after {
-    content: attr(tooltip);
-    position: absolute;
-    left: 50%;
-    top: -6px;
-    transform: translateX(-50%) translateY(-100%);
-    background: rgba(0, 0, 0, 0.7);
-    text-align: center;
-    color: #fff;
-    padding: 4px 2px;
-    font-size: 12px;
-    min-width: 60px;
-    border-radius: 5px;
-    pointer-events: none;
-    padding: 4px 4px;
-    z-index: 99;
-    opacity: 0;
-}
-
-[tooltip]:hover::after,
-[tooltip]:hover::before {
-    opacity: 1
+#calendar-widget {
+    all: unset
 }
 
 /* Destinations */
@@ -1202,4 +1019,80 @@ select {
   .single_tour_departure_wrapper li .single_tour_departure_content .map_shortcode_wrapper {
       border-radius: 5px;
   }
-  
+
+  /* Calendar */
+  .vdpInnerWrap {
+      padding: unset !important;
+  }
+  table.vdpTable {
+        margin: 0px !important;
+        box-shadow: none !important;
+  }
+
+  .vdpHeadCell {
+    padding: .3em .5em 0em !important;
+  }
+
+  .vdpCell {
+      border-bottom: 0px;
+
+  }
+
+  .hidden {
+      display: none;
+  }
+
+  .info-cal {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 1px;
+    margin-right: 1px;
+    background-color: #f5f5f5;
+    border-color: rgba(0,0,0,.15);
+    margin-top: -15px;
+    overflow-y: hidden;
+	max-height: 60px; /* approximate max height */
+	transition-property: all;
+	transition-duration: 2.6s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  }
+
+  input[type="number"]:disabled {
+    background: #dddddd;
+  }
+
+  .subtitle {
+      font-style: normal;
+      font-weight: lighter;
+  }
+.tour_product_variable_wrapper {
+    position: relative;
+    height:50px;
+}
+  .title_wrapper {
+      height: 40px;
+      position: absolute;
+      top:0
+  }
+
+  .vdpCell.selectable:hover .vdpCellContent,
+  .vdpCell.selected .vdpCellContent {
+    background: #ff1689 !important;
+}
+
+  .vdpArrowPrev:after {
+    border-right-color: #ff1689 !important;
+}
+
+.vdpArrowNext:after {
+    border-left-color: #ff1689 !important;
+
+.vdpCell.today {
+    color: #ff1689 !important;
+}
+
+.vdpTimeUnit > input:hover,
+.vdpTimeUnit > input:focus {
+    border-bottom-color: #ff1689 !important;
+}

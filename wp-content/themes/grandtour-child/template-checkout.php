@@ -7,7 +7,7 @@ session_start();
  * @package WordPress
 */
 
-$product = array_shift(apiGetRequest('products/' . $_POST['productId'] . '?date=' . $_POST['date']));
+$product = array_shift(apiGetRequest('products/' . $_POST['productId']));
 
 //Check if single attachment page
 if ($post->post_type == 'attachment') {
@@ -236,20 +236,21 @@ if (empty($page_show_title)) {
 			
 		</p>
 		</div>
-	
+     
 <?php if ($product['type'] == 'tour') {
-            $tour = $product['tours'][array_search($_POST['tour_id'], array_column($product['tours'], 'tourId'))]; 
-            $date = $tour['date'];
+            $date = $_POST['date'];
+            //$tours = $product['tours'][array_search($_POST['schedule_id'], array_column($product['tours'], 'tourId'))]; 
+            $tours = apiGetRequest('products/' . $_POST['productId'] . '/tours?date=' . $date . '&lang=en');
+
             // $filteredTours = array_filter($product['tours'], function($element) use($date){
             //     return isset($element['date']) && $element['date'] == $date;
             // });
-           
             ?>
 
 		 <div id="two">
 		 <h4><?php pll_e('Tour details'); ?></h4>
 
-		 <p><span class="ti-calendar"></span> <strong><?php pll_e('Tour date'); ?>: </strong> <?php echo date_format(date_create($tour['date']), 'l d F Y') ?>
+		 <p><span class="ti-calendar"></span> <strong><?php pll_e('Tour date'); ?>: </strong> <?php echo date_format(date_create($date), 'l d F Y') ?>
 
 		 <p><span class="ti-direction-alt"></span> <strong><?php pll_e('Meeting point'); ?></strong><br>
 		 <?php pll_e('Please select a meeting point'); ?>.
@@ -258,12 +259,12 @@ if (empty($page_show_title)) {
          echo'<div style="overflow-y: scroll; height:250px; width:75%">';
 
             echo '<ul class="departure">';
-            foreach($product['tours'] as $tour){
-                foreach ($tour['stops'] as $stop) {
+            foreach($tours as $tour){
+                foreach ($tour['departures'] as $stop) {
                     if ($stop['type'] == 'stop' && $tour['availableTickets'] >= array_sum($_POST['price'])) {
                     echo '<li >';
                     echo '<div class="radio"><input type="radio" class="stop" name="stop_id" value="' . $stop['stopId'] . '" data-tour="' . $tour['tourId'] . '"></div>';
-                    echo  '<h6>' . $stop['time'] . ' - ' . $stop['name'] . '</h6>';
+                    echo  '<h6>' . $tour['date'] . ' - ' . $stop['name'] . '</h6>';
                     echo  ucfirst($stop['description']) . '<br>';
                     echo '<a href="https://www.google.com/maps?q=@' . $stop['latitude'] . ',' . $stop['longitude'] . '" target="_blank"><span class="ti-location-pin"></span> Show on Google Maps </a></span>';
                     echo '</li>';
@@ -349,8 +350,8 @@ if (empty($page_show_title)) {
         $_SESSION['rand'] = $rand; ?>
  	<input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
 	<input type="hidden" name="prices" value="<?php echo base64_encode(serialize($_POST['price'])) ; ?>" >
-	<input type="hidden" name="tour_id" id="tour_id"  value="<?php echo $_POST['tour_id']; ?>" >
-	<input type="hidden" name="product_id" value="<?php echo $product['productId']; ?>" >
+	<input type="hidden" name="tour_id" id="tour_id"  value="<?php echo $_POST['schedule_id']; ?>" >
+	<input type="hidden" name="product_id" value="<?php echo $product['id']; ?>" >
 	<button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment"><?php pll_e('Proceed to Payment'); ?></button>
 	</div>
     		<?php
