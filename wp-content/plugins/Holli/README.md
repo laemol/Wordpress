@@ -26,12 +26,7 @@ You can use the shortcode `[products]` to display Holli products
 
 ## Support
 
-Please add For questions, support 
-
-## Changelog
-
-1.1.0 - Added support for iframed content
-1.0.0 - Initial version
+Please add For questions, supprt 
 
 
 

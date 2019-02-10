@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 5.0.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-12-17 22:20:45+0000\n"
+"PO-Revision-Date: 2019-01-25 09:32:29+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,11 @@ msgstr "Europe/Paris"
 msgctxt "start of week"
 msgid "1"
 msgstr "1"
+
+#. translators: %s: https://wordpress.org/plugins/classic-editor
+#: wp-admin/edit-form-blocks.php:412
+msgid "The block editor requires JavaScript. Please enable JavaScript in your browser settings, or try the <a href=\"%s\">Classic Editor plugin</a>."
+msgstr "L’éditeur nécessite JavaScript. Veuillez activer JavaScript dans les réglages de votre navigateur, ou essayez <a href=\"%s\">l’extension Classic Editor</a>."
 
 #: wp-admin/post.php:44
 msgid "A post type mismatch has been detected."
@@ -92,140 +97,140 @@ msgid "The Gutenberg plugin has been deactivated, as the features are now includ
 msgstr "L’extension Gutenberg a été désactivée, comme les fonctionnalités sont maintenant incluses dans WordPress %1$s par défaut. Si vous voulez continuer à tester les modifications à venir dans la modification de WordPress, veuillez %2$sréactiver l’extension WordPress%3$s."
 
 #. Translators: Use this to specify the CSS font family for the default font
-#: wp-admin/edit-form-blocks.php:182
+#: wp-admin/edit-form-blocks.php:178
 msgctxt "CSS Font Family for Editor Font"
 msgid "Noto Serif"
 msgstr "Noto Serif"
 
-#: wp-admin/about.php:440
+#: wp-admin/about.php:476
 msgid "Note to users of assistive technology: if you experience usability issues with the block editor, we recommend you continue to use the Classic Editor."
 msgstr "Note pour les utilisateurs et utilisatrices de technologies d’assistance : si vous rencontrez des problèmes d’utilisation du nouvel éditeur, nous vous recommandons de continuer avec l’éditeur classique pour l’instant."
 
-#: wp-admin/about.php:439
+#: wp-admin/about.php:475
 msgid "The Classic Editor plugin restores the previous WordPress editor and the Edit Post screen. It lets you keep using plugins that extend it, add old-style meta boxes, or otherwise depend on the previous editor. To install, visit your plugins page and click the &#8220;Install Now&#8221; button next to &#8220;Classic Editor&#8221;. After the plugin finishes installing, click &#8220;Activate&#8221;. That’s it!"
 msgstr "L’extension Éditeur Classique rétablit l’éditeur précédent de WordPress, ainsi que son écran de rédaction précédent. Cela vous permet de continuer à utiliser les extensions qui étendent cet éditeur original, d’y ajouter des champs méta comme avant, et de manière générale vous permet de continuer à utiliser l’ancien éditeur. Pour l’installer, rendez vous sur la pages Extensions et cliquez sur « Installer maintenant » qui se trouve à côté de « Classic Editor ». Après que l’extension ait terminé de s’installer, cliquez sur « Activer ». C’est tout !"
 
-#: wp-admin/about.php:438
+#: wp-admin/about.php:474
 msgid "Prefer to stick with the familiar Classic Editor? No problem! Support for the Classic Editor plugin will remain in WordPress through 2021."
 msgstr "Vous préférez conserver l’éditeur classique ? Aucun problème ! Le support de l’extension Classic Editor est assuré par WordPress jusqu’en 2021."
 
-#: wp-admin/about.php:423
+#: wp-admin/about.php:459
 msgid "Keep it Classic"
 msgstr "Restons classiques"
 
-#: wp-admin/about.php:414
+#: wp-admin/about.php:450
 msgid "Learn how to get started"
 msgstr "Découvrez comment vous lancer"
 
-#: wp-admin/about.php:408
+#: wp-admin/about.php:444
 msgid "The new block paradigm opens up a path of exploration and imagination when it comes to solving user needs. With the unified block insertion flow, it&#8217;s easier for your clients and customers to find and use blocks for all types of content. Developers can focus on executing their vision and providing rich editing experiences, rather than fussing with difficult APIs."
 msgstr "Ce nouveau paradigme du bloc ouvre la porte à de nouvelles possibilités d’exploration et d’imagination pour répondre aux attentes de vos utilisateurs et d’utilisatrices. Avec le flux unifié d’insertion de bloc, vos clients pourront utiliser des blocs pour tous les types de contenus. Les développeurs peuvent se focaliser sur la concrétisation de leur vision et offrir une expérience de création plus riche, plutôt que de perdre du temps à comprendre des API complexes."
 
-#: wp-admin/about.php:400
+#: wp-admin/about.php:436
 msgid "Take advantage of a wide collection of APIs and interface components to easily create blocks with intuitive controls for your clients. Utilizing these components not only speeds up development work but also provide a more consistent, usable, and accessible interface to all users."
 msgstr "Profitez d’une large collection de composants d’API et d’interface afin de créer facilement des blocs au fonctionnement intuitif pour vos clients. Utilisez ces composants non seulement pour accélérer vos développements, mais également pour offrir une interface plus cohérente, utilisable et accessible à tous les utilisateurs et utilisatrices."
 
-#: wp-admin/about.php:399
+#: wp-admin/about.php:435
 msgid "Compose"
 msgstr "Composer"
 
-#: wp-admin/about.php:392
+#: wp-admin/about.php:428
 msgid "Blocks provide a comfortable way for users to change content directly, while also ensuring the content structure cannot be easily disturbed by accidental code edits. This allows the developer to control the output, building polished and semantic markup that is preserved through edits and not easily broken."
 msgstr "Les blocs fournissent aux utilisateurs et utilisatrices une façon confortable de modifier directement leur contenu, tout en s’assurant que la structure de celui-ci ne peut être facilement altérée par des modification de code accidentelles. Cela permet aux développeurs et aux développeuses de contrôler le rendu, en construisant un balisage soigné et sémantique qui sera préservé lors de l’édition."
 
-#: wp-admin/about.php:391
+#: wp-admin/about.php:427
 msgid "Protect"
 msgstr "Protéger"
 
-#: wp-admin/about.php:372
+#: wp-admin/about.php:408
 msgid "Give Twenty Nineteen a try"
 msgstr "Essayez donc Twenty Nineteen"
 
-#: wp-admin/about.php:365
+#: wp-admin/about.php:401
 msgid "Twenty Nineteen is designed to work for a wide variety of use cases. Whether you’re running a photo blog, launching a new business, or supporting a non-profit, Twenty Nineteen is flexible enough to fit your needs."
 msgstr "Twenty Nineteen a été conçu pour fonctionner dans une large variété de situations. Que vous ayez un blog photo, que vous lanciez un nouveau business ou soutenez une association, Twenty Nineteen est suffisamment flexible pour correspondre à vos besoins."
 
-#: wp-admin/about.php:364
+#: wp-admin/about.php:400
 msgid "Versatile design for all sites"
 msgstr "Une mise en page polyvalente sur tous les sites"
 
-#: wp-admin/about.php:360
+#: wp-admin/about.php:396
 msgid "Featuring ample whitespace, and modern sans-serif headlines paired with classic serif body text, Twenty Nineteen is built to be beautiful on the go. It uses system fonts to increase loading speed. No more long waits on slow networks!"
 msgstr "Disposant de larges espace et d’une police moderne avec empattement couplée à une police plus classique, respectivement pour les titres et le corps du texte, Twenty Nineteen a été conçu dès le départ pour être un vrai beau thème. Terminée l’attente sur les connexions lentes !"
 
-#: wp-admin/about.php:359
+#: wp-admin/about.php:395
 msgid "Simple, type-driven layout"
 msgstr "Une mise en page simple pour mieux mettre le texte en avant"
 
-#: wp-admin/about.php:352
+#: wp-admin/about.php:388
 msgid "Twenty Nineteen features custom styles for the blocks available by default in 5.0. It makes extensive use of editor styles throughout the theme. That way, what you create in your content editor is what you see on the front of your site."
 msgstr "Twenty Nineteen intègre des styles personnalisés pour les blocs disponibles par défaut dans WordPress 5.0. Ce thème fait une utilisation intensive des styles de l’éditeur. Ainsi, ce que vous créez dans votre éditeur correspond vraiment à la manière dont votre site s’affiche pour le monde entier."
 
-#: wp-admin/about.php:351
+#: wp-admin/about.php:387
 msgid "Designed for the block editor"
 msgstr "Conçu pour le nouvel éditeur"
 
-#: wp-admin/about.php:341
+#: wp-admin/about.php:377
 msgid "Introducing Twenty Nineteen, a new default theme that shows off the power of the new editor."
 msgstr "Introduction de Twenty Nineteen, un nouveau thème par défaut qui démontre le pouvoir du nouvel éditeur."
 
-#: wp-admin/about.php:335
+#: wp-admin/about.php:371
 msgid "The front-end of Twenty Nineteen on the left, and how it looks in the editor on the right."
 msgstr "Le rendu frontal de Twenty Nineteen à gauche, et ce à quoi il ressemble dans l’éditeur à droite."
 
-#: wp-admin/about.php:322
+#: wp-admin/about.php:358
 msgid "A Stunning New Default Theme"
 msgstr "Un superbe nouveau thème par défaut"
 
-#: wp-admin/about.php:312
+#: wp-admin/about.php:348
 msgid "Build your first post"
 msgstr "Construisez votre première publication"
 
-#: wp-admin/about.php:300
+#: wp-admin/about.php:336
 msgid "This new editing experience provides a more consistent treatment of design as well as content. If you&#8217;re building client sites, you can create reusable blocks. This lets your clients add new content anytime, while still maintaining a consistent look and feel."
 msgstr "Cette nouvelle manière de créer permet d’obtenir plus de cohérence dans traitement pour la mise en page comme pour le contenu. Si vous créez des sites pour vos clients, vous pouvez créer des blocs réutilisables. Cela leur permet d’ajouter du contenu à tout moment, sans risque de mettre à mal l’aspect visuel du site."
 
-#: wp-admin/about.php:299
+#: wp-admin/about.php:335
 msgid "Freedom to Build, Freedom to Write"
 msgstr "Liberté de construire, liberté d’écrire"
 
-#: wp-admin/about.php:146
+#: wp-admin/about.php:182
 msgid "We have tons of blocks available by default, and more get added by the community every day. Here are a few of the blocks to help you get started:"
 msgstr "Nous avons des tonnes de blocs disponibles par défaut, et d’autres sont ajoutés par la communauté chaque jour. Voici quelques blocs avec lesquels vous pourriez commencer :"
 
-#: wp-admin/about.php:144 wp-admin/about.php:304
+#: wp-admin/about.php:180 wp-admin/about.php:340
 msgid "Your browser doesn&#8217;t support HTML5 video. Here is a %1$slink to the video%2$s instead."
 msgstr "Votre navigateur ne semble pas reconnaître les vidéos HTML5. Voici un %1$slien vers la vidéo%2$s à la place."
 
-#: wp-admin/about.php:140
+#: wp-admin/about.php:176
 msgid "The new block-based editor won&#8217;t change the way any of your content looks to your visitors. What it will do is let you insert any type of multimedia in a snap and rearrange to your heart&#8217;s content. Each piece of content will be in its own block; a distinct wrapper for easy maneuvering. If you&#8217;re more of an HTML and CSS sort of person, then the blocks won&#8217;t stand in your way. WordPress is here to simplify the process, not the outcome."
 msgstr "Le nouvel éditeur, qui utilise des blocs, ne changera rien à la manière dont votre contenu est présenté à vos visiteurs. Il vous permettra par contre d’insérer rapidement n’importe quel type de média et de travailler la mise en page comme bon vous semble. Chaque parcelle de contenu se retrouvera dans son propre bloc, qui agit comme une entité séparée pouvant être facilement déplacée. Si vous préférer travailler directement votre code HTML et CSS, les blocs ne vous gêneront d’aucune manière. WordPress existe pour simplifier le processus d’écriture, pas sa mise en page."
 
-#: wp-admin/about.php:139
+#: wp-admin/about.php:175
 msgid "Building with Blocks"
 msgstr "Construit avec des blocs"
 
-#: wp-admin/about.php:132
+#: wp-admin/about.php:168
 msgid "Trust that your editor looks like your website."
 msgstr "La confiance que votre éditeur ressemble à votre site Web."
 
-#: wp-admin/about.php:123
+#: wp-admin/about.php:159
 msgid "Work across all screen sizes and devices."
 msgstr "Fonctionne sur toutes les tailles d’écrans et sur tous les appareils."
 
-#: wp-admin/about.php:114
+#: wp-admin/about.php:150
 msgid "Create modern, multimedia-heavy layouts."
 msgstr "Créez des mises en page modernes et multimédia."
 
-#: wp-admin/about.php:105
+#: wp-admin/about.php:141
 msgid "Do more with fewer plugins."
 msgstr "Faites davantage de choses avec moins d’extensions."
 
-#: wp-admin/about.php:94
+#: wp-admin/about.php:130
 msgid "You&#8217;ve successfully upgraded to WordPress 5.0! We’ve made some big changes to the editor. Our new block-based editor is the first step toward an exciting new future with a streamlined editing experience across your site. You’ll have more flexibility with how content is displayed, whether you are building your first site, revamping your blog, or write code for a living."
 msgstr "Félicitations, vous avez réussi votre mise à jour vers WordPress 5.0 ! Nous avons apporté des modifications notables à l'éditeur. Le nouvel éditeur, basé sur un système de blocs, est le premier pas dans la direction d’une expérience d’écriture fluide pour l’ensemble de votre site. Vous allez pouvoir afficher votre contenu avec une grande flexibilité, que vous soyez en train de créer votre premier site, de mettre à jour votre blog, ou que vous soyez développeur de métier."
 
-#: wp-admin/about.php:79
+#: wp-admin/about.php:115
 msgid "Say Hello to the New Editor"
 msgstr "Dites bonjour au nouvel éditeur"
 
@@ -308,7 +313,7 @@ msgstr[1] "%s blocs mis à jour."
 msgid "<strong>ERROR</strong>: \"Table Prefix\" must not be empty."
 msgstr "<strong>ERREUR</strong> : le « préfixe de table » ne doit pas être vide."
 
-#: wp-admin/edit-form-blocks.php:161
+#: wp-admin/edit-form-blocks.php:157
 msgid "Default template"
 msgstr "Modèle par défaut"
 
@@ -329,12 +334,16 @@ msgctxt "page title"
 msgid "About"
 msgstr "À propos"
 
+#: wp-admin/edit-form-blocks.php:413
+msgid "https://wordpress.org/plugins/classic-editor/"
+msgstr "https://fr.wordpress.org/plugins/classic-editor"
+
 #: wp-admin/includes/upgrade.php:303
 #: wp-admin/includes/class-wp-internal-pointers.php:167 wp-admin/privacy.php:63
 msgid "Privacy Policy"
 msgstr "Politique de confidentialité"
 
-#: wp-admin/about.php:443
+#: wp-admin/about.php:479
 msgid "Install the Classic Editor"
 msgstr "Installer l’éditeur classique"
 
@@ -1306,7 +1315,7 @@ msgstr "https://codex.wordpress.org/fr:Donner_%C3%A0_WordPress_son_Propre_Dossie
 msgid "Enter the address here if you <a href=\"%s\">want your site home page to be different from your WordPress installation directory</a>."
 msgstr "Saisir ici une adresse si vous <a href=\"%s\">souhaitez que la page d’accueil de votre site soit différente du répertoire de votre installation WordPress</a>."
 
-#: wp-admin/about.php:381
+#: wp-admin/about.php:417
 msgid "Developer Happiness"
 msgstr "Pour le bonheur des développeuses et des développeurs"
 
@@ -1387,7 +1396,7 @@ msgstr "Cet utilisateur ne peut pas être ajouté à ce site."
 
 #: wp-admin/user-edit.php:266
 msgid "Disable syntax highlighting when editing code"
-msgstr "Désactiver le surlignage syntaxique lors de l’édition de code."
+msgstr "Désactiver le surlignage syntaxique lors de l’édition de code"
 
 #: wp-admin/user-edit.php:264
 msgid "Syntax Highlighting"
@@ -2728,7 +2737,7 @@ msgid "Welcome to %s. This is your first post. Edit or delete it, then start blo
 msgstr "Bienvenue sur %s. Vous lisez votre premier article. Modifiez-le ou supprimez-le, puis commencez à publier !"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:572
+#: wp-admin/about.php:608
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "La <strong>version %s</strong> a corrigé un problème de sécurité."
 
@@ -2745,15 +2754,15 @@ msgstr "Vous pouvez changer votre image de profil en passant par <a href=\"%s\">
 msgid "Profile Picture"
 msgstr "Illustration du profil"
 
-#: wp-admin/about.php:64 wp-admin/about.php:569
+#: wp-admin/about.php:64 wp-admin/about.php:605
 msgid "Maintenance and Security Releases"
 msgstr "Mises à jour de maintenance et de sécurité"
 
-#: wp-admin/about.php:566
+#: wp-admin/about.php:602
 msgid "Security Releases"
 msgstr "Mises à jour de sécurité"
 
-#: wp-admin/about.php:563
+#: wp-admin/about.php:599
 msgid "Maintenance Releases"
 msgstr "Mises à jour de maintenance"
 
@@ -3623,7 +3632,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Dashboard_My_Sites_Screen\">Docume
 
 #: wp-admin/user-edit.php:293
 msgid "<a href=\"https://codex.wordpress.org/Keyboard_Shortcuts\" target=\"_blank\">More information</a>"
-msgstr "<a href=\"https://codex.wordpress.org/fr:Raccourcis_Clavier\" target=\"_blank\">Plus d’informations</a>."
+msgstr "<a href=\"https://codex.wordpress.org/fr:Raccourcis_Clavier\" target=\"_blank\">Plus d’informations</a>"
 
 #: wp-admin/edit-comments.php:186
 msgid "<a href=\"https://codex.wordpress.org/Comment_Spam\">Documentation on Comment Spam</a>"
@@ -5248,15 +5257,15 @@ msgstr "Pour naviguer entre les révisions, <strong>faites glisser le curseur ve
 msgid "Loading&hellip;"
 msgstr "Chargement&#8230;"
 
-#: wp-admin/post.php:261
+#: wp-admin/post.php:262
 msgid "This item has already been deleted."
 msgstr "Cet élément a déjà été supprimé."
 
-#: wp-admin/post.php:243
+#: wp-admin/post.php:244
 msgid "The item you are trying to restore from the Trash no longer exists."
 msgstr "L’élément que vous essayez de sortir de la corbeille n’existe plus."
 
-#: wp-admin/post.php:220
+#: wp-admin/post.php:221
 msgid "The item you are trying to move to the Trash no longer exists."
 msgstr "L’élément que vous essayez de placer dans la corbeille n’existe plus."
 
@@ -5493,7 +5502,7 @@ msgstr "La sauvegarde de cette publication dans votre navigateur est différente
 msgid "Draft created on %1$s at %2$s"
 msgstr "Brouillon créé le %1$s à %2$s"
 
-#: wp-admin/post.php:230
+#: wp-admin/post.php:231
 msgid "You cannot move this item to the Trash. %s is currently editing."
 msgstr "Vous ne pouvez pas déplacer cet élément dans la corbeille. %s est en train de le modifier."
 
@@ -6524,7 +6533,7 @@ msgid "Show Toolbar when viewing site"
 msgstr "Afficher la barre d’outils lorsque vous visitez le site"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:577
+#: wp-admin/about.php:69 wp-admin/about.php:87 wp-admin/about.php:613
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "La <strong>version %1$s</strong> a corrigé %2$s bug."
@@ -6532,20 +6541,21 @@ msgstr[1] "La <strong>version %1$s</strong> a corrigé %2$s bugs."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:585
+#: wp-admin/about.php:621
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "La <strong>version %1$s</strong> a corrigé quelques problèmes de sécurité et %2$s bug."
 msgstr[1] "La <strong>version %1$s</strong> a corrigé quelques problèmes de sécurité et %2$s bugs."
 
 #. translators: %s: Codex URL
-#: wp-admin/about.php:72 wp-admin/about.php:589
+#: wp-admin/about.php:80 wp-admin/about.php:98 wp-admin/about.php:108
+#: wp-admin/about.php:625
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Pour plus d’informations, consultez les <a href=\"%s\">notes de publication</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:581
+#: wp-admin/about.php:617
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "La <strong>version %1$s</strong> a corrigé un problème de sécurité et %2$s bug."
@@ -6556,15 +6566,15 @@ msgid "Welcome to your WordPress Dashboard! This is the screen you will see when
 msgstr "Vous voici dans votre tableau de bord WordPress ! Cet écran s’affiche à chaque connexion à votre site. Il vous donne accès à l’ensemble des fonctionnalités de gestion de WordPress. Vous pouvez obtenir de l’aide pour n’importe quel écran en cliquant sur l’onglet « Aide » présent en haut à droite de chaque écran."
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:68 wp-admin/about.php:574
+#: wp-admin/about.php:104 wp-admin/about.php:610
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "La <strong>version %s</strong> a corrigé quelques problèmes de sécurité."
 
-#: wp-admin/about.php:562
+#: wp-admin/about.php:598
 msgid "Maintenance Release"
 msgstr "Mise à jour de maintenance"
 
-#: wp-admin/about.php:565
+#: wp-admin/about.php:601
 msgid "Security Release"
 msgstr "Mise à jour de sécurité"
 
@@ -6572,7 +6582,7 @@ msgstr "Mise à jour de sécurité"
 msgid "What&#8217;s New"
 msgstr "Nouveautés"
 
-#: wp-admin/about.php:568
+#: wp-admin/about.php:604
 msgid "Maintenance and Security Release"
 msgstr "Mise à jour de maintenance et de sécurité"
 
@@ -6584,7 +6594,7 @@ msgstr "Cet écran vous permet de choisir la structure de permalien par défaut.
 msgid "Welcome to WordPress %1$s. <a href=\"%2$s\">Learn more</a>."
 msgstr "Bienvenu dans WordPress %1$s. <a href=\"%2$s\">En savoir plus</a>."
 
-#: wp-admin/about.php:455
+#: wp-admin/about.php:491
 msgid "Return to Updates"
 msgstr "Retourner aux mises à jour"
 
@@ -6856,11 +6866,11 @@ msgstr "Parce qu’il s’agit d’une installation multisite, vous pouvez ajout
 msgid "Welcome to WordPress %s"
 msgstr "Bienvenue sur WordPress %s"
 
-#: wp-admin/about.php:455
+#: wp-admin/about.php:491
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Retourner aux mises à jour"
 
-#: wp-admin/about.php:458
+#: wp-admin/about.php:494
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Aller sur l’accueil"
 
@@ -8417,12 +8427,12 @@ msgstr "Le mot de passe que vous avez choisi."
 msgid "Yes, take me to my profile page"
 msgstr "Oui, je veux aller sur mon profil maintenant"
 
-#: wp-admin/post.php:272 wp-admin/post.php:275 wp-admin/upload.php:164
+#: wp-admin/post.php:273 wp-admin/post.php:276 wp-admin/upload.php:164
 #: wp-admin/edit.php:144 wp-admin/edit.php:147
 msgid "Error in deleting."
 msgstr "Erreur pendant la suppression."
 
-#: wp-admin/post.php:226 wp-admin/upload.php:137 wp-admin/edit.php:106
+#: wp-admin/post.php:227 wp-admin/upload.php:137 wp-admin/edit.php:106
 msgid "Sorry, you are not allowed to move this item to the Trash."
 msgstr "Désolé, vous n’avez pas l’autorisation de déplacer cet élément dans la corbeille."
 
@@ -8440,15 +8450,15 @@ msgid_plural "%s comments restored from the Trash"
 msgstr[0] "%s commentaire récupéré depuis la corbeille"
 msgstr[1] "%s commentaires récupérés depuis la corbeille"
 
-#: wp-admin/post.php:234 wp-admin/upload.php:140 wp-admin/edit.php:114
+#: wp-admin/post.php:235 wp-admin/upload.php:140 wp-admin/edit.php:114
 msgid "Error in moving to Trash."
 msgstr "Erreur lors du déplacement dans la corbeille."
 
-#: wp-admin/post.php:249 wp-admin/upload.php:149 wp-admin/edit.php:125
+#: wp-admin/post.php:250 wp-admin/upload.php:149 wp-admin/edit.php:125
 msgid "Sorry, you are not allowed to restore this item from the Trash."
 msgstr "Désolé, vous n’avez pas l’autorisation de récupérer cet élément depuis la corbeille."
 
-#: wp-admin/post.php:252 wp-admin/upload.php:152 wp-admin/edit.php:128
+#: wp-admin/post.php:253 wp-admin/upload.php:152 wp-admin/edit.php:128
 msgid "Error in restoring from Trash."
 msgstr "Erreur pendant la récupération depuis la corbeille."
 
@@ -8659,7 +8669,7 @@ msgstr "Afficher tout"
 msgid "Please enter a valid menu name."
 msgstr "Veuillez saisir un nom de menu valide."
 
-#: wp-admin/about.php:458
+#: wp-admin/about.php:494
 msgid "Go to Dashboard"
 msgstr "Aller sur le tableau de bord"
 
@@ -9654,7 +9664,7 @@ msgstr "Aucun utilisateur trouvé."
 msgid "Update Themes"
 msgstr "Mettre à jour les thèmes"
 
-#: wp-admin/about.php:292
+#: wp-admin/about.php:328
 msgid "More"
 msgstr "Plus"
 
@@ -11459,7 +11469,7 @@ msgid_plural "%s posts updated."
 msgstr[0] "%s publication mise à jour."
 msgstr[1] "%s publications mises à jour."
 
-#: wp-admin/edit-tags.php:100 wp-admin/post.php:267 wp-admin/themes.php:43
+#: wp-admin/edit-tags.php:100 wp-admin/post.php:268 wp-admin/themes.php:43
 #: wp-admin/upload.php:161 wp-admin/edit.php:140
 msgid "Sorry, you are not allowed to delete this item."
 msgstr "Désolé, vous n’avez pas l’autorisation de supprimer cet élément."

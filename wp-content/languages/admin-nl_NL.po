@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 5.0.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-12-15 07:38:07+0000\n"
+"PO-Revision-Date: 2019-01-18 14:03:38+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,11 @@ msgstr "1"
 msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "Europa/Amsterdam"
+
+#. translators: %s: https://wordpress.org/plugins/classic-editor
+#: wp-admin/edit-form-blocks.php:412
+msgid "The block editor requires JavaScript. Please enable JavaScript in your browser settings, or try the <a href=\"%s\">Classic Editor plugin</a>."
+msgstr "De blok-editor vereist JavaScript. Activeer JavaScript in je browser instellingen of probeer de <a href=\"%s\">Klassieke Editor-plugin</a>."
 
 #: wp-admin/post.php:44
 msgid "A post type mismatch has been detected."
@@ -92,136 +97,136 @@ msgid "The Gutenberg plugin has been deactivated, as the features are now includ
 msgstr "De Gutenberg plugin is gedeactiveerd, omdat de functionaliteiten nu standaard in WordPress %1$s zitten. Mocht je verder willen testen met de aankomende veranderingen in de WordPress bewerk belevenis, %2$sactiveer de Gutenberg plugin opnieuw%3$s."
 
 #. Translators: Use this to specify the CSS font family for the default font
-#: wp-admin/edit-form-blocks.php:182
+#: wp-admin/edit-form-blocks.php:178
 msgctxt "CSS Font Family for Editor Font"
 msgid "Noto Serif"
 msgstr "Noto Serif"
 
-#: wp-admin/about.php:440
+#: wp-admin/about.php:476
 msgid "Note to users of assistive technology: if you experience usability issues with the block editor, we recommend you continue to use the Classic Editor."
 msgstr "Opmerking voor gebruikers van computerhulpmiddelen: als je problemen met de bruikbaarheid ervaart met de Blok-editor, raden we je aan gebruik te maken van de Klassieke editor."
 
-#: wp-admin/about.php:439
+#: wp-admin/about.php:475
 msgid "The Classic Editor plugin restores the previous WordPress editor and the Edit Post screen. It lets you keep using plugins that extend it, add old-style meta boxes, or otherwise depend on the previous editor. To install, visit your plugins page and click the &#8220;Install Now&#8221; button next to &#8220;Classic Editor&#8221;. After the plugin finishes installing, click &#8220;Activate&#8221;. That’s it!"
 msgstr "De Klassieke editor plugin herstelt de vorige WordPress editor en het \"bericht bewerken\" scherm. Hiermee kan je plugins blijven gebruiken die de klassieke editor uitbreiden, klassieke metaboxes toevoegen of op een andere manier afhankelijk zijn van de vorige editor. Bezoek de plugins pagina en klik de “Nu installeren” knop naast \"Klassieke editor\" om de plugin te installeren. Wanneer de plugin klaar is met installeren, klik op “Activeren”. Dat is alles!"
 
-#: wp-admin/about.php:414
+#: wp-admin/about.php:450
 msgid "Learn how to get started"
 msgstr "Leren hoe je moet starten"
 
-#: wp-admin/about.php:408
+#: wp-admin/about.php:444
 msgid "The new block paradigm opens up a path of exploration and imagination when it comes to solving user needs. With the unified block insertion flow, it&#8217;s easier for your clients and customers to find and use blocks for all types of content. Developers can focus on executing their vision and providing rich editing experiences, rather than fussing with difficult APIs."
 msgstr "Het nieuwe blokkenparadigma opent diverse mogelijkheden en verbeelding of  hoe gebruikerswensen opgelost kunnen worden. Met eenduidige flow voor het toevoegen van een blok is eenvoudiger voor gebruikers om blokken te vinden voor alle soorten content. Ontwikkelaars kunnen zich richten op hun visie om verrijkte ervaringen te bieden, in plaats van werken met ingewikkelde API's."
 
-#: wp-admin/about.php:423
+#: wp-admin/about.php:459
 msgid "Keep it Classic"
 msgstr "Liever Klassiek?"
 
-#: wp-admin/about.php:438
+#: wp-admin/about.php:474
 msgid "Prefer to stick with the familiar Classic Editor? No problem! Support for the Classic Editor plugin will remain in WordPress through 2021."
 msgstr "Blijf je liever met de vertrouwde Klassieke editor werken? Dat is geen probleem! Ondersteuning voor de Klassieke editor plugin blijft aanwezig in WordPress tot en met 2021."
 
-#: wp-admin/about.php:400
+#: wp-admin/about.php:436
 msgid "Take advantage of a wide collection of APIs and interface components to easily create blocks with intuitive controls for your clients. Utilizing these components not only speeds up development work but also provide a more consistent, usable, and accessible interface to all users."
 msgstr "Profiteer van een grote verzameling aan API's en interface-componenten om eenvoudig blokken met een intuïtieve besturing voor je klanten te maken. Gebruik maken van deze componenten versnelt niet alleen het ontwikkelingswerk, maar biedt ook een consistentere, bruikbare en toegankelijke interface voor alle gebruikers."
 
-#: wp-admin/about.php:399
+#: wp-admin/about.php:435
 msgid "Compose"
 msgstr "Opstellen"
 
-#: wp-admin/about.php:392
+#: wp-admin/about.php:428
 msgid "Blocks provide a comfortable way for users to change content directly, while also ensuring the content structure cannot be easily disturbed by accidental code edits. This allows the developer to control the output, building polished and semantic markup that is preserved through edits and not easily broken."
 msgstr "Blokken bieden een fijne manier voor gebruikers om content direct te wijzigen en ze voorkomen dat de structuur van de content niet eenvoudig kan worden gestoord door onopzettelijke codebewerkingen. Dit staat de ontwikkelaar toe om controle te hebben op de output door gepolijste en semantische markup te leveren die bewaard blijft tijdens het bewerken. "
 
-#: wp-admin/about.php:391
+#: wp-admin/about.php:427
 msgid "Protect"
 msgstr "Beschermen"
 
-#: wp-admin/about.php:372
+#: wp-admin/about.php:408
 msgid "Give Twenty Nineteen a try"
 msgstr "Twenty Nineteen proberen"
 
-#: wp-admin/about.php:365
+#: wp-admin/about.php:401
 msgid "Twenty Nineteen is designed to work for a wide variety of use cases. Whether you’re running a photo blog, launching a new business, or supporting a non-profit, Twenty Nineteen is flexible enough to fit your needs."
 msgstr "Twenty Nineteen is ontworpen om te werken voor een breed scala aan toepassingen. Of je nu een foto-blog hebt, een nieuw bedrijf start of een non-profitorganisatie, Twenty Nineteen is flexibel genoeg om aan al je wensen te voldoen. "
 
-#: wp-admin/about.php:364
+#: wp-admin/about.php:400
 msgid "Versatile design for all sites"
 msgstr "Veelzijdig ontwerp voor alle sites"
 
-#: wp-admin/about.php:360
+#: wp-admin/about.php:396
 msgid "Featuring ample whitespace, and modern sans-serif headlines paired with classic serif body text, Twenty Nineteen is built to be beautiful on the go. It uses system fonts to increase loading speed. No more long waits on slow networks!"
 msgstr "Twenty Nineteen bevat veel witruimte en moderne schreefloze koppen, gecombineerd met klassieke serif-tekst. Het thema gebruikt systeemlettertypes om de laadsnelheid te verhogen. Niet meer lang wachten op trage netwerken!"
 
-#: wp-admin/about.php:352
+#: wp-admin/about.php:388
 msgid "Twenty Nineteen features custom styles for the blocks available by default in 5.0. It makes extensive use of editor styles throughout the theme. That way, what you create in your content editor is what you see on the front of your site."
 msgstr "Twenty Nineteen bevat aangepaste styling voor de blokken die standaard beschikbaar zijn in 5.0. Het thema maakt uitgebreid gebruik van editor-styles. Op die manier is wat je in de editor aan het maken bent een reflectie van hoe het op de site zelf er uit ziet."
 
-#: wp-admin/about.php:359
+#: wp-admin/about.php:395
 msgid "Simple, type-driven layout"
 msgstr "Eenvoudige, tekst gedreven lay-out"
 
-#: wp-admin/about.php:341
+#: wp-admin/about.php:377
 msgid "Introducing Twenty Nineteen, a new default theme that shows off the power of the new editor."
 msgstr "De introductie van Twenty Nineteen, het nieuwe standaard thema welke de kracht van de nieuwe editor laat zien."
 
-#: wp-admin/about.php:351
+#: wp-admin/about.php:387
 msgid "Designed for the block editor"
 msgstr "Ontworpen voor de Blok-editor"
 
-#: wp-admin/about.php:322
+#: wp-admin/about.php:358
 msgid "A Stunning New Default Theme"
 msgstr "Een verbluffend nieuw standaard thema"
 
-#: wp-admin/about.php:335
+#: wp-admin/about.php:371
 msgid "The front-end of Twenty Nineteen on the left, and how it looks in the editor on the right."
 msgstr "De front-end van Twenty Nineteen aan de linkerkant en hoe het er uit ziet in de editor aan de rechterkant."
 
-#: wp-admin/about.php:300
+#: wp-admin/about.php:336
 msgid "This new editing experience provides a more consistent treatment of design as well as content. If you&#8217;re building client sites, you can create reusable blocks. This lets your clients add new content anytime, while still maintaining a consistent look and feel."
 msgstr "Deze nieuwe editor ervaring behandelt design en content op meer consistente manier. Wanneer je klantensites maakt kun je herbruikbare blokken maken. Hiermee kunnen je klanten steeds nieuwe content blijven toevoegen en blijft de uitstraling precies zoals je die bedoeld had."
 
-#: wp-admin/about.php:312
+#: wp-admin/about.php:348
 msgid "Build your first post"
-msgstr "Je eerst bericht samenstellen"
+msgstr "Je eerste bericht samenstellen"
 
-#: wp-admin/about.php:299
+#: wp-admin/about.php:335
 msgid "Freedom to Build, Freedom to Write"
 msgstr "Vrijheid om te bouwen, vrijheid om te schrijven"
 
-#: wp-admin/about.php:146
+#: wp-admin/about.php:182
 msgid "We have tons of blocks available by default, and more get added by the community every day. Here are a few of the blocks to help you get started:"
 msgstr "We hebben standaard al heel veel blokken beschikbaar, en elke dag worden er meer toegevoegd door de community. Hier zijn enkele blokken om je alvast op weg te helpen:"
 
-#: wp-admin/about.php:144 wp-admin/about.php:304
+#: wp-admin/about.php:180 wp-admin/about.php:340
 msgid "Your browser doesn&#8217;t support HTML5 video. Here is a %1$slink to the video%2$s instead."
 msgstr "Je browser biedt geen ondersteuning voor HTML5 video. In plaats daarvan is hier een %1$slink naar de video%2$s."
 
-#: wp-admin/about.php:140
+#: wp-admin/about.php:176
 msgid "The new block-based editor won&#8217;t change the way any of your content looks to your visitors. What it will do is let you insert any type of multimedia in a snap and rearrange to your heart&#8217;s content. Each piece of content will be in its own block; a distinct wrapper for easy maneuvering. If you&#8217;re more of an HTML and CSS sort of person, then the blocks won&#8217;t stand in your way. WordPress is here to simplify the process, not the outcome."
 msgstr "De nieuwe, op blokken gebaseerde editor, verandert niets aan de manier hoe je content er uit ziet voor bezoekers. Wat het wel doet, is het jou mogelijk maken elke multimedia soort super eenvoudig toe te voegen precies zoals jij dat voor ogen hebt. Elke stukje content is een afgebakend blok welke je eenvoudig kunt verplaatsen. Mocht je liever met HTML en CSS willen werken, dan staan de blokken je niet in de weg. WordPress is hier om het proces eenvoudiger te maken, niet het resultaat."
 
-#: wp-admin/about.php:139
+#: wp-admin/about.php:175
 msgid "Building with Blocks"
 msgstr "Bouwen met blokken"
 
-#: wp-admin/about.php:105
+#: wp-admin/about.php:141
 msgid "Do more with fewer plugins."
 msgstr "Doe meer met minder plugins."
 
-#: wp-admin/about.php:114
+#: wp-admin/about.php:150
 msgid "Create modern, multimedia-heavy layouts."
 msgstr "Creëer moderne, multimedia rijke lay-outs."
 
-#: wp-admin/about.php:132
+#: wp-admin/about.php:168
 msgid "Trust that your editor looks like your website."
 msgstr "Vertrouw dat de editor lijkt op je site."
 
-#: wp-admin/about.php:94
+#: wp-admin/about.php:130
 msgid "You&#8217;ve successfully upgraded to WordPress 5.0! We’ve made some big changes to the editor. Our new block-based editor is the first step toward an exciting new future with a streamlined editing experience across your site. You’ll have more flexibility with how content is displayed, whether you are building your first site, revamping your blog, or write code for a living."
 msgstr "Je hebt WordPress succesvol bijgewerkt naar 5.0! We hebben een aantal grote veranderingen gemaakt in de editor. Onze nieuwe, op blokken gebaseerde editor, is de eerste stap richting een nieuwe toekomst met een gestroomlijnde editor ervaring op je site. Je hebt meer flexibiliteit over de manier hoe inhoud weergeven wordt. Of je nou je eerste site aan het maken bent, je blog nieuw leven inblaast of code schrijft als baan."
 
-#: wp-admin/about.php:123
+#: wp-admin/about.php:159
 msgid "Work across all screen sizes and devices."
 msgstr "Werkt op alle schermformaten en apparaten."
 
@@ -230,17 +235,17 @@ msgstr "Werkt op alle schermformaten en apparaten."
 msgid "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
 msgstr "Welkom bij WordPress. Dit is je eerste bericht. Bewerk of verwijder het, start dan met schrijven!"
 
-#: wp-admin/credits.php:23 wp-admin/freedoms.php:25 wp-admin/about.php:26
-msgid "Thank you for updating to the latest version! WordPress %s introduces a robust new content creation experience."
-msgstr "Bedankt voor het bijwerken naar de nieuwste versie! WordPress %s introduceert een krachtige nieuwe editor voor de creatie van inhoud. "
-
-#: wp-admin/about.php:79
+#: wp-admin/about.php:115
 msgid "Say Hello to the New Editor"
 msgstr "Maak kennis met de nieuwe editor"
 
 #: wp-admin/about.php:50
 msgid "Learn how to keep using the old editor."
 msgstr "Ontdek hoe je de oude editor kunt blijven gebruiken."
+
+#: wp-admin/credits.php:23 wp-admin/freedoms.php:25 wp-admin/about.php:26
+msgid "Thank you for updating to the latest version! WordPress %s introduces a robust new content creation experience."
+msgstr "Bedankt voor het bijwerken naar de nieuwste versie! WordPress %s introduceert een krachtige nieuwe ervaring voor het maken van inhoud. "
 
 #. translators: first page content, %s: site admin URL
 #: wp-admin/includes/upgrade.php:253
@@ -266,10 +271,6 @@ msgstr "Hoi daar! Ik ben een fietskoerier in het dagelijks leven en een beginnen
 #: wp-admin/includes/upgrade.php:232
 msgid "This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:"
 msgstr "Dit is een voorbeeldpagina. Het is anders dan een blog bericht omdat het op één plek blijft en tevoorschijn komt in je site navigatie (in de meeste thema's). De meeste mensen starten met een Over pagina dat hen voorstelt aan potentiële site bezoekers. Het zou iets als dit kunnen zeggen:"
-
-#: wp-admin/includes/post.php:2233
-msgid "This action is still supported in the classic editor, but is deprecated in the block editor."
-msgstr "Deze actie wordt nog steeds ondersteund in de Klassieke editor, maar is vervallen in de Blok-editor."
 
 #: wp-admin/includes/class-wp-posts-list-table.php:1309
 msgid "Export as JSON"
@@ -312,7 +313,7 @@ msgstr[1] "%s blokken bijgewerkt."
 msgid "<strong>ERROR</strong>: \"Table Prefix\" must not be empty."
 msgstr "<strong>FOUT</strong>: \"Table Prefix\" mag niet leeg zijn."
 
-#: wp-admin/edit-form-blocks.php:161
+#: wp-admin/edit-form-blocks.php:157
 msgid "Default template"
 msgstr "Standaard template"
 
@@ -333,12 +334,16 @@ msgctxt "page title"
 msgid "About"
 msgstr "Over"
 
+#: wp-admin/edit-form-blocks.php:413
+msgid "https://wordpress.org/plugins/classic-editor/"
+msgstr "https://nl.wordpress.org/plugins/classic-editor/"
+
 #: wp-admin/includes/upgrade.php:303
 #: wp-admin/includes/class-wp-internal-pointers.php:167 wp-admin/privacy.php:63
 msgid "Privacy Policy"
 msgstr "Privacybeleid"
 
-#: wp-admin/about.php:443
+#: wp-admin/about.php:479
 msgid "Install the Classic Editor"
 msgstr "De Klassieke editor installeren"
 
@@ -1313,7 +1318,7 @@ msgstr "https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory"
 msgid "Enter the address here if you <a href=\"%s\">want your site home page to be different from your WordPress installation directory</a>."
 msgstr "Vul hier het adres in als je <a href=\"%s\">je site's homepage een andere wilt laten zijn dan de WordPress installatie map</a>."
 
-#: wp-admin/about.php:381
+#: wp-admin/about.php:417
 msgid "Developer Happiness"
 msgstr "Hier worden ontwikkelaars blij van"
 
@@ -2730,7 +2735,7 @@ msgid "(Currently set to: %s)"
 msgstr "(Nu ingesteld op: %s)"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:572
+#: wp-admin/about.php:608
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>Versie %s</strong> heeft een beveiligingsprobleem opgelost."
 
@@ -2752,15 +2757,15 @@ msgstr "Je kunt je profielfoto wijzigen op <a href=\"%s\">Gravatar</a>."
 msgid "Profile Picture"
 msgstr "Profielfoto"
 
-#: wp-admin/about.php:563
+#: wp-admin/about.php:599
 msgid "Maintenance Releases"
 msgstr "Onderhoudsreleases"
 
-#: wp-admin/about.php:566
+#: wp-admin/about.php:602
 msgid "Security Releases"
 msgstr "Beveiligingsreleases"
 
-#: wp-admin/about.php:64 wp-admin/about.php:569
+#: wp-admin/about.php:64 wp-admin/about.php:605
 msgid "Maintenance and Security Releases"
 msgstr "Onderhoud en beveiligingsreleases"
 
@@ -3789,7 +3794,7 @@ msgstr "Hoofdmenu"
 
 #: wp-admin/includes/file.php:1754
 msgid "Enter the location on the server where the public and private keys are located. If a passphrase is needed, enter that in the password field above."
-msgstr "Vul de locatie in waar de publieke en priv&#233;sleutels staan op de server. Als een wachtwoord nodig is, vul deze dan in het bovenstaande veld in."
+msgstr "Vul de locatie in waar de publieke en privésleutels staan op de server. Als een wachtwoord nodig is, vul deze dan in het bovenstaande veld in."
 
 #: wp-admin/users.php:269
 msgid "What should be done with content owned by these users?"
@@ -5250,15 +5255,15 @@ msgstr "Om te navigeren tussen revisies, <strong>sleep je de slider naar links o
 msgid "Loading&hellip;"
 msgstr "Laden&hellip;"
 
-#: wp-admin/post.php:261
+#: wp-admin/post.php:262
 msgid "This item has already been deleted."
 msgstr "Het object is reeds verwijderd."
 
-#: wp-admin/post.php:243
+#: wp-admin/post.php:244
 msgid "The item you are trying to restore from the Trash no longer exists."
 msgstr "Het object dat je probeert te herstellen van de prullenbak bestaat niet meer."
 
-#: wp-admin/post.php:220
+#: wp-admin/post.php:221
 msgid "The item you are trying to move to the Trash no longer exists."
 msgstr "Het object wat je probeert te verplaatsen naar de prullenbak bestaat niet meer."
 
@@ -5499,7 +5504,7 @@ msgstr "Concept gecre&#235;erd op %1$s om %2$s"
 msgid "%s has taken over and is currently editing."
 msgstr "%s is het bericht nu aan het bewerken."
 
-#: wp-admin/post.php:230
+#: wp-admin/post.php:231
 msgid "You cannot move this item to the Trash. %s is currently editing."
 msgstr "Je kunt dit item niet verplaatsen naar de prullenbak. %s is hem nu aan het bewerken."
 
@@ -6529,27 +6534,28 @@ msgstr "Toolbar tonen tijdens bekijken van de site"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:581
+#: wp-admin/about.php:617
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>Versie %1$s</strong> was gericht op een beveiligingsprobleem en een bepaalde %2$s bug."
 msgstr[1] "<strong>Versie %1$s</strong> was gericht op een beveiligingsprobleem en bepaalde %2$s bugs."
 
 #. translators: %s: Codex URL
-#: wp-admin/about.php:72 wp-admin/about.php:589
+#: wp-admin/about.php:80 wp-admin/about.php:98 wp-admin/about.php:108
+#: wp-admin/about.php:625
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Voor meer informatie, bezoek de  <a href=\"%s\">versie opmerkingen</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:585
+#: wp-admin/about.php:621
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>Versie%1$s</strong> was gericht op enkele beveiligingsproblemen en herstelde %2$s bug."
 msgstr[1] "<strong>Versie %1$s</strong> was gericht op enkele beveiligingsproblemen en herstelde %2$s bugs."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:577
+#: wp-admin/about.php:69 wp-admin/about.php:87 wp-admin/about.php:613
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>Versie %1$s</strong> bevat %2$s bugfix."
@@ -6559,7 +6565,7 @@ msgstr[1] "<strong>Versie %1$s</strong> bevat %2$s bugfixes."
 msgid "Welcome to your WordPress Dashboard! This is the screen you will see when you log in to your site, and gives you access to all the site management features of WordPress. You can get help for any screen by clicking the Help tab above the screen title."
 msgstr "Welkom bij je WordPress Dashboard. Dit is het scherm dat je krijgt te zien zodra je inlogt op je website. Het geeft je toegang tot alle beheerfuncties van WordPress. Wanneer je klikt op de Hulp tab rechtsboven de schermtitel, krijg je meer informatie te zien over de functionaliteiten en werking van het betreffende onderdeel. "
 
-#: wp-admin/about.php:568
+#: wp-admin/about.php:604
 msgid "Maintenance and Security Release"
 msgstr "Onderhouds- en veiligheidsversie"
 
@@ -6567,16 +6573,16 @@ msgstr "Onderhouds- en veiligheidsversie"
 msgid "What&#8217;s New"
 msgstr "Wat is nieuw"
 
-#: wp-admin/about.php:565
+#: wp-admin/about.php:601
 msgid "Security Release"
 msgstr "Beveiligingsversie"
 
-#: wp-admin/about.php:562
+#: wp-admin/about.php:598
 msgid "Maintenance Release"
 msgstr "Onderhoudsversie"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:68 wp-admin/about.php:574
+#: wp-admin/about.php:104 wp-admin/about.php:610
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>Versie %s</strong> lost enkele beveiligingsproblemen op."
 
@@ -6584,7 +6590,7 @@ msgstr "<strong>Versie %s</strong> lost enkele beveiligingsproblemen op."
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
 msgstr "Dit scherm stelt je in staat om je permalinkstructuur te kiezen. Je kunt uit de diverse mogelijkheden kiezen of een eigen structuur gebruiken."
 
-#: wp-admin/about.php:455
+#: wp-admin/about.php:491
 msgid "Return to Updates"
 msgstr "Terug naar WordPress bijwerken"
 
@@ -6784,13 +6790,13 @@ msgstr "Veel mensen maken gebruik van de sneltoetsen om de reacties sneller te m
 msgid "You can also perform the same types of actions, including narrowing the list by using the filters, acting on a page using the action links that appear when you hover over a row, or using the Bulk Actions menu to edit the metadata for multiple pages at once."
 msgstr "Je kunt ook hetzelfde soort acties uitvoeren, inclusief het verkleinen van de lijst met behulp van de filters, die op een pagina met de actielinks  worden weergegeven. Je kunt dit doen d.m.v. het hoveren over een rij, of met behulp van het Actiesmenu om de metadata van meerdere pagina&#39;s tegelijk te bewerken."
 
-#: wp-admin/upload.php:201
-msgid "Hovering over a row reveals action links: Edit, Delete Permanently, and View. Clicking Edit or on the media file&#8217;s name displays a simple screen to edit that individual file&#8217;s metadata. Clicking Delete Permanently will delete the file from the media library (as well as from any posts to which it is currently attached). View will take you to the display page for that file."
-msgstr "Hoveren over een rij toont actielinks: Bewerken, Permanent verwijderen en Bekijken. Klikken op Bewerken of klikken op de mediabestandsnaam toont een eenvoudig scherm om de individuele bestandsmetadata te bewerken. Klikken op Definitief verwijderen zal het bestand uit de mediabibliotheek verwijderen (en ook van elk bericht/pagina waar het aan is toegevoegd). Bekijken brengt je naar de schermpagina van het bestand."
-
 #: wp-admin/index.php:46
 msgid "Links in the Toolbar at the top of the screen connect your dashboard and the front end of your site, and provide access to your profile and helpful WordPress information."
 msgstr "De links in de toolbar aan de bovenkant van het scherm verbinden je Dashboard en de voorkant van je site en geven je toegang tot je profiel en handige WordPress informatie."
+
+#: wp-admin/upload.php:201
+msgid "Hovering over a row reveals action links: Edit, Delete Permanently, and View. Clicking Edit or on the media file&#8217;s name displays a simple screen to edit that individual file&#8217;s metadata. Clicking Delete Permanently will delete the file from the media library (as well as from any posts to which it is currently attached). View will take you to the display page for that file."
+msgstr "Hoveren over een rij toont actielinks: Bewerken, Permanent verwijderen en Bekijken. Klikken op Bewerken of klikken op de mediabestandsnaam toont een eenvoudig scherm om de individuele bestandsmetadata te bewerken. Klikken op Definitief verwijderen zal het bestand uit de mediabibliotheek verwijderen (en ook van elk bericht/pagina waar het aan is toegevoegd). Bekijken brengt je naar de schermpagina van het bestand."
 
 #: wp-admin/edit-form-advanced.php:262 wp-admin/edit.php:242
 msgid "Pages are similar to posts in that they have a title, body text, and associated metadata, but they are different in that they are not part of the chronological blog stream, kind of like permanent posts. Pages are not categorized or tagged, but can have a hierarchy. You can nest pages under other pages by making one the &#8220;Parent&#8221; of the other, creating a group of pages."
@@ -6860,11 +6866,11 @@ msgstr "Omdat dit een multisite installatie is, kun je accounts toevoegen die al
 msgid "Welcome to WordPress %s"
 msgstr "Welkom bij WordPress %s"
 
-#: wp-admin/about.php:458
+#: wp-admin/about.php:494
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Ga naar Dashboard &rarr; Home"
 
-#: wp-admin/about.php:455
+#: wp-admin/about.php:491
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Terugkeren naar het Dashboard &rarr; WordPress bijwerken"
 
@@ -7109,6 +7115,26 @@ msgid "Add New"
 msgstr "Nieuwe toevoegen"
 
 #. translators: %s: plugin name
+#: wp-admin/includes/class-wp-links-list-table.php:82
+#: wp-admin/includes/class-wp-links-list-table.php:318
+#: wp-admin/includes/class-wp-themes-list-table.php:192
+#: wp-admin/includes/theme.php:694
+#: wp-admin/includes/class-wp-plugins-list-table.php:466
+#: wp-admin/includes/class-wp-plugins-list-table.php:610
+#: wp-admin/includes/class-wp-plugins-list-table.php:635
+#: wp-admin/includes/meta-boxes.php:963
+#: wp-admin/includes/class-wp-terms-list-table.php:153
+#: wp-admin/includes/class-wp-terms-list-table.php:452
+#: wp-admin/includes/class-wp-users-list-table.php:237
+#: wp-admin/includes/class-wp-users-list-table.php:416
+#: wp-admin/includes/media.php:1506 wp-admin/includes/widgets.php:259
+#: wp-admin/includes/template.php:577 wp-admin/themes.php:351
+#: wp-admin/themes.php:499 wp-admin/widgets.php:320
+#: wp-admin/edit-tag-form.php:264
+msgid "Delete"
+msgstr "Verwijderen"
+
+#. translators: %s: plugin name
 #: wp-admin/includes/theme.php:699
 #: wp-admin/includes/class-wp-theme-install-list-table.php:408
 #: wp-admin/includes/deprecated.php:1381 wp-admin/theme-install.php:290
@@ -7160,26 +7186,6 @@ msgstr[1] "Updates beschikbaar <span class=\"count\">(%s)</span>"
 #: wp-admin/plugins.php:316 wp-admin/plugins.php:322
 msgid "Caution:"
 msgstr "Waarschuwing:"
-
-#. translators: %s: plugin name
-#: wp-admin/includes/class-wp-links-list-table.php:82
-#: wp-admin/includes/class-wp-links-list-table.php:318
-#: wp-admin/includes/class-wp-themes-list-table.php:192
-#: wp-admin/includes/theme.php:694
-#: wp-admin/includes/class-wp-plugins-list-table.php:466
-#: wp-admin/includes/class-wp-plugins-list-table.php:610
-#: wp-admin/includes/class-wp-plugins-list-table.php:635
-#: wp-admin/includes/meta-boxes.php:963
-#: wp-admin/includes/class-wp-terms-list-table.php:153
-#: wp-admin/includes/class-wp-terms-list-table.php:452
-#: wp-admin/includes/class-wp-users-list-table.php:237
-#: wp-admin/includes/class-wp-users-list-table.php:416
-#: wp-admin/includes/media.php:1506 wp-admin/includes/widgets.php:259
-#: wp-admin/includes/template.php:577 wp-admin/themes.php:351
-#: wp-admin/themes.php:499 wp-admin/widgets.php:320
-#: wp-admin/edit-tag-form.php:264
-msgid "Delete"
-msgstr "Verwijderen"
 
 #: wp-admin/includes/ms.php:855 wp-admin/users.php:295
 msgid "Confirm Deletion"
@@ -8422,16 +8428,16 @@ msgstr "Ja, breng mij naar mijn profielpagina"
 msgid "Your chosen password."
 msgstr "Je gekozen wachtwoord."
 
-#: wp-admin/post.php:272 wp-admin/post.php:275 wp-admin/upload.php:164
+#: wp-admin/post.php:273 wp-admin/post.php:276 wp-admin/upload.php:164
 #: wp-admin/edit.php:144 wp-admin/edit.php:147
 msgid "Error in deleting."
 msgstr "Fout tijdens het verwijderen."
 
-#: wp-admin/post.php:252 wp-admin/upload.php:152 wp-admin/edit.php:128
+#: wp-admin/post.php:253 wp-admin/upload.php:152 wp-admin/edit.php:128
 msgid "Error in restoring from Trash."
 msgstr "Fout tijdens herstellen vanuit de prullenbak."
 
-#: wp-admin/post.php:234 wp-admin/upload.php:140 wp-admin/edit.php:114
+#: wp-admin/post.php:235 wp-admin/upload.php:140 wp-admin/edit.php:114
 msgid "Error in moving to Trash."
 msgstr "Fout tijdens verplaatsen naar de prullenbak."
 
@@ -8449,11 +8455,11 @@ msgid_plural "%s comments moved to the Trash."
 msgstr[0] "%s reactie verplaatst naar de prullenbak."
 msgstr[1] "%s reacties verplaatst naar de prullenbak."
 
-#: wp-admin/post.php:249 wp-admin/upload.php:149 wp-admin/edit.php:125
+#: wp-admin/post.php:250 wp-admin/upload.php:149 wp-admin/edit.php:125
 msgid "Sorry, you are not allowed to restore this item from the Trash."
 msgstr "Je hebt geen toestemming om dit item te herstellen uit de prullenbak."
 
-#: wp-admin/post.php:226 wp-admin/upload.php:137 wp-admin/edit.php:106
+#: wp-admin/post.php:227 wp-admin/upload.php:137 wp-admin/edit.php:106
 msgid "Sorry, you are not allowed to move this item to the Trash."
 msgstr "Je hebt geen toestemming om dit item naar de prullenbak te verplaatsen."
 
@@ -8646,7 +8652,7 @@ msgstr "Menu-item bewerken"
 msgid "Are you sure you wish to delete these files and data?"
 msgstr "Weet je zeker dat je deze bestanden en data wilt verwijderen?"
 
-#: wp-admin/about.php:458
+#: wp-admin/about.php:494
 msgid "Go to Dashboard"
 msgstr "Naar het dashboard"
 
@@ -9511,7 +9517,7 @@ msgstr "Database bijwerken&#8230;"
 msgid "User(s) already exists."
 msgstr "Gebruiker(s) bestaan al."
 
-#: wp-admin/about.php:292
+#: wp-admin/about.php:328
 msgid "More"
 msgstr "Meer"
 
@@ -9806,13 +9812,13 @@ msgstr "Schrijvers van reacties moeten naam en e-mailadres opgeven"
 msgid "Admin Color Scheme"
 msgstr "Kleurenschema beheren"
 
-#: wp-admin/options-discussion.php:176
-msgid "When a comment contains any of these words in its content, name, URL, email, or IP address, it will be put in the trash. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
-msgstr "Wanneer een reactie &#233;&#233;n of meer van deze woorden bevat in de inhoud, naam, URL, e-mail- of IP-adres, wordt het verplaatst naar de prullenbak. E&#233;n woord of IP-adres per regel. Er wordt gezocht in woorden, &#8220;press&#8221; zal worden gevonden in &#8220;WordPress&#8221;. "
-
 #: wp-admin/options-discussion.php:167
 msgid "When a comment contains any of these words in its content, name, URL, email, or IP address, it will be held in the <a href=\"edit-comments.php?comment_status=moderated\">moderation queue</a>. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
 msgstr "Wanneer een reactie &#233;&#233;n of meer van deze woorden bevat in de inhoud, naam, URL, e-mail of IP-adres, wordt het in de <a href=\"edit-comments.php?comment_status=moderated\">moderatiewachtrij</a> opgehouden. E&#233;n woord of IP-adres per regel. Het houdt ook rekening met woorden in woorden. &#8220;press&#8221; wordt ook gevonden binnen &#8220;WordPress&#8221;."
+
+#: wp-admin/options-discussion.php:176
+msgid "When a comment contains any of these words in its content, name, URL, email, or IP address, it will be put in the trash. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
+msgstr "Wanneer een reactie &#233;&#233;n of meer van deze woorden bevat in de inhoud, naam, URL, e-mail- of IP-adres, wordt het verplaatst naar de prullenbak. E&#233;n woord of IP-adres per regel. Er wordt gezocht in woorden, &#8220;press&#8221; zal worden gevonden in &#8220;WordPress&#8221;. "
 
 #: wp-admin/includes/theme.php:267
 msgid "One Column"
@@ -11176,10 +11182,6 @@ msgstr "Trackbacks verzenden"
 msgid "Visit Link"
 msgstr "Link bezoeken"
 
-#: wp-admin/includes/meta-boxes.php:949
-msgid "Keep this link private"
-msgstr "Houd deze link priv&#233;"
-
 #: wp-admin/includes/class-wp-links-list-table.php:318
 #: wp-admin/includes/meta-boxes.php:963
 msgid ""
@@ -11475,15 +11477,6 @@ msgstr "Kan  de afbeelding niet opslaan."
 msgid "Could not retrieve file from archive."
 msgstr "Kan bestand niet ophalen uit het archief."
 
-#: wp-admin/includes/file.php:1751
-msgid "Private Key:"
-msgstr "Priv&#233;sleutel:"
-
-#. translators: %s: username
-#: wp-admin/includes/class-wp-filesystem-ssh2.php:143
-msgid "Public and Private keys incorrect for %s"
-msgstr "Publieke en priv&#233;sleutels onjuist voor %s"
-
 #: wp-admin/custom-header.php:800
 msgid "Choose the part of the image you want to use as your header."
 msgstr "Het deel van de afbeelding kiezen die je als header wilt gebruiken."
@@ -11656,7 +11649,7 @@ msgstr[1] "Alle <span class=\"count\">(%s)</span>"
 msgid "View &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; bekijken"
 
-#: wp-admin/edit-tags.php:100 wp-admin/post.php:267 wp-admin/themes.php:43
+#: wp-admin/edit-tags.php:100 wp-admin/post.php:268 wp-admin/themes.php:43
 #: wp-admin/upload.php:161 wp-admin/edit.php:140
 msgid "Sorry, you are not allowed to delete this item."
 msgstr "Je hebt geen toestemming om dit item te verwijderen. "
@@ -11766,6 +11759,19 @@ msgid "%s block not updated, somebody is editing it."
 msgid_plural "%s blocks not updated, somebody is editing them."
 msgstr[0] "%s blok kan niet bijgewerkt worden, het wordt momenteel door iemand bewerkt."
 msgstr[1] "%s blokken kunnen niet bijgewerkt worden, ze worden momenteel door iemand bewerkt."
+
+#: wp-admin/includes/meta-boxes.php:949
+msgid "Keep this link private"
+msgstr "Houd deze link privé"
+
+#: wp-admin/includes/file.php:1751
+msgid "Private Key:"
+msgstr "Privésleutel:"
+
+#. translators: %s: username
+#: wp-admin/includes/class-wp-filesystem-ssh2.php:143
+msgid "Public and Private keys incorrect for %s"
+msgstr "Publieke en privésleutels onjuist voor %s"
 
 #: wp-admin/includes/media.php:2456 wp-admin/includes/nav-menu.php:361
 #: wp-admin/includes/nav-menu.php:649

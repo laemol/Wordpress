@@ -3,6 +3,7 @@
 namespace GeminiLabs\SiteReviews\Controllers;
 
 use GeminiLabs\SiteReviews\Application;
+use GeminiLabs\SiteReviews\Database;
 use GeminiLabs\SiteReviews\Database\CountsManager;
 use GeminiLabs\SiteReviews\Database\ReviewManager;
 use GeminiLabs\SiteReviews\Helper;
@@ -14,25 +15,45 @@ class ReviewController extends Controller
 	/**
 	 * @param int $postId
 	 * @param array $terms
-	 * @param array $termIds
+	 * @param array $termTaxonomyIds
 	 * @param string $taxonomySlug
 	 * @param bool $append
-	 * @param array $oldTermIds
+	 * @param array $oldTermTaxonomyIds
 	 * @return void
 	 * @action set_object_terms
 	 */
-	public function onAfterChangeCategory( $postId, $terms, $termIds, $taxonomySlug, $append, $oldTermIds )
+	public function onAfterChangeCategory( $postId, $terms, $termTaxonomyIds, $taxonomySlug, $append, $oldTermTaxonomyIds )
 	{
-		sort( $termIds );
-		sort( $oldTermIds );
-		if( $termIds === $oldTermIds || !$this->isReviewPostId( $postId ))return;
+		sort( $termTaxonomyIds );
+		sort( $oldTermTaxonomyIds );
+		if( $termTaxonomyIds === $oldTermTaxonomyIds || !$this->isReviewPostId( $postId ))return;
 		$review = glsr( ReviewManager::class )->single( get_post( $postId ));
-		$ignoredTerms = array_intersect( $oldTermIds, $termIds );
-		if( $review->term_ids = array_diff( $oldTermIds, $ignoredTerms )) {
+		$ignoredIds = array_intersect( $oldTermTaxonomyIds, $termTaxonomyIds );
+		$decreasedIds = array_diff( $oldTermTaxonomyIds, $ignoredIds );
+		$increasedIds = array_diff( $termTaxonomyIds, $ignoredIds );
+		if( $review->term_ids = glsr( Database::class )->getTermIds( $decreasedIds, 'term_taxonomy_id' )) {
 			glsr( CountsManager::class )->decreaseTermCounts( $review );
 		}
-		if( $review->term_ids = array_diff( $termIds, $ignoredTerms )) {
+		if( $review->term_ids = glsr( Database::class )->getTermIds( $increasedIds, 'term_taxonomy_id' )) {
 			glsr( CountsManager::class )->increaseTermCounts( $review );
+		}
+	}
+
+	/**
+	 * @param string $oldStatus
+	 * @param string $newStatus
+	 * @return void
+	 * @action transition_post_status
+	 */
+	public function onAfterChangeStatus( $newStatus, $oldStatus, WP_Post $post )
+	{
+		if( $post->post_type != Application::POST_TYPE || in_array( $oldStatus, ['new', $newStatus] ))return;
+		$review = glsr( ReviewManager::class )->single( get_post( $post->ID ));
+		if( $post->post_status == 'publish' ) {
+			glsr( CountsManager::class )->increase( $review );
+		}
+		else {
+			glsr( CountsManager::class )->decrease( $review );
 		}
 	}
 
@@ -42,6 +63,7 @@ class ReviewController extends Controller
 	 */
 	public function onAfterCreate( Review $review )
 	{
+		if( $review->status !== 'publish' )return;
 		glsr( CountsManager::class )->increase( $review );
 	}
 
@@ -107,23 +129,5 @@ class ReviewController extends Controller
 		glsr( CountsManager::class )->decrease( $review );
 		$review->review_type = $reviewType;
 		glsr( CountsManager::class )->increase( $review );
-	}
-
-	/**
-	 * @param string $oldStatus
-	 * @param string $newStatus
-	 * @return void
-	 * @action transition_post_status
-	 */
-	public function onChangeStatus( $newStatus, $oldStatus, WP_Post $post )
-	{
-		if( $post->post_type != Application::POST_TYPE || in_array( $oldStatus, ['new', $newStatus] ))return;
-		$review = glsr( ReviewManager::class )->single( get_post( $post->ID ));
-		if( $post->post_status == 'publish' ) {
-			glsr( CountsManager::class )->increase( $review );
-		}
-		else {
-			glsr( CountsManager::class )->decrease( $review );
-		}
 	}
 }

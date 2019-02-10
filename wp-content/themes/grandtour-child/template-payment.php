@@ -179,9 +179,11 @@ if (empty($page_show_title)) {
 
 <!-- Begin main content -->
 <?php
+
 session_start();
         // Prevent resubmission of the form
         if ($_POST['randcheck'] == $_SESSION['rand']) {
+            // if (true) {
             
             unset($_SESSION['rand']);
             $prices = unserialize(base64_decode($_POST['prices']));
@@ -196,9 +198,12 @@ session_start();
                 'name' => $_POST['fullname'],
                 'phone' => $_POST['phone'],
                 'email' => $_POST['email'],
-                'productId' => $_POST['product_id'],
+                'productId' => $_POST['productId'],
                 'tourId' => $_POST['tour_id'],
                 'stopId' => $_POST['stop_id'],
+                'scheduleId' => $_POST['scheduleId'],
+                'date' => $_POST['date'],
+                'timeslot' => $_POST['timeslot'],
                 'items' => $tickets,
                 'source' => 'web',
             ];
@@ -256,6 +261,11 @@ session_start();
 
             <?php
             }
+            }else{
+                ?>
+                <h4><?php pll_e('Oops, something went wrong...'); ?></h4>
+                <?php pll_e('Please try again or contact support'); ?>.
+                <?php
             }
         } else {
             ?>
@@ -291,9 +301,10 @@ session_start();
 <?php
    if($_POST['payment_type'] == 'card'){
 ?>
-<script>
-	// Create a Stripe client.
-var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
+<script type="text/javascript" defer>
+// Create a Stripe client
+var stripe = Stripe('<?php echo STRIPE_KEY ?>');
 
 // Create an instance of Elements.
 var elements = stripe.elements();
@@ -395,81 +406,3 @@ window.onload = function () {
     startTimer(minutes, display);
 };
 </script>
-
-<?php
-   if($_POST['payment_type'] == 'ideal'){
-?>
-
-<script>
-    // Create a Stripe client.
-// Note: this merchant has been set up for demo purposes.
-var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
-
-// Create an instance of Elements.
-var elements = stripe.elements();
-
-// Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
-var style = {
-  base: {
-    padding: '10px 12px',
-    color: '#32325d',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-    fontSmoothing: 'antialiased',
-    fontSize: '16px',
-    '::placeholder': {
-      color: '#aab7c4'
-    },
-  },
-  invalid: {
-    color: '#fa755a',
-  }
-};
-
-// Create an instance of the idealBank Element.
-var idealBank = elements.create('idealBank', {style: style});
-
-// Add an instance of the idealBank Element into the `ideal-bank-element` <div>.
-idealBank.mount('#ideal-bank-element');
-
-var errorMessage = document.getElementById('error-message');
-
-// Handle form submission.
-var form = document.getElementById('payment-form');
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
-  //showLoading();
-
-  var sourceData = {
-    type: 'ideal',
-    amount: 1099,
-    currency: 'eur',
-    owner: {
-      name: document.querySelector('input[name="name"]').value,
-    },
-    // Specify the URL to which the customer should be redirected
-    // after paying.
-    redirect: {
-      return_url: 'http://wordpress.test/return',
-    },
-  };
-
-  // Call `stripe.createSource` with the idealBank Element and additional options.
-  stripe.createSource(idealBank, sourceData).then(function(result) {
-    if (result.error) {
-      // Inform the customer that there was an error.
-      errorMessage.textContent = result.error.message;
-      errorMessage.classList.add('visible');
-      stopLoading();
-    } else {
-      // Redirect the customer to the authorization URL.
-      errorMessage.classList.remove('visible');
-      stripeSourceHandler(result.source);
-    }
-  });
-});
-</script>
-
-<?php
-  }
-?>

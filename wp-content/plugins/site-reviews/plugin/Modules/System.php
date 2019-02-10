@@ -212,9 +212,10 @@ class System
 	public function getPluginDetails()
 	{
 		return [
-			'Current version' => glsr()->version,
-			'Previous version' => glsr( OptionManager::class )->get( 'version_upgraded_from' ),
 			'Console size' => glsr( Console::class )->humanSize( '0' ),
+			'Last Rating Count' => date_i18n( 'Y-m-d H:i', glsr( OptionManager::class )->get( 'last_review_count' )),
+			'Version (current)' => glsr()->version,
+			'Version (previous)' => glsr( OptionManager::class )->get( 'version_upgraded_from' ),
 		];
 	}
 

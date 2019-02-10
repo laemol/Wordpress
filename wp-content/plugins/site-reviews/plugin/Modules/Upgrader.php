@@ -28,14 +28,28 @@ class Upgrader
 			glsr( 'Modules\\Upgrader\\'.$className );
 			glsr_log()->info( 'Completed Upgrade for v'.$version.$versionSuffix );
 		});
-		$this->setReviewCounts();
-		$this->updateVersion();
+		$this->finish();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function finish()
+	{
+		$version = $this->currentVersion();
+		if( $version !== glsr()->version ) {
+			$this->setReviewCounts();
+			$this->updateVersionFrom( $version );
+		}
+		else if( !glsr( OptionManager::class )->get( 'last_review_count', false )) {
+			$this->setReviewCounts();
+		}
 	}
 
 	/**
 	 * @return string
 	 */
-	public function currentVersion()
+	protected function currentVersion()
 	{
 		return glsr( OptionManager::class )->get( 'version', '0.0.0' );
 	}
@@ -43,24 +57,18 @@ class Upgrader
 	/**
 	 * @return void
 	 */
-	public function setReviewCounts()
+	protected function setReviewCounts()
 	{
-		if( !empty( glsr( OptionManager::class )->get( 'last_review_count' )))return;
-		add_action( 'admin_init', function() {
-			glsr( AdminController::class )->routerCountReviews( false );
-			glsr_log()->info( __( 'Calculated rating counts.', 'site-reviews' ));
-		});
+		add_action( 'admin_init', 'glsr_calculate_ratings' );
 	}
 
 	/**
+	 * @param string $previousVersion
 	 * @return void
 	 */
-	public function updateVersion()
+	protected function updateVersionFrom( $previousVersion )
 	{
-		$currentVersion = $this->currentVersion();
-		if( $currentVersion !== glsr()->version ) {
-			glsr( OptionManager::class )->set( 'version', glsr()->version );
-			glsr( OptionManager::class )->set( 'version_upgraded_from', $currentVersion );
-		}
+		glsr( OptionManager::class )->set( 'version', glsr()->version );
+		glsr( OptionManager::class )->set( 'version_upgraded_from', $previousVersion );
 	}
 }

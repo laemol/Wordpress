@@ -5,7 +5,7 @@ Tags: reviews, ratings, business ratings, business reviews, testimonials, site r
 Requires at least: 4.7.0
 Tested up to: 5.0
 Requires PHP: 5.6
-Stable tag: 3.0.5
+Stable tag: 3.1.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Site Reviews allows you to easily receive and display reviews for your website, 
 
 == Description ==
 
-**Please make sure your website meets the minimum plugin requirements: PHP 5.6, WordPress 4.7**
+> Site Reviews requires PHP v5.6 or higher!
 
 Site Reviews allows your visitors to submit reviews with a 1-5 star rating on your website, similar to the way you would on TripAdvisor or Yelp.
 
@@ -21,7 +21,7 @@ The plugin provides blocks, shortcodes, and widgets, along with full documentati
 
 You can pin your best reviews so that they are always shown first, require approval before new review submissions are published, require visitors to be logged-in in order to write a review, send custom notifications on a new submission, and much more.
 
-Follow plugin development on github at: https://github.com/geminilabs/site-reviews/
+[Follow plugin development on Github.](https://github.com/geminilabs/site-reviews/)
 
 = Current Features =
 
@@ -103,6 +103,39 @@ All documentation can be found in the "Documentation" page of the plugin.
 9. This is what the Slack notifications look like
 
 == Changelog ==
+
+= 3.1.5 (2019-01-08) =
+
+- Fixed custom templating
+
+= 3.1.4 (2019-01-07) =
+
+- Changed plugin shortcodes to allow add-on integration
+- Fixed a possible javascript conflict that breaks form validation
+- Fixed error when "Slack webhook URL" setting is empty
+- Fixed multi-checkbox values in plugin settings
+- Fixed possible duplicate star-rating controls
+- Fixed rating counts for review categories
+- Removed internal "site-reviews/shortcode/hidden-keys" hook
+
+= 3.1.2 (2019-01-03) =
+
+- Fixed compatibility issue with PHP v7.0.x
+
+= 3.1.1 (2019-01-01) =
+
+- Fixed support for Microsoft IIS
+
+= 3.1.0 (2018-12-30) =
+
+- Added compatibility for WP Super Cache plugin
+- Added helper function to recalculate ratings
+- Added safe method of using plugin functions without having to use `function_exists()` (see documentation)
+- Added support for multiple shortcode buttons on the same page (i.e. when using multiple classic wysiwyg editors)
+- Changed "minimum rating" range in the block options to allow a rating of "0" (to show reviews with no rating)
+- Fixed summary counts when the "Require Approval" option is enabled
+- Fixed the "All Reviews" page to update the status counts when a review is approved/unapproved
+- Fixed the "Recalculate rating counts" notice
 
 = 3.0.5 (2018-12-26) =
 

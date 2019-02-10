@@ -350,8 +350,11 @@ if (empty($page_show_title)) {
         $_SESSION['rand'] = $rand; ?>
  	<input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
 	<input type="hidden" name="prices" value="<?php echo base64_encode(serialize($_POST['price'])) ; ?>" >
-	<input type="hidden" name="tour_id" id="tour_id"  value="<?php echo $_POST['schedule_id']; ?>" >
-	<input type="hidden" name="product_id" value="<?php echo $product['id']; ?>" >
+	<input type="hidden" name="tour_id" id="tour_id"  value="<?php echo $_POST['tour_id']; ?>" >
+    <input type="hidden" name="productId" value="<?php echo $product['id']; ?>" >
+    <input type="hidden" name="scheduleId" value="<?php echo $_POST['schedule_id'];?>" >
+    <input type="hidden" name="date" value="<?php echo $_POST['date'];?>" >
+    <input type="hidden" name="timeslot" value="<?php echo $_POST['timeslot']; ?>" >
 	<button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment"><?php pll_e('Proceed to Payment'); ?></button>
 	</div>
     		<?php

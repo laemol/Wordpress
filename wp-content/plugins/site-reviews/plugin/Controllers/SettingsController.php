@@ -25,7 +25,9 @@ class SettingsController extends Controller
 			$options = $this->sanitizeGeneral( $input, $options );
 			$options = $this->sanitizeSubmissions( $input, $options );
 			$options = $this->sanitizeTranslations( $input, $options );
-			glsr( Notice::class )->addSuccess( __( 'Settings updated.', 'site-reviews' ));
+			if( filter_input( INPUT_POST, 'option_page' ) == Application::ID.'-settings' ) {
+				glsr( Notice::class )->addSuccess( __( 'Settings updated.', 'site-reviews' ));
+			}
 			return $options;
 		}
 		return $input;
@@ -48,22 +50,15 @@ class SettingsController extends Controller
 	protected function sanitizeGeneral( array $input, array $options )
 	{
 		$inputForm = $input['settings']['general'];
-		if( $inputForm['support']['polylang'] == 'yes' ) {
-			if( !glsr( Polylang::class )->isActive() ) {
-				$options['settings']['general']['support']['polylang'] = 'no';
-				glsr( Notice::class )->addError( __( 'Please install/activate the Polylang plugin to enable integration.', 'site-reviews' ));
-			}
-			else if( !glsr( Polylang::class )->isSupported() ) {
-				$options['settings']['general']['support']['polylang'] = 'no';
-				glsr( Notice::class )->addError( __( 'Please update the Polylang plugin to v2.3.0 or greater to enable integration.', 'site-reviews' ));
-			}
-		}
-		if( !isset( $inputForm['notifications'] )) {
-			$options['settings']['general']['notifications'] = [];
+		if( $inputForm['support']['polylang'] == 'yes' && !$this->isPolylangActiveAndSupported() ) {
+			$options['settings']['general']['support']['polylang'] = 'no';
 		}
 		if( trim( $inputForm['notification_message'] ) == '' ) {
 			$options['settings']['general']['notification_message'] = glsr()->defaults['settings']['general']['notification_message'];
 		}
+		$options['settings']['general']['notifications'] = isset( $inputForm['notifications'] )
+			? $inputForm['notifications']
+			: [];
 		return $options;
 	}
 
@@ -73,9 +68,9 @@ class SettingsController extends Controller
 	protected function sanitizeSubmissions( array $input, array $options )
 	{
 		$inputForm = $input['settings']['submissions'];
-		if( !isset( $inputForm['required'] )) {
-			$options['settings']['submissions']['required'] = [];
-		}
+		$options['settings']['submissions']['required'] = isset( $inputForm['required'] )
+			? $inputForm['required']
+			: [];
 		return $options;
 	}
 
@@ -97,5 +92,21 @@ class SettingsController extends Controller
 			});
 		}
 		return $options;
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function isPolylangActiveAndSupported()
+	{
+		if( !glsr( Polylang::class )->isActive() ) {
+			glsr( Notice::class )->addError( __( 'Please install/activate the Polylang plugin to enable integration.', 'site-reviews' ));
+			return false;
+		}
+		else if( !glsr( Polylang::class )->isSupported() ) {
+			glsr( Notice::class )->addError( __( 'Please update the Polylang plugin to v2.3.0 or greater to enable integration.', 'site-reviews' ));
+			return false;
+		}
+		return true;
 	}
 }

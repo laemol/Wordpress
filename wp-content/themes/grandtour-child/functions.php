@@ -79,6 +79,8 @@ function apiPostRequest($resource, $data)
         'body' => json_encode($data)
     ]);
 
+    //var_dump($data);
+
     if (is_array($response) && !is_wp_error($response)) {
         $data = array_shift(json_decode($response['body'], true));
     }

@@ -1096,3 +1096,7 @@ select {
 .vdpTimeUnit > input:focus {
     border-bottom-color: #ff1689 !important;
 }
+
+.intl-tel-input{
+    width:100%  !important;
+}

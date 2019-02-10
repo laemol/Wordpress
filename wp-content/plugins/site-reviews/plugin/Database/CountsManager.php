@@ -38,13 +38,13 @@ class CountsManager
 	}
 
 	/**
-	 * @param int $termId
+	 * @param int $termTaxonomyId
 	 * @param int $limit
 	 * @return array
 	 */
-	public function buildTermCounts( $termId, $limit = 500 )
+	public function buildTermCounts( $termTaxonomyId, $limit = 500 )
 	{
-		return $this->build( $limit, ['term_id' => $termId] );
+		return $this->build( $limit, ['term_taxonomy_id' => $termTaxonomyId] );
 	}
 
 	/**
@@ -135,7 +135,7 @@ class CountsManager
 		}
 		return in_array( $args['type'], ['', 'all'] )
 			? $this->normalize( [$this->flatten( $counts )] )
-			: $this->normalize( array_column( $counts, $args['type'] ));
+			: $this->normalize( glsr_array_column( $counts, $args['type'] ));
 	}
 
 	/**
@@ -212,13 +212,13 @@ class CountsManager
 	 */
 	public function increaseTermCounts( Review $review )
 	{
-		$termIds = glsr( ReviewManager::class )->normalizeTerms( implode( ',', $review->term_ids ));
-		foreach( $termIds as $termId ) {
-			$counts = $this->getTermCounts( $termId );
+		$terms = glsr( ReviewManager::class )->normalizeTerms( implode( ',', $review->term_ids ));
+		foreach( $terms as $term ) {
+			$counts = $this->getTermCounts( $term['term_id'] );
 			$counts = empty( $counts )
-				? $this->buildTermCounts( $termId )
+				? $this->buildTermCounts( $term['term_taxonomy_id'] )
 				: $this->increaseRating( $counts, $review->review_type, $review->rating );
-			$this->setTermCounts( $termId, $counts );
+			$this->setTermCounts( $term['term_id'], $counts );
 		}
 	}
 
@@ -248,7 +248,8 @@ class CountsManager
 	 */
 	public function setTermCounts( $termId, array $reviewCounts )
 	{
-		if( !term_exists( $termId ))return;
+		$term = get_term( $termId, Application::TAXONOMY );
+		if( !isset( $term->term_id ))return;
 		$ratingCounts = $this->flatten( $reviewCounts );
 		update_term_meta( $termId, static::META_COUNT, $reviewCounts );
 		update_term_meta( $termId, static::META_AVERAGE, glsr( Rating::class )->getAverage( $ratingCounts ));
@@ -265,7 +266,7 @@ class CountsManager
 		$counts = [];
 		$lastPostId = 0;
 		while( $reviews = $this->queryReviews( $args, $lastPostId, $limit )) {
-			$types = array_keys( array_flip( array_column( $reviews, 'type' )));
+			$types = array_keys( array_flip( glsr_array_column( $reviews, 'type' )));
 			$types = array_unique( array_merge( ['local'], $types ));
 			foreach( $types as $type ) {
 				$type = $this->normalizeType( $type );
@@ -348,15 +349,15 @@ class CountsManager
 	 */
 	protected function queryReviews( array $args = [], $lastPostId, $limit )
 	{
-		$args = wp_parse_args( $args, array_fill_keys( ['post_id', 'term_id'], '' ));
+		$args = wp_parse_args( $args, array_fill_keys( ['post_id', 'term_taxonomy_id'], '' ));
 		if( empty( array_filter( $args ))) {
 			return glsr( SqlQueries::class )->getReviewCounts( $lastPostId, $limit );
 		}
 		if( !empty( $args['post_id'] )) {
 			return glsr( SqlQueries::class )->getReviewPostCounts( $args['post_id'], $lastPostId, $limit );
 		}
-		if( !empty( $args['term_id'] )) {
-			return glsr( SqlQueries::class )->getReviewTermCounts( $args['term_id'], $lastPostId, $limit );
+		if( !empty( $args['term_taxonomy_id'] )) {
+			return glsr( SqlQueries::class )->getReviewTermCounts( $args['term_taxonomy_id'], $lastPostId, $limit );
 		}
 	}
 }
