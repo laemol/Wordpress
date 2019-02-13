@@ -206,6 +206,7 @@ session_start();
                 'timeslot' => $_POST['timeslot'],
                 'items' => $tickets,
                 'source' => 'web',
+                'clientIp' => $_SERVER['REMOTE_ADDR']
             ];
 
             $result = apiPostRequest('orders', $data);
