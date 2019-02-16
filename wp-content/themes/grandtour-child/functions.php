@@ -54,8 +54,6 @@ function apiGetRequest($resource)
         $data = array_shift(json_decode($response['body'], true));
     }
 
-    //var_dump($url);
-
     return $data;
 }
 
@@ -78,8 +76,6 @@ function apiPostRequest($resource, $data)
         'headers' => $wp_request_headers,
         'body' => json_encode($data)
     ]);
-
-    //var_dump($data);
 
     if (is_array($response) && !is_wp_error($response)) {
         $data = array_shift(json_decode($response['body'], true));
@@ -106,6 +102,7 @@ function addProductListCode($atts = '')
     ob_start();
     $category_id = $_GET['category_id'] ? implode(',', $_GET['category_id']) : null;
     $region_id = $value['region'] ?: $_GET['region_id'];
+    $zone_id = $_GET['zone_id'];
     $recommended = $_GET['region_id'] || $_GET['category_id'] ? '' : 'true';
 
     if ($_POST['offset'] || $_POST['category'] || $_POST['destination']) {
@@ -115,7 +112,7 @@ function addProductListCode($atts = '')
         $recommended = '';
     }
 
-    $url = 'products?region_id=' . $region_id . '&offset=' . $offset . '&limit=' . $value['limit'] . '&category_id=' . $category_id . '&lang=' . pll_current_language() . '&lat=' . $value['lat'] . '&long=' . $value['long'] . '&range=' . $value['range'];
+    $url = 'products?region_id=' . $region_id . '&zone_id=' . $zone_id . '&offset=' . $offset . '&limit=' . $value['limit'] . '&category_id=' . $category_id . '&lang=' . pll_current_language() . '&lat=' . $value['lat'] . '&long=' . $value['long'] . '&range=' . $value['range'];
     $data = apiGetRequest($url);
 
     echo '<div  class="ppb_tour_classic one nopadding" >';
@@ -223,7 +220,7 @@ function addCategoryOptionsList()
 {
     ob_start();
 
-    $categories = apiGetRequest('product/categories?lang=' . pll_current_language() . '&region_id=' . $_GET['region_id']);
+    $categories = apiGetRequest('product/categories?lang=' . pll_current_language() . '&region_id=' . $_GET['region_id'] . '&zone_id=' . $_GET['zone_id']);
 
     echo '<h2 class="widgettitle">';
     echo pll_e('What do you want to do?');
@@ -254,6 +251,11 @@ function addCategoryOptionsList()
     echo '<br>';
 
     $regions = apiGetRequest('regions');
+
+    if($_GET['region_id']){
+        $zones = apiGetRequest('regions/' . $_GET['region_id'] . '/zones');
+    }
+
     echo '<div class="radio-toolbar">';
     echo '<label><input type="radio" id="region_0" class="filter" name="region_id" value=""';
     if (!$_GET['region_id']) {
@@ -263,11 +265,20 @@ function addCategoryOptionsList()
     echo pll_e('All Destination');
     echo '</span></label>';
     foreach ($regions as $region) {
-        echo '<label><input type="radio" id="region_' . $zone['id'] . '" class="filter" name="region_id" value="' . $region['id'] . '"';
+        echo '<label><input type="radio" id="region_' . $region['id'] . '" class="filter" name="region_id" value="' . $region['id'] . '"';
         if ($region['id'] == $_GET['region_id']) {
             echo 'checked';
         }
         echo '><span for="region_' . $region['id'] . '">' . ucfirst($region['name']) . '</span></label>';
+        if($region['id'] == $_GET['region_id']){
+            foreach ($zones as $zone) {
+                echo '<label><input type="radio" id="zone_' . $zone['id'] . '" class="filter sub-filter" name="zone_id" value="' . $zone['id'] . '"';
+                if ($zone['id'] == $_GET['zone_id']) {
+                    echo 'checked';
+                }
+                echo '><span style="margin-left:15px" for="region_' . $zone['id'] . '">' . ucfirst($zone['name']) . '</span></label>';
+            }
+        }
     }
     echo '</div>';
 
