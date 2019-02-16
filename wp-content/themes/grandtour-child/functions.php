@@ -124,7 +124,7 @@ function addProductListCode($atts = '')
             $offset++;
             echo '<div class="element grid classic4_cols animated4">';
             echo '<div class="one_fourth gallery4 classic static filterable portfolio_type themeborder">';
-            echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['id'] . '">';
+            echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['id'] . '" target="_blank">';
             echo '<img src="' . $product['media'][0]['imageUrl'] . '" alt="' . $product['name'] . '" style="height:140px"/>';
             if ($product['originalPrice'] > $product['currentPrice']) {
                 echo '<div class="tour_price has_discount"><span class="normal_price">&euro; ' . $product['originalPrice'] . '</span>&euro; ' . $product['currentPrice'] . '</div></a>';
@@ -132,7 +132,7 @@ function addProductListCode($atts = '')
                 echo '<div class="tour_price">&euro; ' . $product['currentPrice'] . '</div></a>';
             }
             echo '<div class="portfolio_info_wrapper">';
-            echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['id'] . '"><h4>' . $product['name'] . '</h4></a>';
+            echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['id'] . '" target="_blank"><h4>' . $product['name'] . '</h4></a>';
             if ($product['type'] == 'tour') {
                 echo '<div class="tour_excerpt"><p><i class="ti-location-pin"> </i> ' . $product['location'] . '<br><i class="ti-time"> </i> ' . $product['duration'] . ' Hours</p></div>';
             } else {
