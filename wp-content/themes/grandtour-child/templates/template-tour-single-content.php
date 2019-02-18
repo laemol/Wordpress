@@ -160,7 +160,7 @@ $slide++ ;
             if (!empty($tour_included)) {
                 ?>
 		<li>
-			<div class="single_tour_departure_title"><?php esc_html_e('Benefits', 'grandtour'); ?></div>
+			<div class="single_tour_departure_title"><?php pll_e('Benefits'); ?></div>
 			<div class="single_tour_departure_content indent_content">
 				<?php
                     if (!empty($tour_included) && is_array($tour_included)) {
@@ -188,7 +188,7 @@ $slide++ ;
             if (!empty($tour_usp)) {
                 ?>
 		<li>
-			<div class="single_tour_departure_title"><?php esc_html_e('Included', 'grandtour'); ?></div>
+			<div class="single_tour_departure_title"><?php pll_e('Included'); ?></div>
 			<div class="single_tour_departure_content indent_content">
 				<?php
                     if (!empty($tour_included) && is_array($tour_included)) {
@@ -224,12 +224,12 @@ $slide++ ;
             if (!empty($tour_included)) {
                 ?>
 		<li>
-			<div class="single_tour_departure_title"><?php esc_html_e('Description', 'grandtour'); ?></div>
+			<div class="single_tour_departure_title"><?php pll_e('Description'); ?></div>
 			<div class="single_tour_departure_content">
 
             <div class="txt-wrapper">
-            <a href="#panel-show" class="panel-show txt" id="panel-show">Read more</a> 
-            <a href="#panel-hide" class="panel-hide txt" id="panel-hide">Read less</a> 
+            <a href="#panel-show" class="panel-show txt" id="panel-show"><?php pll_e('Read More'); ?></a> 
+            <a href="#panel-hide" class="panel-hide txt" id="panel-hide"><?php pll_e('Read Less'); ?></a> 
             <div class="txt-panel">
             <?php echo $product['webDescription'] ?>
             
@@ -247,7 +247,7 @@ $slide++ ;
             if (!empty($tour_map_address)) {
                 $tg_tour_map_marker = kirki_get_option('tg_tour_map_marker'); ?>
 		<li>
-			<div class="single_tour_departure_title"><?php esc_html_e('Maps', 'grandtour'); ?></div>
+			<div class="single_tour_departure_title"><<?php pll_e('Map'); ?></div>
 			<div class="single_tour_departure_content">
                 <?php echo do_shortcode('[tg_map width="1000" height="300" address="' . esc_attr($tour_map_address) . '" zoom="13" marker="' . esc_url($tg_tour_map_marker) . '"]'); ?></div>
 		</li>

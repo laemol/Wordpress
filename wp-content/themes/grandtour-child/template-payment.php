@@ -183,7 +183,7 @@ if (empty($page_show_title)) {
 session_start();
         // Prevent resubmission of the form
         if ($_POST['randcheck'] == $_SESSION['rand']) {
-            // if (true) {
+             //if (true) {
             
             unset($_SESSION['rand']);
             $prices = unserialize(base64_decode($_POST['prices']));
@@ -199,6 +199,7 @@ session_start();
                 'phone' => $_POST['phone'],
                 'email' => $_POST['email'],
                 'productId' => $_POST['productId'],
+                'productName' => $_POST['productName'],
                 'tourId' => $_POST['tour_id'],
                 'stopId' => $_POST['stop_id'],
                 'scheduleId' => $_POST['scheduleId'],
@@ -214,8 +215,14 @@ session_start();
             if ($result['orderId']) {
                 ?>
             <h4><?php pll_e('Almost there!'); ?></h4>
-             <?php pll_e('Your tickets are reserved for'); ?> <strong><span id="time">30:00</span></strong> <?php pll_e('minutes. Please click the payment button to proceed with the creditcard payment'); ?> . <br><br>
             
+             <p><?php pll_e('Your tickets are reserved for'); ?> <strong><span id="time">30:00</span></strong> <?php pll_e('minutes. Please click the payment button to proceed with the creditcard payment'); ?> . </p>
+            
+             <div class="payment-details">
+            <p> 
+            <?php pll_e('Total'); ?>: <strong> &euro;<?php echo number_format($result['totalPrice'], 2) ?></strong><br>
+		    </p><br>
+
             <?php
             if($_POST['payment_type'] == 'card'){
                 ?>
@@ -234,13 +241,15 @@ session_start();
 			
             <input type="hidden" name="order_id" value="<?php echo $result['orderId'] ?>" >
             <input type="hidden" name="code" value="<?php echo $result['code'] ?>" >
-		    </form>
+            </form>
+            </div>
 		  
             <?php
             }elseif($_POST['payment_type'] == 'ideal'){
             ?>
 
             <script src="https://js.stripe.com/v3/"></script>
+            
             <div class="payment-details">
             <form id="payment-form">
                 

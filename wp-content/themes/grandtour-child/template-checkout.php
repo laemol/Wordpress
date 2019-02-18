@@ -227,9 +227,10 @@ if (empty($page_show_title)) {
 			<input type="text" class="input-text" name="fullname" id="fullname" placeholder="" value="" autocomplete="fullname" required=""></p>
 			<p><strong><?php pll_e('Email'); ?></strong><br> <?php echo $_POST['email'] ; ?>
 			<input type="email" class="input-text" name="email" id="email" placeholder="" value="" autocomplete="email" required=""></p>
-			<p><div class="text-container"><strong><?php pll_e('Phone'); ?></strong><br><?php echo $_POST['phone'] ; ?>
+			<p><div class="text-container"><strong><?php pll_e('Phone'); ?></strong> (<?php pll_e('Only used in case of emergency'); ?>)<br><?php echo $_POST['phone'] ; ?>
 			
-			<input type="text" class="input-text" name="phone" id="phone" placeholder="" value="" autocomplete="phone">
+            <input type="text" class="input-text" name="phone" id="phone" placeholder="" value="" autocomplete="phone">
+            <input type="text" name="phone_check" id="phone_check" value="" required class="hide">
 			<span id="valid-msg" class="hide valid inline"><?php pll_e('Valid'); ?></span>
 			<span id="error-msg" class="hide error inline"></span>  
 			</div>
@@ -352,6 +353,7 @@ if (empty($page_show_title)) {
 	<input type="hidden" name="prices" value="<?php echo base64_encode(serialize($_POST['price'])) ; ?>" >
 	<input type="hidden" name="tour_id" id="tour_id"  value="<?php echo $_POST['tour_id']; ?>" >
     <input type="hidden" name="productId" value="<?php echo $product['id']; ?>" >
+    <input type="hidden" name="productName" value="<?php echo $product['name']; ?>" >
     <input type="hidden" name="scheduleId" value="<?php echo $_POST['schedule_id'];?>" >
     <input type="hidden" name="date" value="<?php echo $_POST['date'];?>" >
     <input type="hidden" name="timeslot" value="<?php echo $_POST['timeslot']; ?>" >
@@ -439,11 +441,13 @@ input.addEventListener('blur', function() {
   if (input.value.trim()) {
     if (iti.isValidNumber()) {
       validMsg.classList.remove("hide");
+      document.getElementById('phone_check').value='valid' ; 
     } else {
       input.classList.add("error");
       var errorCode = iti.getValidationError();
       errorMsg.innerHTML = errorMap[errorCode];
       errorMsg.classList.remove("hide");
+      document.getElementById('phone_check').value='' ; 
     }
   }
 });

@@ -27,6 +27,11 @@ a.button, .button, .pagination span,
     background-color: #ff1689 !important;
 }
 
+.intl-tel-input  {
+    display: block;
+    width: 100%  !important;
+}
+
 .cf7-smart-grid.has-grid .wpcf7-form-control {
     text-align: center;
 }
@@ -121,6 +126,10 @@ a.button, .button, .pagination span,
       }
       .searchtxt {
           display: none;
+      }
+
+      .tags_wrapper {
+        display: none;
       }
   }
 
@@ -1062,21 +1071,23 @@ select {
     background: #dddddd;
   }
 
-  .subtitle {
+.subtitle {
       font-style: normal;
       font-weight: lighter;
   }
+
 .tour_product_variable_wrapper {
     position: relative;
     height:50px;
 }
-  .title_wrapper {
+
+.title_wrapper {
       height: 40px;
       position: absolute;
       top:0
-  }
+}
 
-  .vdpCell.selectable:hover .vdpCellContent,
+.vdpCell.selectable:hover .vdpCellContent,
   .vdpCell.selected .vdpCellContent {
     background: #ff1689 !important;
 }
@@ -1087,6 +1098,7 @@ select {
 
 .vdpArrowNext:after {
     border-left-color: #ff1689 !important;
+}
 
 .vdpCell.today {
     color: #ff1689 !important;
@@ -1097,6 +1109,10 @@ select {
     border-bottom-color: #ff1689 !important;
 }
 
-.intl-tel-input{
-    width:100%  !important;
+.hide {
+    display:none;
+}
+
+.checkout-review-order {
+    padding: 25px;
 }

@@ -5,8 +5,7 @@
 	    $pin_thumb[0] = '';
     }
 ?>
-<h2><?php echo esc_html_e( 'Share', 'grandtour' ); ?></h2>
-<div class="page_tagline"><?php the_title(); ?></div>
+<h2><?php pll_e('Share'); ?></h2>
 <div id="social_share_wrapper">
 	<ul>
 		<li><a class="facebook" title="<?php esc_html_e( 'Share On Facebook', 'grandtour' ); ?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_permalink(); ?>"><span class="ti-facebook"></span></a></li>
