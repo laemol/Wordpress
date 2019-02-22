@@ -126,6 +126,9 @@ function addProductListCode($atts = '')
             echo '<div class="one_fourth gallery4 classic static filterable portfolio_type themeborder">';
             echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['id'] . '" target="_blank">';
             echo '<img src="' . $product['media'][0]['imageUrl'] . '" alt="' . $product['name'] . '" style="height:140px"/>';
+            if($product['openToday'] != true){
+                echo '<div class="tour_label">' . pll__('Closed Today') . '</div>';
+            }
             if ($product['originalPrice'] > $product['currentPrice']) {
                 echo '<div class="tour_price has_discount"><span class="normal_price">&euro; ' . $product['originalPrice'] . '</span>&euro; ' . $product['currentPrice'] . '</div></a>';
             } else {

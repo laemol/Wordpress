@@ -27,6 +27,26 @@ a.button, .button, .pagination span,
     background-color: #ff1689 !important;
 }
 
+.tour_label {
+  background-color: #000 !important;
+}
+
+.tour_label, .single_tour_attribute_wrapper .tour_label, a.tour_image .tour_label, .grid.portfolio_type .tour_label {
+  position: absolute;
+  top: 15px;
+  right: 0px;
+  background: #1EC6B6;
+  border-radius: 0px !important;
+  padding: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+  
 .intl-tel-input  {
     display: block;
     width: 100%  !important;

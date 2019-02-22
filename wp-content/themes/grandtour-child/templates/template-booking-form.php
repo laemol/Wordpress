@@ -11,8 +11,17 @@ $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
     $dates = apiGetRequest('products/' . $_GET['pid'] . '/dates');
 
     echo do_shortcode('[calendar]');
+
+    // Fix registered first bug
+    pll__("Monday");
+    $weekdays = array(pll__("Monday"), pll__("Tuesday"), pll__("Wednesday"), pll__("Thursday"), pll__("Friday"), pll__("Saturday"), pll__("Sunday"));
+
+    // Fix registered first bug
+    pll__("Januari"); 
+    $months = array(pll__("Januari"), pll__("February"), pll__("March"), pll__("April"), pll__("May"), pll__("June"), pll__("July"), pll__("August"), pll__("September"), pll__("October"), pll__("November"), pll__("December"));
+
     ?>
-    <div id="calendar-widget"><calendar-component :schedule-data='<?php echo json_encode($dates) ?>' :product-id="<?php echo $product['id'] ?>"></calendar-component></div><br>
+    <div id="calendar-widget"><calendar-component :schedule-data='<?php echo json_encode($dates) ?>' :product-id="<?php echo $product['id'] ?>" :weekdays='<?php echo json_encode($weekdays) ?>'  :months='<?php echo json_encode($months) ?>'></calendar-component></div><br>
     <?php
 
 }
