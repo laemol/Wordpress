@@ -396,7 +396,7 @@ select {
 }
 
 .radio-toolbar input[type="radio"]:checked ~ * { 
-    background:#1abc9c !important;
+    background:#ff1689 !important;
     border-radius: 4px;
     color: #fff;
 }
@@ -441,6 +441,8 @@ select {
 
 .linkdiv {
     padding: 6px;
+    background-color: #12283E;
+    border-radius: 5px;
 }
 .linkdiv h5 {
     color: #fff; 
@@ -611,7 +613,7 @@ select {
 
 #page_caption{
     overflow: hidden;
-    background-color: #1abc9c !important;
+    background-color: #12283E !important;
 }
 
 #page_caption h1 {
@@ -808,7 +810,7 @@ select {
       margin: 0;
     }
     .cd-multi-steps li.visited::after {
-      background-color: #1C3F6A;
+      background-color: #ff1689;
     }
     .cd-multi-steps li > *, .cd-multi-steps li.current > * {
       position: relative;
@@ -880,8 +882,10 @@ select {
     .cd-multi-steps.text-top li.visited > *::before,
     .cd-multi-steps.text-top li.current > *::before, .cd-multi-steps.text-bottom li.visited > *::before,
     .cd-multi-steps.text-bottom li.current > *::before {
-      background-color: #1C3F6A;
+      background-color: #ff1689;
+
     }
+    
     .no-touch .cd-multi-steps.text-top a:hover, .no-touch .cd-multi-steps.text-bottom a:hover {
       color: #1C3F6A;
     }
@@ -936,7 +940,7 @@ select {
       line-height: 26px;
       font-size: 1.2rem;
       font-weight: bold;
-      color: #1abc9c ;
+      color: #12283E ;
     }
   
     .cd-multi-steps.text-top.count li:not(.current) em::before,
@@ -970,7 +974,7 @@ select {
   }
 
   .info {
-      color: #1abc9c;
+      color: #ff1689;
       margin-left:6px;
       font-weight: 600;
   }
