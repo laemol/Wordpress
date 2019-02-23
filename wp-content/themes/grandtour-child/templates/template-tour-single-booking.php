@@ -168,7 +168,7 @@
 
             if (!empty($tg_tour_single_share)) {
                 ?>
- 		<a id="single_tour_share_button" href="javascript:;" class="button ghost themeborder"><span class="ti-email"></span><?php esc_html_e('Share this tour', 'grandtour'); ?></a>
+ 		<a id="single_tour_share_button" href="javascript:;" class="button ghost themeborder"><span class="ti-email"></span><?php pll_e('Share'); ?></a>
  		<?php
             }
         ?>

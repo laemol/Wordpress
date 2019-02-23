@@ -45,6 +45,9 @@ define('HOLLI_KEY', '539169d340eda42d50c384efc2f9aa227eabcce7');
 /** The Stripe API key */
 define('STRIPE_KEY', 'pk_test_VNG4isUFQaA1V9Y6Kx9Eh0sd');
 
+/** The Google API key */
+define('GOOGLE_KEY', 'AIzaSyDRWCbpclysCI36awaBDAwm_XNnI9L7VD8');
+
 /**#@+
  * Authentication Unique Keys and Salts.
  *

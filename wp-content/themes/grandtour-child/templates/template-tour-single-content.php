@@ -104,7 +104,7 @@ $slide++ ;
 
             if (!empty($tg_tour_single_share)) {
                 ?>
- 	<a id="single_tour_share_button" href="javascript:;" class="button ghost themeborder"><span class="ti-email"></span><?php esc_html_e('Share this tour', 'grandtour'); ?></a>
+ 	<a id="single_tour_share_button" href="javascript:;" class="button ghost themeborder"><span class="ti-email"></span><?php pll_e('Share');?></a>
  	<?php
             } ?>
 		</div>
@@ -120,7 +120,7 @@ $slide++ ;
         $tour_included = $product['details'];
         $tour_not_included = $product['details'];
         $tour_usp = $product['details'];
-        $tour_map_address = $product['address']
+        $tour_map_address = $product['address'];
     ?>
 	<ul class="single_tour_departure_wrapper themeborder">
 		<?php
@@ -243,13 +243,14 @@ $slide++ ;
             }
         ?>
 		
-		<?php
+        <?php
+     
             if (!empty($tour_map_address)) {
                 $tg_tour_map_marker = kirki_get_option('tg_tour_map_marker'); ?>
 		<li>
-			<div class="single_tour_departure_title"><<?php pll_e('Map'); ?></div>
+			<div class="single_tour_departure_title"><?php pll_e('Map'); ?></div>
 			<div class="single_tour_departure_content">
-                <?php echo do_shortcode('[tg_map width="1000" height="300" address="' . esc_attr($tour_map_address) . '" zoom="13" marker="' . esc_url($tg_tour_map_marker) . '"]'); ?></div>
+                <?php echo do_shortcode('[pw_map address="' . esc_attr($tour_map_address) . '" key="' . GOOGLE_KEY . '"]'); ?></div>
 		</li>
 		<?php
             }
