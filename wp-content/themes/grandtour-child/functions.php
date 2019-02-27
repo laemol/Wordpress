@@ -12,6 +12,7 @@ add_shortcode('zones', 'addRegionTags');
 add_shortcode('region-name', 'addRegionName');
 add_shortcode('filter-list', 'addCategoryOptionsList');
 add_shortcode('calendar', 'showCalendar');
+add_shortcode('destinations', 'showDestinations');
 
 // Actions
 add_action('wp_ajax_grandtour_ajax_search_product_result', 'grandtour_ajax_search_product_result');
@@ -126,7 +127,7 @@ function addProductListCode($atts = '')
             echo '<div class="one_fourth gallery4 classic static filterable portfolio_type themeborder">';
             echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/tour/details?pid=' . $product['id'] . '" target="_blank">';
             echo '<img src="' . $product['media'][0]['imageUrl'] . '" alt="' . $product['name'] . '" style="height:140px"/>';
-            if($product['openToday'] != true){
+            if ($product['openToday'] != true) {
                 echo '<div class="tour_label">' . pll__('Closed Today') . '</div>';
             }
             if ($product['originalPrice'] > $product['currentPrice']) {
@@ -168,7 +169,6 @@ function addProductListCode($atts = '')
         </div>
 
     <?php
-
         }
     }
 
@@ -205,6 +205,42 @@ function addProductListCode($atts = '')
     </script>
 <?php
 return ob_get_clean();
+}
+
+/**
+* Adds the destination cards code
+*/
+function showDestinations()
+{
+    ob_start();
+
+    echo '<div class="ppb_destination_metro one nopadding " style="margin-top:-10px;">';
+    echo '<div class="page_content_wrapper page_main_content sidebar_content full_width fixed_column">';
+    echo '<div class="standard_wrapper">';
+    echo '<div id="155127177278100507" class="portfolio_filter_wrapper gallery grid metro portrait four_cols" data-columns="4">';
+
+    $url = 'regions?limit=6';
+    $data = apiGetRequest($url);
+
+    $count = 1;
+
+    if ($data) {
+        foreach ($data as $destination) {
+            echo '<div class="element grid center classic4_cols ';
+            if ($count == 1 || $count == 6 || $count == 7 || $count == 12 || $count == 13) {
+                echo ' double_size ';
+            }
+            echo ' animated' . $count . '">';
+            echo '<div class="one_fourth gallery4 double_size grid static filterable portfolio_type themeborder" style="background-image:url(' . $destination['imageUrl'] . ');">';
+            echo '<div class="ppb_background_overlay light"></div>';
+            echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/tickets?region_id=' . $destination['id'] . '"></a>';
+            echo '<div class="portfolio_info_wrapper"><div class="portfolio_info_content"><h3>' . $destination['name'] . '</h3></div></div></div></div>';
+
+            $count++;
+        }
+    }
+    echo '</div></div></div></div>';
+    return ob_get_clean();
 }
 
 /**
@@ -255,7 +291,7 @@ function addCategoryOptionsList()
 
     $regions = apiGetRequest('regions');
 
-    if($_GET['region_id']){
+    if ($_GET['region_id']) {
         $zones = apiGetRequest('regions/' . $_GET['region_id'] . '/zones');
     }
 
@@ -273,7 +309,7 @@ function addCategoryOptionsList()
             echo 'checked';
         }
         echo '><span for="region_' . $region['id'] . '">' . ucfirst($region['name']) . '</span></label>';
-        if($region['id'] == $_GET['region_id']){
+        if ($region['id'] == $_GET['region_id']) {
             foreach ($zones as $zone) {
                 echo '<label><input type="radio" id="zone_' . $zone['id'] . '" class="filter sub-filter" name="zone_id" value="' . $zone['id'] . '"';
                 if ($zone['id'] == $_GET['zone_id']) {
@@ -427,7 +463,8 @@ function searchBar()
 /*
 * Adds the calendar code
 */
-function showCalendar() {
+function showCalendar()
+{
     //wp_enqueue_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js', [], '2.5.17');
     wp_enqueue_script('calendar', get_stylesheet_directory_uri() . '/js/app.js', [], '1.0', true);
 }
