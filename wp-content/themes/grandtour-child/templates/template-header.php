@@ -117,6 +117,14 @@ if (empty($page_show_title)) {
         $tg_page_header_bg_parallax = 0;
     }
 
+    // Set header image of region
+    if ($_GET['region_id']) {
+        $url = 'regions/' . $_GET['region_id'];
+        $data = apiGetRequest($url);
+
+        $pp_page_bg = $data['imageUrl'];
+    }
+
     //Check if add parallax effect
     $tg_page_header_bg_parallax = kirki_get_option('tg_page_header_bg_parallax');
 
@@ -193,18 +201,16 @@ if (empty($page_show_title)) {
 			<div class="page_title_content">
 				<h1 <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
                 ?>class ="withtopbar"<?php
-            } ?>><?php echo esc_html($page_title); 
-            ?></h1>
+            } ?>><?php echo esc_html($page_title); ?></h1>
 				<?php
                     if ($_GET['region_id']) {
                         ?>
 			    	<div class="page_tagline">
                         <?php 
-                        if($_GET['region_id']){
+                        if ($_GET['region_id']) {
                             echo pll_e('All activities for');
-                            echo do_shortcode("[region-name]");
-                        }
-                        ?>
+                            echo do_shortcode('[region-name]');
+                        } ?>
 			    	</div>
 			    <?php
                     } ?>
