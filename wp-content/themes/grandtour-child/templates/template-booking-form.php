@@ -5,7 +5,7 @@ $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
 ?>
 
 <form action="<?php echo lang_url()  ?>checkout" method="POST">
-<script>var api_url = 'http://ticketandtours.test/api/v4'; </script>
+<script>var api_url = '<?php echo API_URL ?>'; </script>
 
 <?php if ($product['type'] == 'tour' || $product['scheduleRequired'] ) {
     $dates = apiGetRequest('products/' . $_GET['pid'] . '/dates');
@@ -27,18 +27,18 @@ $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
 }
 
 ?>
-
+<div id="prices" class="<?php if($product['scheduleRequired']){ echo 'hidden'; } ?>">
 <?php foreach ($product['prices'] as $price) {
     ?>
-    <div class="tour_product_variable_wrapper">
- 		<div class="tour_product_variable_title">
+    <div class="tour_product_variable_wrapper" id="<?php echo $price['ticketId']; ?>">
+ 		<div class="tour_product_variable_title" >
              <div class="title_wrapper">
            <?php echo mb_strimwidth($price['name'], 0, 20, '..'); ?>
            <?php echo $price['availableTickets'] === 0 ? '<br><span class="error">Sold Out<span>' : '<br><span class="subtitle">' . $price['description'] . '</span>' ?>
         </div>
          </div>
  		<div class="tour_product_variable_qty">
- 			<input type="number" class="price" data-amount="<?php echo $price['currentPrice']; ?>" name="price[<?php echo $price['ticketId']; ?>]" id="<?php echo $price['ticketId']; ?>" value="0" min="0" max="<?php echo $price['availableTickets']; ?>">
+ 			<input type="number" class="price" data-amount="<?php echo $price['currentPrice']; ?>"  name="price[<?php echo $price['ticketId']; ?>]"  value="0" min="0" max="<?php echo $price['availableTickets']; ?>">
  		</div>
  		&nbsp;x&nbsp;
  		<div id="tour_product_variable_price_3512" class="tour_product_variable_price" data-price="6000">
@@ -50,6 +50,8 @@ $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
 <div class="tour_product_variable_title">
 <?php pll_e('Free'); ?>
 <br><span class="subtitle"><?php echo $product['ageDescription']; ?></span>
+</div>
+
 </div>
 
 <div class="single_tour_view_wrapper themeborder">
