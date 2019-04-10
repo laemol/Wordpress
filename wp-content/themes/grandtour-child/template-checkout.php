@@ -207,8 +207,6 @@ if (empty($page_show_title)) {
         ?>
 <!-- Begin content -->
 
-<?php var_dump($_POST); ?>
-
 <div id="page_content_wrapper" class="<?php if (!empty($pp_page_bg)) {
             ?>hasbg<?php
         } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
@@ -247,17 +245,16 @@ if (empty($page_show_title)) {
 			</p>
 			
 		</div>
-   
-<?php 
+     
+<?php if ($product['type'] == 'tour') {
+            $date = $_POST['date'];
+            //$tours = $product['tours'][array_search($_POST['schedule_id'], array_column($product['tours'], 'tourId'))]; 
+            $tours = apiGetRequest('products/' . $_POST['productId'] . '/tours?date=' . $date . '&lang=en');
 
-if ($product['type'] == 'tour') {
-    $date = $_POST['date'];
-    //$tours = $product['tours'][array_search($_POST['schedule_id'], array_column($product['tours'], 'tourId'))];
-    $tours = apiGetRequest('products/' . $_POST['productId'] . '/tours?date=' . $date . '&lang=en');
-
-    // $filteredTours = array_filter($product['tours'], function($element) use($date){
-    //     return isset($element['date']) && $element['date'] == $date;
-    // }); ?>
+            // $filteredTours = array_filter($product['tours'], function($element) use($date){
+            //     return isset($element['date']) && $element['date'] == $date;
+            // });
+            ?>
 
 		 <div id="two">
 		 <h4><?php pll_e('Tour details'); ?></h4>
@@ -270,19 +267,19 @@ if ($product['type'] == 'tour') {
 
          echo'<div style="overflow-y: scroll; height:250px; width:75%">';
 
-    echo '<ul class="departure">';
-    foreach ($tours as $tour) {
-        foreach ($tour['departures'] as $stop) {
-            if ($stop['type'] == 'stop' && $tour['availableTickets'] >= array_sum($_POST['price'])) {
-                echo '<li >';
-                echo '<div class="radio"><input type="radio" class="stop" name="stop_id" value="' . $stop['stopId'] . '" data-tour="' . $tour['tourId'] . '"></div>';
-                echo  '<h6>' . $stop['time'] . ' - ' . $stop['name'] . '</h6>';
-                echo  ucfirst($stop['description']) . '<br>';
-                echo '<a href="https://www.google.com/maps?q=@' . $stop['latitude'] . ',' . $stop['longitude'] . '" target="_blank"><span class="ti-location-pin"></span> Show on Google Maps </a></span>';
-                echo '</li>';
+            echo '<ul class="departure">';
+            foreach($tours as $tour){
+                foreach ($tour['departures'] as $stop) {
+                    if ($stop['type'] == 'stop' && $tour['availableTickets'] >= array_sum($_POST['price'])) {
+                    echo '<li >';
+                    echo '<div class="radio"><input type="radio" class="stop" name="stop_id" value="' . $stop['stopId'] . '" data-tour="' . $tour['tourId'] . '"></div>';
+                    echo  '<h6>' . $tour['date'] . ' - ' . $stop['name'] . '</h6>';
+                    echo  ucfirst($stop['description']) . '<br>';
+                    echo '<a href="https://www.google.com/maps?q=@' . $stop['latitude'] . ',' . $stop['longitude'] . '" target="_blank"><span class="ti-location-pin"></span> Show on Google Maps </a></span>';
+                    echo '</li>';
+                }
             }
-        }
-    } ?>
+            } ?>
 		 </ul>
 		 </div>
 		</p>
@@ -290,15 +287,15 @@ if ($product['type'] == 'tour') {
 		 </div>
 
 		<?php
-} else {
-        ?>
+        } else {
+            ?>
 
         <div id="two">
         <!-- no conetnt yet... -->
         </div>
 
         <?php
-    } ?>
+        } ?>
 		<div style="clear: both; height: 20px;"></div>
         <h4><?php pll_e('Your order'); ?></h4>
 			<div id="order_review" class="checkout-review-order">
@@ -370,8 +367,8 @@ if ($product['type'] == 'tour') {
 	<input type="hidden" name="tour_id" id="tour_id"  value="<?php echo $_POST['tour_id']; ?>" >
     <input type="hidden" name="productId" value="<?php echo $product['id']; ?>" >
     <input type="hidden" name="productName" value="<?php echo $product['name']; ?>" >
-    <input type="hidden" name="scheduleId" value="<?php echo $_POST['schedule_id']; ?>" >
-    <input type="hidden" name="date" value="<?php echo $_POST['date']; ?>" >
+    <input type="hidden" name="scheduleId" value="<?php echo $_POST['schedule_id'];?>" >
+    <input type="hidden" name="date" value="<?php echo $_POST['date'];?>" >
     <input type="hidden" name="timeslot" value="<?php echo $_POST['timeslot']; ?>" >
     <input type="hidden" name="total" id="total" value="<?php echo $total ?>" >
 	<button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment"><?php pll_e('Proceed to Payment'); ?></button>
@@ -401,7 +398,7 @@ if ($product['type'] == 'tour') {
 <div class="standard_wrapper">
     <div class="page_content_wrapper"><div class="inner"><div style="margin:auto;width:100%">   
     <h4><?php pll_e('Frequently asked questions'); ?></h4> 
-    <?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('Footer Checkout')) : ?>
+    <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer Checkout") ) : ?>
 <?php endif;?>
 
 </div></div></div></div></div>
