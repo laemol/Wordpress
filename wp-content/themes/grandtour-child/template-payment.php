@@ -207,7 +207,8 @@ session_start();
                 'timeslot' => $_POST['timeslot'],
                 'items' => $tickets,
                 'source' => 'web',
-                'clientIp' => $_SERVER['REMOTE_ADDR']
+                'clientIp' => $_SERVER['REMOTE_ADDR'],
+                'partnerId' => $_SESSION['partnerId']
             ];
 
             $result = apiPostRequest('orders', $data);

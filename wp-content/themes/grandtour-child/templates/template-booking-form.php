@@ -1,6 +1,7 @@
 <?php
 // Get current product
-$product = array_shift(apiGetRequest('products/' . $_GET['pid']));
+
+$product = array_shift(apiGetRequest('products/' . get_query_var('pid')));
 
 ?>
 
@@ -8,7 +9,7 @@ $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
 <script>var api_url = '<?php echo API_URL ?>'; </script>
 
 <?php if ($product['type'] == 'tour' || $product['scheduleRequired'] ) {
-    $dates = apiGetRequest('products/' . $_GET['pid'] . '/dates');
+    $dates = apiGetRequest('products/' . $product['id'] . '/dates');
 
     echo do_shortcode('[calendar]');
 
@@ -34,7 +35,7 @@ $product = array_shift(apiGetRequest('products/' . $_GET['pid']));
  		<div class="tour_product_variable_title" >
              <div class="title_wrapper">
            <?php echo mb_strimwidth($price['name'], 0, 20, '..'); ?>
-           <?php echo $price['availableTickets'] === 0 ? '<br><span class="error">Sold Out<span>' : '<br><span class="subtitle">' . $price['description'] . '</span>' ?>
+           <?php echo $price['availableTickets'] === 0 ? '<br><span class="error">Sold Out<span>' : '<br><span class="subtitle">' . substr($price['description'],0,24) . '</span>' ?>
         </div>
          </div>
  		<div class="tour_product_variable_qty">

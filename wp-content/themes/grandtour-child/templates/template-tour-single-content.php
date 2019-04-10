@@ -1,6 +1,7 @@
 <?php
     // Get current product
-    $product = array_shift(apiGetRequest('products/' . $_GET['pid'] . '?lang=' . pll_current_language()));
+
+    $product = array_shift(apiGetRequest('products/' . get_query_var('pid'). '?lang=' . pll_current_language()));
 
 ?>
 
@@ -9,6 +10,7 @@
 } ?>">
 
 <!-- Slideshow container -->
+<br>
 <div class="slideshow-container">
 
 <!-- Images with number and caption text -->

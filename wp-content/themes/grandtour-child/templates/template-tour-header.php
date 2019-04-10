@@ -1,7 +1,7 @@
 <?php
 
 // Get current product
-$product = array_shift(apiGetRequest('products/' . $_GET['pid']));
+$product = array_shift(apiGetRequest('products/' . get_query_var('pid')));
 
 $image_thumb = [$product['media'][0]['imageUrl']];
 

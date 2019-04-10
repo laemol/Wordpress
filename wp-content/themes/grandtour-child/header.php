@@ -5,6 +5,14 @@
  * @package WordPress
  */
 
+ // starting the session
+session_start();
+if (isset($_GET['partnerId'])) {
+    $_SESSION['partnerId'] = $_GET['partnerId'];
+}
+
+ob_start();
+
 if (!isset($content_width)) {
     $content_width = 1170;
 }
@@ -22,7 +30,7 @@ $tg_menu_layout = grandtour_menu_layout();
 } ?> data-menu="<?php echo esc_attr($tg_menu_layout); ?>">
 <head>
 
-<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="profile" href="https://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
 <?php

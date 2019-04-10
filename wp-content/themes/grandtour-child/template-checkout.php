@@ -207,6 +207,8 @@ if (empty($page_show_title)) {
         ?>
 <!-- Begin content -->
 
+<?php var_dump($_POST); ?>
+
 <div id="page_content_wrapper" class="<?php if (!empty($pp_page_bg)) {
             ?>hasbg<?php
         } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
@@ -224,21 +226,31 @@ if (empty($page_show_title)) {
 		<h4><?php pll_e('Billing details'); ?></h4>
   
 			<p><strong><?php pll_e('Name'); ?></strong><br>
-			<input type="text" class="input-text" name="fullname" id="fullname" placeholder="" value="" autocomplete="fullname" required=""></p>
+            <input type="text" class="input-text" name="fullname" id="fullname" placeholder="" value="" autocomplete="fullname" required=""></p>
+            
 			<p><strong><?php pll_e('Email'); ?></strong><br> <?php echo $_POST['email'] ; ?>
-			<input type="email" class="input-text" name="email" id="email" placeholder="" value="" autocomplete="email" required=""></p>
+            <input type="email" class="input-text" name="email" id="email" placeholder="" value="" autocomplete="email" required=""></p>
+            
 			<p><div class="text-container"><strong><?php pll_e('Phone'); ?></strong> (<?php pll_e('Only used in case of emergency'); ?>)<br><?php echo $_POST['phone'] ; ?>
 			
             <input type="text" class="input-text" name="phone" id="phone" placeholder="" value="" autocomplete="phone">
             <input type="text" name="phone_check" id="phone_check" value="" required class="hide">
 			<span id="valid-msg" class="hide valid inline"><?php pll_e('Valid'); ?></span>
-			<span id="error-msg" class="hide error inline"></span>  
-			</div>
+            <span id="error-msg" class="hide error inline"></span> 
+            </div>
+            </p>
+            
+            <p ><strong><?php pll_e('Promocode'); ?></strong><br>
+            <input type="text" class="input-text" name="promocode" id="promocode" style="width:260px">
+            <button type="button" class="button alt" name="apply" id="apply" value="apply" style="width:135px"><?php pll_e('Apply'); ?></button><br>  
+            <div id="discount_error" class="hide error"><?php pll_e('Invalid Promocode'); ?></div>
+			</p>
 			
-		</p>
 		</div>
-     
-<?php if ($product['type'] == 'tour') {
+   
+<?php 
+
+if ($product['type'] == 'tour') {
             $date = $_POST['date'];
             //$tours = $product['tours'][array_search($_POST['schedule_id'], array_column($product['tours'], 'tourId'))]; 
             $tours = apiGetRequest('products/' . $_POST['productId'] . '/tours?date=' . $date . '&lang=en');
@@ -321,12 +333,17 @@ if (empty($page_show_title)) {
 
 		<tr class="cart-subtotal">
 			<th><?php pll_e('Subtotal'); ?></th>
-			<td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($total, 2, '.', '')  ?></span></td>
-		</tr>
-
+			<td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($total, 2, '.', '')  ?></span></strong></td>
+        </tr>
+        
+        <tr class="cart-subtotal">
+			<td><?php pll_e('Discount'); ?> <span id="discount_percent"></span></td>
+			<td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><span id="discount_amount"><?php echo number_format(0, 2, '.', '')  ?></span></span> -</td>
+        </tr>
+        
 		<tr class="order-total">
 			<th><?php pll_e('Total'); ?></th>
-			<td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($total, 2, '.', '')  ?></span></strong> </td>
+			<td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><span id="discount_amount_total"><?php echo number_format($total, 2, '.', '')  ?></span></span></strong></td>
 		</tr>
 
 	</tfoot>
@@ -357,6 +374,7 @@ if (empty($page_show_title)) {
     <input type="hidden" name="scheduleId" value="<?php echo $_POST['schedule_id'];?>" >
     <input type="hidden" name="date" value="<?php echo $_POST['date'];?>" >
     <input type="hidden" name="timeslot" value="<?php echo $_POST['timeslot']; ?>" >
+    <input type="hidden" name="total" id="total" value="<?php echo $total ?>" >
 	<button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment"><?php pll_e('Proceed to Payment'); ?></button>
 	</div>
     		<?php
@@ -409,6 +427,47 @@ jQuery(function()
         jQuery('.selected').removeClass('selected');
         jQuery(this).addClass('selected');
         jQuery('#tour_id').val(jQuery(this).data('tour'));
+});
+</script>
+
+<script>
+jQuery("#apply").on("click", function(){
+var promocode = document.getElementById("promocode").value;
+var api_url = "<?php echo API_URL ?>";
+
+if(promocode){
+jQuery.ajax({
+
+url : api_url + 'orders/promocode/' + promocode,
+headers: {"x-authorization": "539169d340eda42d50c384efc2f9aa227eabcce7"},
+type : 'GET',
+dataType:'json',
+success : function(data) {  
+    if(data.data[0].success) {
+        document.getElementById("discount_error").classList.add("hide")
+        var discount = document.getElementById("total").value / 100 * data.data[0].discount;
+        document.getElementById("discount_percent").textContent =  data.data[0].discount + '%';
+        document.getElementById("discount_amount").textContent =  parseFloat(discount).toFixed(2);
+        document.getElementById("discount_amount_total").textContent = parseFloat(document.getElementById("total").value - discount).toFixed(2);
+    }else{
+        document.getElementById("discount_error").classList.remove("hide")
+        document.getElementById("discount_percent").textContent =  '';
+        document.getElementById("discount_amount").textContent =  parseFloat(0).toFixed(2);
+        document.getElementById("discount_amount_total").textContent = parseFloat(document.getElementById("total").value).toFixed(2);
+    }          
+},
+error : function(request,error)
+{
+    console.log(JSON.stringify(request));
+}
+
+});
+
+}else{
+    // error empty field
+    document.getElementById("discount_error").classList.remove("hide")
+    console.log('empty field');
+}
 });
 </script>
 
