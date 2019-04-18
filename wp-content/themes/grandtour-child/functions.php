@@ -13,6 +13,7 @@ add_shortcode('region-name', 'addRegionName');
 add_shortcode('filter-list', 'addCategoryOptionsList');
 add_shortcode('calendar', 'showCalendar');
 add_shortcode('destinations', 'showDestinations');
+add_shortcode('show-all', 'addShowAll');
 
 // Actions
 add_action('wp_ajax_grandtour_ajax_search_product_result', 'grandtour_ajax_search_product_result');
@@ -92,6 +93,14 @@ function apiPostRequest($resource, $data)
     }
 
     return $data;
+}
+
+/**
+* Adds the show all button
+*/
+function addShowAll()
+{
+echo '<p style="text-align: center;"><a href="' . get_site_url() . '/destinations/" class="button show_more">' . pll__('Show All Destinations') .'</a></p>';
 }
 
 /**
@@ -219,16 +228,24 @@ return ob_get_clean();
 /**
 * Adds the destination cards code
 */
-function showDestinations()
+function showDestinations($atts = '')
 {
     ob_start();
+
+    $value = shortcode_atts([
+        'style' => '',
+    ], $atts);
 
     echo '<div class="ppb_destination_metro one nopadding " style="margin-top:-10px;">';
     echo '<div class="page_content_wrapper page_main_content sidebar_content full_width fixed_column">';
     echo '<div class="standard_wrapper">';
-    echo '<div id="155127177278100507" class="portfolio_filter_wrapper gallery grid metro portrait four_cols" data-columns="4">';
+    echo '<div id="155127177278100507" class="portfolio_filter_wrapper gallery grid ';
+    if($value['style'] == 'metro' ){
+        echo 'metro';
+    }
+    echo ' portrait four_cols" data-columns="4">';
 
-    $url = 'regions?limit=6';
+    $url = $value['style'] == 'metro' ? 'regions?limit=6' : 'regions' ;
     $data = apiGetRequest($url);
 
     $count = 1;
@@ -236,19 +253,24 @@ function showDestinations()
     if ($data) {
         foreach ($data as $destination) {
             echo '<div class="element grid center classic4_cols ';
-            if ($count == 1 || $count == 6 || $count == 7 || $count == 12 || $count == 13) {
-                echo ' double_size ';
+            if($value['style'] == 'metro'){
+                if ($count == 1 || $count == 6 || $count == 7 || $count == 12 || $count == 13) {
+                    echo ' double_size ';
+                }
             }
             echo ' animated' . $count . '">';
-            echo '<div class="one_fourth gallery4 double_size grid static filterable portfolio_type themeborder" style="background-image:url(' . $destination['imageUrl'] . ');">';
+            echo '<div class="one_fourth gallery4 double_size grid static filterable portfolio_type themeborder" style="background-image:url(' . str_replace(' ', '%20', $destination['imageUrl'])  . ');">';
             echo '<div class="ppb_background_overlay light"></div>';
             echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/tickets?region_id=' . $destination['id'] . '"></a>';
-            echo '<div class="portfolio_info_wrapper"><div class="portfolio_info_content"><h3>' . $destination['name'] . '</h3></div></div></div></div>';
+            echo '<div class="portfolio_info_wrapper"><div class="portfolio_info_content"><h3>' . ucwords($destination['name']) . '</h3></div></div></div></div>';
 
             $count++;
         }
     }
     echo '</div></div></div></div>';
+    if($value['style'] == 'metro'){
+    echo '<p style="text-align: center;"><a href="' . get_site_url() . '/destinations/" class="button show_more">' . pll__('Show All Destinations') .'</a></p>';
+    }
     return ob_get_clean();
 }
 
