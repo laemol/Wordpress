@@ -32,7 +32,7 @@ function custom_rewrite_tag() {
   add_action('init', 'custom_rewrite_tag', 10, 0);
 
   function custom_rewrite_rule() {
-    add_rewrite_rule('^([a-z]+)/products/?([^/]*)','index.php?pagename=product&pid=$matches[2]&lang=$matches[1]','top');
+    add_rewrite_rule('^([a-z]+)/ticket/?([^/]*)','index.php?pagename=product&pid=$matches[2]&lang=$matches[1]','top');
   }
   add_action('init', 'custom_rewrite_rule', 10, 0);
 
@@ -143,7 +143,7 @@ function addProductListCode($atts = '')
             $offset++;
             echo '<div class="element grid classic4_cols animated4">';
             echo '<div class="one_fourth gallery4 classic static filterable portfolio_type themeborder">';
-            echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/products/' . $product['slug'] . '" target="_blank">';
+            echo '<a class="tour_image" href="' . get_site_url() . '/' . pll_current_language() . '/ticket/' . $product['slug'] . '" target="_blank">';
             echo '<img src="' . $product['media'][0]['imageUrl'] . '" alt="' . $product['name'] . '" style="height:140px"/>';
             if ($product['openToday'] != true) {
                 echo '<div class="tour_label">' . pll__('Closed Today') . '</div>';
@@ -154,7 +154,7 @@ function addProductListCode($atts = '')
                 echo '<div class="tour_price">&euro; ' . $product['currentPrice'] . '</div></a>';
             }
             echo '<div class="portfolio_info_wrapper">';
-            echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/products/' . $product['slug'] . '" target="_blank"><h4>' . $product['name'] . '</h4></a>';
+            echo '<a class="tour_link" href="' . get_site_url() . '/' . pll_current_language() . '/ticket/' . $product['slug'] . '" target="_blank"><h4>' . $product['name'] . '</h4></a>';
             if ($product['type'] == 'tour') {
                 echo '<div class="tour_excerpt"><p><i class="ti-location-pin"> </i> ' . $product['location'] . '<br><i class="ti-time"> </i> ' . $product['duration'] . ' Hours</p></div>';
             } else {
@@ -448,7 +448,7 @@ function grandtour_ajax_search_product_result()
 
         foreach ($products as $product) {
             echo '<li>';
-            echo '<a href="' . get_site_url() . '/' . pll_current_language() . '/products/' . $product['slug'] . '"><span class="ti-ticket"></span> ' . $product['name'] . '</a>';
+            echo '<a href="' . get_site_url() . '/' . pll_current_language() . '/ticket/' . $product['slug'] . '"><span class="ti-ticket"></span> ' . $product['name'] . '</a>';
             echo '</li>';
         }
 
