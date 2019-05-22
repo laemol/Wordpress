@@ -5,37 +5,44 @@ $product = array_shift(apiGetRequest('products/' . get_query_var('pid')));
 
 ?>
 
+<?php if ($product['externalUrl']) {
+    ?>
+<p>
+<?php pll_e('This product is available at our external partner'); ?><br>
+</p>
+<a href="<?php echo  $product['externalUrl'] ?>" class="button single_tour_booking_wrapper" target="_blank"><?php pll_e('Book Now'); ?></a>
+    <?php
+} else {
+        ?>
+
 <form action="<?php echo lang_url()  ?>checkout" method="POST">
 <script>var api_url = '<?php echo API_URL ?>'; </script>
 
-<?php if ($product['type'] == 'tour' || $product['scheduleRequired'] ) {
-    $dates = apiGetRequest('products/' . $product['id'] . '/dates');
+<?php if ($product['type'] == 'tour' || $product['scheduleRequired']) {
+            $dates = apiGetRequest('products/' . $product['id'] . '/dates');
 
-    echo do_shortcode('[calendar]');
+            echo do_shortcode('[calendar]');
 
-    // Fix registered first bug
-    pll__("Monday");
-    $weekdays = array(pll__("Monday"), pll__("Tuesday"), pll__("Wednesday"), pll__("Thursday"), pll__("Friday"), pll__("Saturday"), pll__("Sunday"));
+            // Fix registered first bug
+            pll__('Monday');
+            $weekdays = [pll__('Monday'), pll__('Tuesday'), pll__('Wednesday'), pll__('Thursday'), pll__('Friday'), pll__('Saturday'), pll__('Sunday')];
 
-    // Fix registered first bug
-    pll__("Januari"); 
-    $months = array(pll__("Januari"), pll__("February"), pll__("March"), pll__("April"), pll__("May"), pll__("June"), pll__("July"), pll__("August"), pll__("September"), pll__("October"), pll__("November"), pll__("December"));
-
-    ?>
+            // Fix registered first bug
+            pll__('Januari');
+            $months = [pll__('Januari'), pll__('February'), pll__('March'), pll__('April'), pll__('May'), pll__('June'), pll__('July'), pll__('August'), pll__('September'), pll__('October'), pll__('November'), pll__('December')]; ?>
     <div id="calendar-widget"><calendar-component :schedule-data='<?php echo json_encode($dates) ?>' :product-id="<?php echo $product['id'] ?>" :weekdays='<?php echo json_encode($weekdays) ?>'  :months='<?php echo json_encode($months) ?>'></calendar-component></div><br>
     <?php
-
-}
-
-?>
-<div id="prices" class="<?php if($product['scheduleRequired']){ echo 'hidden'; } ?>">
+        } ?>
+<div id="prices" class="<?php if ($product['scheduleRequired']) {
+            echo 'hidden';
+        } ?>">
 <?php foreach ($product['prices'] as $price) {
-    ?>
+            ?>
     <div class="tour_product_variable_wrapper" id="<?php echo $price['ticketId']; ?>">
  		<div class="tour_product_variable_title" >
              <div class="title_wrapper">
            <?php echo mb_strimwidth($price['name'], 0, 20, '..'); ?>
-           <?php echo $price['availableTickets'] === 0 ? '<br><span class="error">Sold Out<span>' : '<br><span class="subtitle">' . substr($price['description'],0,24) . '</span>' ?>
+           <?php echo $price['availableTickets'] === 0 ? '<br><span class="error">Sold Out<span>' : '<br><span class="subtitle">' . substr($price['description'], 0, 24) . '</span>' ?>
         </div>
          </div>
  		<div class="tour_product_variable_qty">
@@ -47,7 +54,7 @@ $product = array_shift(apiGetRequest('products/' . get_query_var('pid')));
         </div>
     </div>
 <?php
-} ?>
+        } ?>
 <div class="tour_product_variable_title">
 <?php pll_e('Free'); ?>
 <br><span class="subtitle"><?php echo $product['ageDescription']; ?></span>
@@ -78,6 +85,10 @@ $product = array_shift(apiGetRequest('products/' . get_query_var('pid')));
 
 </form>
 
+<?php
+    }
+// end else external
+?>
 <script>
     jQuery(".price").on("change", function(){
   var total = 0;
@@ -90,7 +101,7 @@ $product = array_shift(apiGetRequest('products/' . get_query_var('pid')));
 </script>
 
 <?php if ($product['type'] == 'tour') {
-        ?>
+    ?>
 <script>
     jQuery(".price").on("change", function(){
   var count = Number(0);
@@ -110,7 +121,7 @@ $product = array_shift(apiGetRequest('products/' . get_query_var('pid')));
 });
 </script>
 <?php
-    } ?>
+} ?>
 
 <script>
     jQuery(".select_date").on("click", function(){

@@ -18,7 +18,9 @@
  * @package WordPress
  */
 
-define('API_URL', 'https://ticketandtours.test/api/v4/');
+define('API_URL', 'https://test.backend.holliapp.com/api/v4/');
+
+define('HOLLI_BASICAUTH', 'hollidev:hollidev03847');
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */

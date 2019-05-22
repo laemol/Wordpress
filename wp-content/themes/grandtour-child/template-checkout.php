@@ -5,7 +5,7 @@ session_start();
  * The main template file for display tour page checkout.
  *
  * @package WordPress
-*/
+ */
 
 $product = array_shift(apiGetRequest('products/' . $_POST['productId']));
 
@@ -28,8 +28,8 @@ if (isset($_GET['ppb_preview_page'])) {
 }
 
 /**
-*	Get Current page object
-**/
+ *	Get Current page object
+ **/
 if (!is_null($post)) {
     $page_obj = get_page($post->ID);
 }
@@ -37,8 +37,8 @@ if (!is_null($post)) {
 $current_page_id = '';
 
 /**
-*	Get current page id
-**/
+ *	Get current page id
+ **/
 
 if (!is_null($post) && isset($page_obj->ID)) {
     $current_page_id = $page_obj->ID;
@@ -96,419 +96,425 @@ if (empty($page_show_title)) {
             $video_url = 'https://vimeo.com/' . $page_header_vimeo;
         }
     } ?>
-<div id="page_caption" class="<?php if (!empty($pp_page_bg)) {
-        ?>hasbg <?php if (!empty($tg_page_header_bg_parallax)) {
-            ?>parallax<?php
-        } ?> <?php
-    } ?> <?php if (!empty($grandtour_topbar)) {
-        ?>withtopbar<?php
-    } ?> <?php if (!empty($grandtour_screen_class)) {
-        echo esc_attr($grandtour_screen_class);
-    } ?> <?php if (!empty($grandtour_page_content_class)) {
-        echo esc_attr($grandtour_page_content_class);
-    } ?>" <?php if (!empty($pp_page_bg)) {
-        ?>style="background-image:url(<?php echo esc_url($pp_page_bg); ?>);"<?php
-    } ?> <?php if ($page_header_type == 'Youtube Video' or $page_header_type == 'Vimeo Video') {
-        ?>data-jarallax-video="<?php echo esc_url($video_url); ?>"<?php
-    } ?>>
-	
-	<?php
+    <div id="page_caption" class="<?php if (!empty($pp_page_bg)) {
+                                        ?>hasbg <?php if (!empty($tg_page_header_bg_parallax)) {
+                                                            ?>parallax<?php
+                                                                            } ?> <?php
+                                                                                    } ?> <?php if (!empty($grandtour_topbar)) {
+                                                                    ?>withtopbar<?php
+                                                                } ?> <?php if (!empty($grandtour_screen_class)) {
+                                                            echo esc_attr($grandtour_screen_class);
+                                                        } ?> <?php if (!empty($grandtour_page_content_class)) {
+                                                            echo esc_attr($grandtour_page_content_class);
+                                                        } ?>" <?php if (!empty($pp_page_bg)) {
+                                                            ?>style="background-image:url(<?php echo esc_url($pp_page_bg); ?>);" <?php
+                                                                                                                    } ?> <?php if ($page_header_type == 'Youtube Video' or $page_header_type == 'Vimeo Video') {
+                                                                                                                        ?>data-jarallax-video="<?php echo esc_url($video_url); ?>" <?php
+                                                                                                                                                                        } ?>>
+
+        <?php
         //Check page title vertical alignment
         $tg_page_title_vertical_alignment = kirki_get_option('tg_page_title_vertical_alignment');
-    if ($tg_page_title_vertical_alignment == 'center') {
-        ?>
-		<div class="overlay_background visible"></div>
-	<?php
+        if ($tg_page_title_vertical_alignment == 'center') {
+            ?>
+            <div class="overlay_background visible"></div>
+        <?php
     } ?>
 
-	<?php
+        <?php
         if (empty($page_show_title)) {
             ?>
-	<div class="page_title_wrapper">
-		<div class="page_title_inner">
-			<div class="page_title_content">
+            <div class="page_title_wrapper">
+                <div class="page_title_inner">
+                    <div class="page_title_content">
 
-            <h1><?php pll_e('Checkout'); ?></h1>
-            <nav>
-            <ol class="cd-multi-steps text-bottom count">
-            <li class="current"><a href="#0"><?php pll_e('Checkout'); ?></a></li>
-            <li ><a href="#0"><?php pll_e('Payment'); ?></a></li>
-            <li ><a href="#0"><?php pll_e('Confirmation'); ?></a></li>
-            </ol>
-            </nav>
+                        <h1><?php pll_e('Checkout'); ?></h1>
+                        <nav>
+                            <ol class="cd-multi-steps text-bottom count">
+                                <li class="current"><a href="#0"><?php pll_e('Checkout'); ?></a></li>
+                                <li><a href="#0"><?php pll_e('Payment'); ?></a></li>
+                                <li><a href="#0"><?php pll_e('Confirmation'); ?></a></li>
+                            </ol>
+                        </nav>
 
-				<?php
-                    if (!empty($page_tagline)) {
-                        ?>
-			    	<div class="page_tagline">
-			    		<?php echo nl2br($page_tagline); ?>
-			    	</div>
-			    <?php
+                        <?php
+                        if (!empty($page_tagline)) {
+                            ?>
+                            <div class="page_tagline">
+                                <?php echo nl2br($page_tagline); ?>
+                            </div>
+                        <?php
                     } ?>
+                    </div>
+
+                </div>
             </div>
+        <?php
+    } ?>
 
-		</div>
-	</div>
-	<?php
-        } ?>
-
-</div>
+    </div>
 <?php
 }
 ?>
 
 <?php
-    //Check if use page builder
-    $ppb_form_data_order = '';
-    $ppb_form_item_arr = [];
-    $ppb_enable = get_post_meta($current_page_id, 'ppb_enable', true);
+//Check if use page builder
+$ppb_form_data_order = '';
+$ppb_form_item_arr = [];
+$ppb_enable = get_post_meta($current_page_id, 'ppb_enable', true);
 
-    $grandtour_topbar = grandtour_get_topbar();
+$grandtour_topbar = grandtour_get_topbar();
 ?>
 <?php
-    if (!empty($ppb_enable)) {
-        $grandtour_screen_class = grandtour_get_screen_class();
-        grandtour_set_screen_class('ppb_wrapper');
+if (!empty($ppb_enable)) {
+    $grandtour_screen_class = grandtour_get_screen_class();
+    grandtour_set_screen_class('ppb_wrapper');
 
-        //if dont have password set
-        if (!post_password_required()) {
-            wp_enqueue_script('grandtour-custom-onepage', get_template_directory_uri() . '/js/custom_onepage.js', false, GRANDTOUR_THEMEVERSION, true); ?>
-<div class="ppb_wrapper <?php if (!empty($pp_page_bg)) {
-                ?>hasbg<?php
-            } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
-                ?>withtopbar<?php
-            } ?>">
-<?php
-        grandtour_apply_builder($current_page_id); ?>
-</div>
-<?php
-        } //end if dont have password set
-        else {
-            ?>
-<div id="page_content_wrapper" class="<?php if (!empty($pp_page_bg)) {
-                ?>hasbg<?php
-            } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
-                ?>withtopbar<?php
-            } ?>">
-    <div class="inner">
-    	<!-- Begin main content -->
-    	<div class="inner_wrapper">
-            
-    		<div class="sidebar_content full_width">
-<?php
-            the_content(); ?>
-    		<br/><br/></div>
-    	</div>
-    </div>
-</div>
-<?php
-        }
-    } else {
-        ?>
-<!-- Begin content -->
-
-<div id="page_content_wrapper" class="<?php if (!empty($pp_page_bg)) {
-            ?>hasbg<?php
-        } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
-            ?>withtopbar<?php
-        } ?>">
-
-		<!-- Begin main content -->
-		<form action="<?php echo lang_url() ?>payment" method="POST" id="form" data-parsley-validate>
-
-    	<div class="wrapper">
-            
-		<div class="form_wrapper">
-
-		<div id="one">
-		<h4><?php pll_e('Billing details'); ?></h4>
-  
-			<p><strong><?php pll_e('Name'); ?></strong><br>
-            <input type="text" class="input-text" name="fullname" id="fullname" placeholder="" value="" autocomplete="fullname" required=""></p>
-            
-			<p><strong><?php pll_e('Email'); ?></strong><br> <?php echo $_POST['email'] ; ?>
-            <input type="email" class="input-text" name="email" id="email" placeholder="" value="" autocomplete="email" required=""></p>
-            
-			<p><div class="text-container"><strong><?php pll_e('Phone'); ?></strong> (<?php pll_e('Only used in case of emergency'); ?>)<br><?php echo $_POST['phone'] ; ?>
-			
-            <input type="text" class="input-text" name="phone" id="phone" placeholder="" value="" autocomplete="phone">
-            <input type="text" name="phone_check" id="phone_check" value="" required class="hide">
-			<span id="valid-msg" class="hide valid inline"><?php pll_e('Valid'); ?></span>
-            <span id="error-msg" class="hide error inline"></span> 
-            </div>
-            </p>
-            
-            <p ><strong><?php pll_e('Promocode'); ?></strong><br>
-            <input type="text" class="input-text" name="promocode" id="promocode" style="width:260px">
-            <button type="button" class="button alt" name="apply" id="apply" value="apply" style="width:135px"><?php pll_e('Apply'); ?></button><br>  
-            <div id="discount_error" class="hide error"><?php pll_e('Invalid Promocode'); ?></div>
-			</p>
-			
-		</div>
-     
-<?php if ($product['type'] == 'tour') {
-            $date = $_POST['date'];
-            //$tours = $product['tours'][array_search($_POST['schedule_id'], array_column($product['tours'], 'tourId'))]; 
-            $tours = apiGetRequest('products/' . $_POST['productId'] . '/tours?date=' . $date . '&lang=en');
-
-            // $filteredTours = array_filter($product['tours'], function($element) use($date){
-            //     return isset($element['date']) && $element['date'] == $date;
-            // });
-            ?>
-
-		 <div id="two">
-		 <h4><?php pll_e('Tour details'); ?></h4>
-
-		 <p><span class="ti-calendar"></span> <strong><?php pll_e('Tour date'); ?>: </strong> <?php echo date_format(date_create($date), 'l d F Y') ?>
-
-		 <p><span class="ti-direction-alt"></span> <strong><?php pll_e('Meeting point'); ?></strong><br>
-		 <?php pll_e('Please select a meeting point'); ?>.
-		  <?php 
-
-         echo'<div style="overflow-y: scroll; height:250px; width:75%">';
-
-            echo '<ul class="departure">';
-            foreach($tours as $tour){
-                foreach ($tour['departures'] as $stop) {
-                    if ($stop['type'] == 'stop' && $tour['availableTickets'] >= array_sum($_POST['price'])) {
-                    echo '<li >';
-                    echo '<div class="radio"><input type="radio" class="stop" name="stop_id" value="' . $stop['stopId'] . '" data-tour="' . $tour['tourId'] . '"></div>';
-                    echo  '<h6>' . $tour['date'] . ' - ' . $stop['name'] . '</h6>';
-                    echo  ucfirst($stop['description']) . '<br>';
-                    echo '<a href="https://www.google.com/maps?q=@' . $stop['latitude'] . ',' . $stop['longitude'] . '" target="_blank"><span class="ti-location-pin"></span> Show on Google Maps </a></span>';
-                    echo '</li>';
-                }
-            }
-            } ?>
-		 </ul>
-		 </div>
-		</p>
-			
-		 </div>
-
-		<?php
-        } else {
-            ?>
-
-        <div id="two">
-        <!-- no conetnt yet... -->
+    //if dont have password set
+    if (!post_password_required()) {
+        wp_enqueue_script('grandtour-custom-onepage', get_template_directory_uri() . '/js/custom_onepage.js', false, GRANDTOUR_THEMEVERSION, true); ?>
+        <div class="ppb_wrapper <?php if (!empty($pp_page_bg)) {
+                                    ?>hasbg<?php
+                                                } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
+                                                                    ?>withtopbar<?php
+                                                                                    } ?>">
+            <?php
+            grandtour_apply_builder($current_page_id); ?>
         </div>
+    <?php
+} //end if dont have password set
+else {
+    ?>
+        <div id="page_content_wrapper" class="<?php if (!empty($pp_page_bg)) {
+                                                    ?>hasbg<?php
+                                                                } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
+                                                                                    ?>withtopbar<?php
+                                                                                                    } ?>">
+            <div class="inner">
+                <!-- Begin main content -->
+                <div class="inner_wrapper">
 
-        <?php
-        } ?>
-		<div style="clear: both; height: 20px;"></div>
-        <h4><?php pll_e('Your order'); ?></h4>
-			<div id="order_review" class="checkout-review-order">
-		<table class="shop_table checkout-review-order-table">
-	    <thead>
-		<tr>
-			<th class="product-name"><?php pll_e('Product'); ?></th>
-			<th class="product-total"><?php pll_e('Total'); ?></th>
-		</tr>
-	    </thead>
-	    <tbody>
-	
-	<?php 
-    $total = 0;
+                    <div class="sidebar_content full_width">
+                        <?php
+                        the_content(); ?>
+                        <br /><br /></div>
+                </div>
+            </div>
+        </div>
+    <?php
+}
+} else {
+    ?>
+    <!-- Begin content -->
 
-        foreach ($_POST['price'] as $key => $value) {
-            if ($value > 0) {
-                $price = $product['prices'][array_search($key, array_column($product['prices'], 'ticketId'))];
-                $total = $total + $value * $price['currentPrice']; ?>
-	<tr class="cart_item">
-		<td class="product-name">
-		<?php echo $product['name'] ?> - <?php echo $price['name'] ?>&nbsp;	<strong class="product-quantity">&times; <?php echo $value ?></strong></td>
-						<td class="product-total">
-							<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($value * $price['currentPrice'], 2, '.', '')  ?></span></td>
-	</tr>
-	<?php
-            }
-        } ?>
-	</tbody>
-	<tfoot>
+    <div id="page_content_wrapper" class="<?php if (!empty($pp_page_bg)) {
+                                                ?>hasbg<?php
+                                                        } ?> <?php if (!empty($pp_page_bg) && !empty($grandtour_topbar)) {
+                                                                        ?>withtopbar<?php
+                                                                                    } ?>">
 
-		<tr class="cart-subtotal">
-			<th><?php pll_e('Subtotal'); ?></th>
-			<td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($total, 2, '.', '')  ?></span></strong></td>
-        </tr>
-        
-        <tr class="cart-subtotal">
-			<td><?php pll_e('Discount'); ?> <span id="discount_percent"></span></td>
-			<td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><span id="discount_amount"><?php echo number_format(0, 2, '.', '')  ?></span></span> -</td>
-        </tr>
-        
-		<tr class="order-total">
-			<th><?php pll_e('Total'); ?></th>
-			<td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><span id="discount_amount_total"><?php echo number_format($total, 2, '.', '')  ?></span></span></strong></td>
-		</tr>
+        <!-- Begin main content -->
+        <form action="<?php echo lang_url() ?>payment" method="POST" id="form" data-parsley-validate>
 
-	</tfoot>
-</table>
-    </div>
+            <div class="wrapper">
 
-    <!-- Payments --> 
-    <div class="payment-details">
-        <input type="radio" name="payment_type" value="card" checked="checked"> <?php pll_e('Creditcard'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/credit-cards.png" class="cards"/><br>
-    </div>
+                <div class="form_wrapper">
 
-    <!-- <div class="payment_options">
-        <input type="radio" name="payment_type" value="ideal" disabled> iDeal (not available yet) <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/ideal.png" class="cards" /><br>
-    </div> -->
+                    <div id="one">
+                        <h4><?php pll_e('Billing details'); ?></h4>
 
-    <div style="clear: both; height: 20px;"></div>
+                        <p><strong><?php pll_e('Name'); ?></strong><br>
+                            <input type="text" class="input-text" name="fullname" id="fullname" placeholder="" value="" autocomplete="fullname" required=""></p>
 
-	<!-- forward input fields -->
-	<?php
-    session_start();
-        $rand = rand();
-        $_SESSION['rand'] = $rand; ?>
- 	<input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
-	<input type="hidden" name="prices" value="<?php echo base64_encode(serialize($_POST['price'])) ; ?>" >
-	<input type="hidden" name="tour_id" id="tour_id"  value="<?php echo $_POST['tour_id']; ?>" >
-    <input type="hidden" name="productId" value="<?php echo $product['id']; ?>" >
-    <input type="hidden" name="productName" value="<?php echo $product['name']; ?>" >
-    <input type="hidden" name="scheduleId" value="<?php echo $_POST['schedule_id'];?>" >
-    <input type="hidden" name="date" value="<?php echo $_POST['date'];?>" >
-    <input type="hidden" name="timeslot" value="<?php echo $_POST['timeslot']; ?>" >
-    <input type="hidden" name="total" id="total" value="<?php echo $total ?>" >
-	<button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment"><?php pll_e('Proceed to Payment'); ?></button>
-	</div>
-    		<?php
+                        <p><strong><?php pll_e('Email'); ?></strong><br> <?php echo $_POST['email']; ?>
+                            <input type="email" class="input-text" name="email" id="email" placeholder="" value="" autocomplete="email" required=""></p>
+
+                        <p>
+                            <div class="text-container"><strong><?php pll_e('Phone'); ?></strong> (<?php pll_e('Only used in case of emergency'); ?>)<br><?php echo $_POST['phone']; ?>
+
+                                <input type="text" class="input-text" name="phone" id="phone" placeholder="" value="" autocomplete="phone">
+                                <input type="text" name="phone_check" id="phone_check" value="" required class="hide">
+                                <span id="valid-msg" class="hide valid inline"><?php pll_e('Valid'); ?></span>
+                                <span id="error-msg" class="hide error inline"></span>
+                            </div>
+                        </p>
+
+                        <p><strong><?php pll_e('Promocode'); ?></strong><br>
+                            <input type="text" class="input-text" name="promocode" id="promocode" style="width:260px">
+                            <button type="button" class="button alt" name="apply" id="apply" value="apply" style="width:135px"><?php pll_e('Apply'); ?></button><br>
+                            <div id="discount_error" class="hide error"><?php pll_e('Invalid Promocode'); ?></div>
+                        </p>
+
+                    </div>
+
+                    <?php if ($product['type'] == 'tour') {
+                        $date = $_POST['date'];
+                        //$tours = $product['tours'][array_search($_POST['schedule_id'], array_column($product['tours'], 'tourId'))]; 
+                        $tours = apiGetRequest('products/' . $_POST['productId'] . '/tours?date=' . $date . '&lang=en');
+
+                        // $filteredTours = array_filter($product['tours'], function($element) use($date){
+                        //     return isset($element['date']) && $element['date'] == $date;
+                        // });
+                        ?>
+
+                        <div id="two">
+                            <h4><?php pll_e('Tour details'); ?></h4>
+
+                            <p><span class="ti-calendar"></span> <strong><?php pll_e('Tour date'); ?>: </strong> <?php echo date_format(date_create($date), 'l d F Y') ?>
+
+                                <p><span class="ti-direction-alt"></span> <strong><?php pll_e('Meeting point'); ?></strong><br>
+                                    <?php pll_e('Please select a meeting point'); ?>.
+                                    <?php
+
+                                    echo '<div style="overflow-y: scroll; height:250px; width:75%">';
+
+                                    echo '<ul class="departure">';
+                                    foreach ($tours as $tour) {
+                                        foreach ($tour['departures'] as $stop) {
+                                            if ($stop['type'] == 'stop' && $tour['availableTickets'] >= array_sum($_POST['price'])) {
+                                                echo '<li >';
+                                                echo '<div class="radio"><input type="radio" class="stop" name="stop_id" value="' . $stop['stopId'] . '" data-tour="' . $tour['tourId'] . '"></div>';
+                                                echo  '<h6>' . $tour['date'] . ' - ' . $stop['name'] . '</h6>';
+                                                echo  ucfirst($stop['description']) . '<br>';
+                                                echo '<a href="https://www.google.com/maps?q=@' . $stop['latitude'] . ',' . $stop['longitude'] . '" target="_blank"><span class="ti-location-pin"></span> Show on Google Maps </a></span>';
+                                                echo '</li>';
+                                            }
+                                        }
+                                    } ?>
+                                    </ul>
+                        </div>
+                        </p>
+
+                    </div>
+
+                <?php
+            } else {
+                ?>
+
+                    <div id="two">
+                        <!-- no conetnt yet... -->
+                    </div>
+
+                <?php
+            } ?>
+                <div style="clear: both; height: 20px;"></div>
+                <h4><?php pll_e('Your order'); ?></h4>
+                <div id="order_review" class="checkout-review-order">
+                    <table class="shop_table checkout-review-order-table">
+                        <thead>
+                            <tr>
+                                <th class="product-name"><?php pll_e('Product'); ?></th>
+                                <th class="product-total"><?php pll_e('Total'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+                            $total = 0;
+
+                            foreach ($_POST['price'] as $key => $value) {
+                                if ($value > 0) {
+                                    $price = $product['prices'][array_search($key, array_column($product['prices'], 'ticketId'))];
+                                    $total = $total + $value * $price['currentPrice']; ?>
+                                    <tr class="cart_item">
+                                        <td class="product-name">
+                                            <?php echo $product['name'] ?> - <?php echo $price['name'] ?>&nbsp; <strong class="product-quantity">&times; <?php echo $value ?></strong></td>
+                                        <td class="product-total">
+                                            <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($value * $price['currentPrice'], 2, '.', '')  ?></span></td>
+                                    </tr>
+                                <?php
+                            }
+                        } ?>
+                        </tbody>
+                        <tfoot>
+
+                            <tr class="cart-subtotal">
+                                <th><?php pll_e('Subtotal'); ?></th>
+                                <td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><?php echo number_format($total, 2, '.', '')  ?></span></strong></td>
+                            </tr>
+
+                            <tr class="cart-subtotal">
+                                <td><?php pll_e('Discount'); ?> <span id="discount_percent"></span></td>
+                                <td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><span id="discount_amount"><?php echo number_format(0, 2, '.', '')  ?></span></span> -</td>
+                            </tr>
+
+                            <tr class="order-total">
+                                <th><?php pll_e('Total'); ?></th>
+                                <td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&euro;</span><span id="discount_amount_total"><?php echo number_format($total, 2, '.', '')  ?></span></span></strong></td>
+                            </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Payments -->
+
+                <input type="hidden" name="payment_type" value="card" checked="checked">
+
+
+                <!-- <div class="payment_options">
+                        <input type="radio" name="payment_type" value="ideal" disabled> iDeal (not available yet) <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/ideal.png" class="cards" /><br>
+                    </div> -->
+
+                <div style="clear: both; height: 20px;"></div>
+
+                <!-- forward input fields -->
+                <?php
+                session_start();
+                $rand = rand();
+                $_SESSION['rand'] = $rand; ?>
+                <input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
+                <input type="hidden" name="prices" value="<?php echo base64_encode(serialize($_POST['price'])); ?>">
+                <input type="hidden" name="tour_id" id="tour_id" value="<?php echo $_POST['tour_id']; ?>">
+                <input type="hidden" name="productId" value="<?php echo $product['id']; ?>">
+                <input type="hidden" name="productName" value="<?php echo $product['name']; ?>">
+                <input type="hidden" name="scheduleId" value="<?php echo $_POST['schedule_id']; ?>">
+                <input type="hidden" name="date" value="<?php echo $_POST['date']; ?>">
+                <input type="hidden" name="timeslot" value="<?php echo $_POST['timeslot']; ?>">
+                <input type="hidden" name="total" id="total" value="<?php echo $total ?>">
+                <button type="submit" class="button alt" name="submit" id="proceed_payment" value="payment"><?php pll_e('Proceed to Payment'); ?></button>
+            </div>
+            <?php
 
             if (comments_open($post->ID)) {
                 ?>
-			<div class="fullwidth_comment_wrapper">
-				<?php comments_template('', true); ?>
-			</div>
-			<?php
-            } ?>
-			</div>
- 
-		</form>
-        <!-- End main content -->
+                <div class="fullwidth_comment_wrapper">
+                    <?php comments_template('', true); ?>
+                </div>
+            <?php
+        } ?>
+    </div>
 
-        </div>
+    </form>
+    <!-- End main content -->
+
+    </div>
 
 <?php
-    }
+}
 ?>
 
 <!-- Help pre-footer -->
 <div class="one withsmallpadding ppb_text pre-footer" style="padding:40px 0 40px 0;">
-<div class="standard_wrapper">
-    <div class="page_content_wrapper"><div class="inner"><div style="margin:auto;width:100%">   
-    <h4><?php pll_e('Frequently asked questions'); ?></h4> 
-    <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer Checkout") ) : ?>
-<?php endif;?>
+    <div class="standard_wrapper">
+        <div class="page_content_wrapper">
+            <div class="inner">
+                <div style="margin:auto;width:100%">
+                    <h4><?php pll_e('Frequently asked questions'); ?></h4>
+                    <?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer Checkout")) : ?>
+                    <?php endif; ?>
 
-</div></div></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php get_footer(); ?>
 
 <script>
-jQuery(function()
-{
-	jQuery('#form').submit(function(){
-		jQuery("#proceed_payment", this)
-      .text("Please Wait...")
-	  .attr('disabled', 'disabled')
-	  .addClass('disabled', 'disabled');
-    return true;
-  });
-});
-  </script>
-
-<script>
-    jQuery(".stop").on("click", function(){
-        jQuery('.selected').removeClass('selected');
-        jQuery(this).addClass('selected');
-        jQuery('#tour_id').val(jQuery(this).data('tour'));
-});
+    jQuery(function() {
+        jQuery('#form').submit(function() {
+            jQuery("#proceed_payment", this)
+                .text("Please Wait...")
+                .attr('disabled', 'disabled')
+                .addClass('disabled', 'disabled');
+            return true;
+        });
+    });
 </script>
 
 <script>
-jQuery("#apply").on("click", function(){
-var promocode = document.getElementById("promocode").value;
-var api_url = "<?php echo API_URL ?>";
+    jQuery(".stop").on("click", function() {
+        jQuery('.selected').removeClass('selected');
+        jQuery(this).addClass('selected');
+        jQuery('#tour_id').val(jQuery(this).data('tour'));
+    });
+</script>
 
-if(promocode){
-jQuery.ajax({
+<script>
+    jQuery("#apply").on("click", function() {
+        var promocode = document.getElementById("promocode").value;
+        var api_url = "<?php echo API_URL ?>";
 
-url : api_url + 'orders/promocode/' + promocode,
-headers: {"x-authorization": "539169d340eda42d50c384efc2f9aa227eabcce7"},
-type : 'GET',
-dataType:'json',
-success : function(data) {  
-    if(data.data[0].success) {
-        document.getElementById("discount_error").classList.add("hide")
-        var discount = document.getElementById("total").value / 100 * data.data[0].discount;
-        document.getElementById("discount_percent").textContent =  data.data[0].discount + '%';
-        document.getElementById("discount_amount").textContent =  parseFloat(discount).toFixed(2);
-        document.getElementById("discount_amount_total").textContent = parseFloat(document.getElementById("total").value - discount).toFixed(2);
-    }else{
-        document.getElementById("discount_error").classList.remove("hide")
-        document.getElementById("discount_percent").textContent =  '';
-        document.getElementById("discount_amount").textContent =  parseFloat(0).toFixed(2);
-        document.getElementById("discount_amount_total").textContent = parseFloat(document.getElementById("total").value).toFixed(2);
-    }          
-},
-error : function(request,error)
-{
-    console.log(JSON.stringify(request));
-}
+        if (promocode) {
+            jQuery.ajax({
 
-});
+                url: api_url + 'orders/promocode/' + promocode,
+                headers: {
+                    "x-authorization": "539169d340eda42d50c384efc2f9aa227eabcce7"
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data.data[0].success) {
+                        document.getElementById("discount_error").classList.add("hide")
+                        var discount = document.getElementById("total").value / 100 * data.data[0].discount;
+                        document.getElementById("discount_percent").textContent = data.data[0].discount + '%';
+                        document.getElementById("discount_amount").textContent = parseFloat(discount).toFixed(2);
+                        document.getElementById("discount_amount_total").textContent = parseFloat(document.getElementById("total").value - discount).toFixed(2);
+                    } else {
+                        document.getElementById("discount_error").classList.remove("hide")
+                        document.getElementById("discount_percent").textContent = '';
+                        document.getElementById("discount_amount").textContent = parseFloat(0).toFixed(2);
+                        document.getElementById("discount_amount_total").textContent = parseFloat(document.getElementById("total").value).toFixed(2);
+                    }
+                },
+                error: function(request, error) {
+                    console.log(JSON.stringify(request));
+                }
 
-}else{
-    // error empty field
-    document.getElementById("discount_error").classList.remove("hide")
-    console.log('empty field');
-}
-});
+            });
+
+        } else {
+            // error empty field
+            document.getElementById("discount_error").classList.remove("hide")
+            console.log('empty field');
+        }
+    });
 </script>
 
 <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() ?>/scripts/intlTelInput/css/intlTelInput.css">
 <script src="<?php echo get_stylesheet_directory_uri() ?>/scripts/intlTelInput/js/intlTelInput.js"></script>
 <script>
-var input = document.querySelector("#phone"),
-  errorMsg = document.querySelector("#error-msg"),
-  validMsg = document.querySelector("#valid-msg");
+    var input = document.querySelector("#phone"),
+        errorMsg = document.querySelector("#error-msg"),
+        validMsg = document.querySelector("#valid-msg");
 
-// here, the index maps to the error code returned from getValidationError - see readme
-var errorMap = [ "Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+    // here, the index maps to the error code returned from getValidationError - see readme
+    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
 
-// initialise plugin
-var iti = window.intlTelInput(input, {
-	preferredCountries: ['IT', 'NL', 'DE', 'BE', 'DK', 'FR', 'GB'],
-  	utilsScript: "<?php echo get_stylesheet_directory_uri() ?>/scripts/intlTelInput/js/utils.js?1537727621611"
-});
+    // initialise plugin
+    var iti = window.intlTelInput(input, {
+        preferredCountries: ['IT', 'NL', 'DE', 'BE', 'DK', 'FR', 'GB'],
+        utilsScript: "<?php echo get_stylesheet_directory_uri() ?>/scripts/intlTelInput/js/utils.js?1537727621611"
+    });
 
-var reset = function() {
-  input.classList.remove("error");
-  errorMsg.innerHTML = "";
-  errorMsg.classList.add("hide");
-  validMsg.classList.add("hide");
-};
+    var reset = function() {
+        input.classList.remove("error");
+        errorMsg.innerHTML = "";
+        errorMsg.classList.add("hide");
+        validMsg.classList.add("hide");
+    };
 
-// on blur: validate
-input.addEventListener('blur', function() {
-  reset();
-  if (input.value.trim()) {
-    if (iti.isValidNumber()) {
-      validMsg.classList.remove("hide");
-      document.getElementById('phone_check').value='valid' ; 
-    } else {
-      input.classList.add("error");
-      var errorCode = iti.getValidationError();
-      errorMsg.innerHTML = errorMap[errorCode];
-      errorMsg.classList.remove("hide");
-      document.getElementById('phone_check').value='' ; 
-    }
-  }
-});
+    // on blur: validate
+    input.addEventListener('blur', function() {
+        reset();
+        if (input.value.trim()) {
+            if (iti.isValidNumber()) {
+                validMsg.classList.remove("hide");
+                document.getElementById('phone_check').value = 'valid';
+            } else {
+                input.classList.add("error");
+                var errorCode = iti.getValidationError();
+                errorMsg.innerHTML = errorMap[errorCode];
+                errorMsg.classList.remove("hide");
+                document.getElementById('phone_check').value = '';
+            }
+        }
+    });
 
-// on keyup / change flag: reset
-input.addEventListener('change', reset);
-input.addEventListener('keyup', reset);
-
+    // on keyup / change flag: reset
+    input.addEventListener('change', reset);
+    input.addEventListener('keyup', reset);
 </script>
